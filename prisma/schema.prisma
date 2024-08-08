@@ -1,0 +1,93 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["views"]
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  firstName    String?
+  lastName     String
+  followers    Int      @default(0)
+  isActive     Boolean  @default(true)
+  registeredAt DateTime @default(now())
+}
+
+model MaintenanceTask {
+  taskId       Int            @id @default(autoincrement())
+  taskName     String
+  description  String?        @db.Text
+  frequency    Frequency      @default(YEARLY)
+  importance   Importance     @default(MEDIUM)
+  taskSchedule taskSchedule[]
+  taskHistory  taskHistory[]
+}
+
+model taskSchedule {
+  scheduleId        Int             @id @default(autoincrement())
+  task              MaintenanceTask @relation(fields: [taskId], references: [taskId])
+  taskId            Int
+  nextDueDate       DateTime
+  lastCompletedDate DateTime?
+  status            Status          @default(PENDING)
+  notes             String?         @db.Text
+}
+
+model taskHistory {
+  historyId      Int             @id @default(autoincrement())
+  task           MaintenanceTask @relation(fields: [taskId], references: [taskId])
+  taskId         Int
+  datePerformed  DateTime        @default(now())
+  monthPerformed Int             @default(8)
+  yearPerformed  Int             @default(2024)
+  status         Status          @default(COMPLETED)
+  notes          String?         @db.Text
+}
+
+model House {
+  houseId       Int    @id
+  street        String
+  city          String
+  squarefootage Int?
+  Rooms         Room[]
+}
+
+model Room {
+  roomId  Int     @id @default(autoincrement())
+  name    String
+  notes   String?
+  House   House   @relation(fields: [houseId], references: [houseId])
+  houseId Int
+}
+
+enum Status {
+  PENDING
+  COMPLETED
+  SKIPPED
+  CANCELLED
+}
+
+enum Frequency {
+  WEEKLY
+  MONTHLY
+  QUARTERLY
+  YEARLY
+  ADHOC
+}
+
+enum Importance {
+  HIGH
+  MEDIUM
+  LOW
+}
