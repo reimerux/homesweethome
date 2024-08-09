@@ -19,7 +19,7 @@ export async function PUT(
     const updatedTaskHistory = await prisma.taskHistory.create({
         data: {
             datePerformed: new Date(body.completionDate),
-            monthPerformed: new Date(body.completionDate).getMonth(),
+            monthPerformed: new Date(body.completionDate).getMonth()+1,
             yearPerformed: new Date(body.completionDate).getFullYear(),
             taskId: parseInt(body.taskId),
             status: "COMPLETED",

@@ -1,10 +1,9 @@
-import axios from 'axios';
-import React from 'react'
+import { addDays } from '@/app/components/URfunctions';
+import prisma from '@/prisma/client';
 import { MdCheckBoxOutlineBlank } from 'react-icons/md';
 import HouseInfo from '../HouseInfo';
-import prisma from '@/prisma/client';
-import { addDays } from '@/app/components/URfunctions';
 
+export const dynamic = 'force-dynamic';
 const PrintTaskList = async () => {
   const tasks = await prisma.taskSchedule.findMany({
     where:

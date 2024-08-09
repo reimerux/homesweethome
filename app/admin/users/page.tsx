@@ -3,6 +3,7 @@ import AdminSideNav from '../AdminSideNav';
 import UserTable from './UserTable';
 
 
+export const dynamic = 'force-dynamic';
 const UsersPage = () => {
 
   return (

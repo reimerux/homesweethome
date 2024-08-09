@@ -1,7 +1,6 @@
 import React from 'react'
 import AdminSideNav from './AdminSideNav'
 
-export const dynamic = 'force-dynamic';
 const AdminPage = () => {
   return (
     <div className='flex'>

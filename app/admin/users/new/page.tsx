@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import AdminSideNav from '../../AdminSideNav';
+import toast from 'react-hot-toast';
 
 interface UserForm {
   firstName: string;
@@ -20,6 +21,7 @@ interface UserForm {
     <form className='max-w-sm mx-auto' onSubmit={handleSubmit(async (data) => {
       await axios.post('../../api/users',data);
       router.push("/admin/users")
+      toast("User created")
     })
       }>
       <h1>Create new User</h1>

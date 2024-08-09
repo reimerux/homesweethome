@@ -3,6 +3,7 @@ import Kpis from '../components/Kpis'
 import TaskCards from './TaskCards'
 import HouseInfo from './HouseInfo'
 
+export const dynamic = 'force-dynamic';
 const Dashboard = () => {
   const parameter = 'PENDING'
   return (
