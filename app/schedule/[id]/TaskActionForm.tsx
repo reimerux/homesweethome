@@ -36,6 +36,7 @@ const  TaskActionForm = ( props : Props) => {
     const toastMessage = (props.operation==="COMPLETE") ? 'Task completed' : (props.operation==="UNSCHEDULE")? 'Task unscheduled' : 'Task pushed';
   return (
     <form className='max-w-xl mx-auto' onSubmit={handleSubmit(async (data) => {
+        console.log(data);
         await axios.put(URL, data);
         //implement toast & intelligent return
         router.push("/dashboard");
@@ -44,7 +45,8 @@ const  TaskActionForm = ( props : Props) => {
       }>
         <h1>Edit Scheduled Task: {props.currentTask.task.taskName}</h1>
         <p>{props.currentTask.task.description}</p>
-        <input type="text" className='hidden' value={props.id} required {...register('taskId')}></input>
+        <input type="text" className="hidden" id="scheduleId" value={props.id} required {...register('scheduleId')}></input>
+        <input type="text" className="hidden" id="taskId" value={props.currentTask.taskId} {...register('taskId')}></input>
         <div className="mb-5">
           <label htmlFor="importance" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Importance</label >
           {props.currentTask.task.importance}

@@ -28,7 +28,7 @@ export async function PUT(
     })
 
     const updatedTask = await prisma.taskSchedule.update({
-        where: { scheduleId: task.taskId },
+        where: { scheduleId: parseInt(params.id) },
         data: {
             lastCompletedDate: new Date(body.completionDate),
             nextDueDate: new Date(body.calcDueDate),
