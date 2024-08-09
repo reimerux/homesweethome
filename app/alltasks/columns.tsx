@@ -1,12 +1,13 @@
 "use client"
-import { Frequency, Importance, Prisma, Status } from "@prisma/client";
+import { Frequency, Importance, Prisma, Season, Status } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { MdCheck, MdRedo } from "react-icons/md";
 import ImportanceBadge from "../components/ImportanceBadge";
+import SeasonBadge from "../components/SeasonBadge";
 
 interface taskSchedule {
-     task: { taskId: number, taskName: string, description: string | null, frequency: Frequency, importance: Importance }
+     task: { taskId: number, taskName: string, description: string | null, frequency: Frequency, importance: Importance, season: Season | null}
      scheduleId: number; taskId: number; nextDueDate: Date; lastCompletedDate: Date | null; status: Status; notes: string | null; 
     }
 
@@ -32,7 +33,7 @@ interface taskSchedule {
     {
       accessorKey: "task.importance",
       header: "Importance",
-      cell: ({ cell, row }) => {
+      cell: ({ row }) => {
         return (<><ImportanceBadge importance={row.original.task.importance} /></>)}
     },
     {
@@ -42,6 +43,8 @@ interface taskSchedule {
     {
       accessorKey: "task.season",
       header: "Season",
+      cell: ({ row }) => {
+        return (<><SeasonBadge season={row.original.task.season} /></>)}
     },
     {
       accessorKey: "nextDueDate",

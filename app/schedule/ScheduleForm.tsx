@@ -42,7 +42,7 @@ const ScheduleForm = (props: Props) => {
                 <div className="mb-5">
                     <label htmlFor="task" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task</label>
                     <select id="task" className="select select-bordered w-full max-w-sm" {...register('taskId')}>
-                        {props.tasks.map(task => <option key={task.taskId} value={task.taskId.toString()}>{task.taskName} / {task.frequency} ({task.season})</option>)}
+                        {props.tasks.map(task => <option key={task.taskId} value={task.taskId.toString()}>{(task.season==='NONE' || task.season===null)? task.taskName + " / " + task.frequency : task.taskName + " / " + task.frequency + " ("+task.season+")"}</option>)}
                     </select>
                 </div>
                 <div className="mb-5">

@@ -94,6 +94,7 @@ enum Importance {
 }
 
 enum Season {
+  NONE
   WINTER
   SPRING
   SUMMER

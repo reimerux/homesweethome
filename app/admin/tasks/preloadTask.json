@@ -3,414 +3,483 @@
       "taskName": "Check Carbon Monoxide Alarms",
       "description": "Check Carbon Monoxide Alarms",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Check Fire Extinguishers And Fire Blankets",
       "description": "Check Fire Extinguishers And Fire Blankets",
       "importance": "LOW",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Check Smoke Alarms",
       "description": "Check Smoke Alarms",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Check Other Alarms",
       "description": "Check Other Alarms",
       "importance": "LOW",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Dryer",
       "description": "Clean Dryer",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Washing Machine",
       "description": "Clean Washing Machine",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Fridge Inside",
       "description": "Clean Fridge Inside",
       "importance": "HIGH",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Defrost And Clean Freezer",
       "description": "Defrost And Clean Freezer",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Microwave",
       "description": "Clean Microwave",
       "importance": "HIGH",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Oven",
       "description": "Clean Oven",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Small Appliances",
       "description": "Clean Small Appliances",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Inside of Kitchen Cabinet",
       "description": "Clean Inside of Kitchen Cabinet",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Inside of Bathroom Cabinet",
       "description": "Clean Inside of Bathroom Cabinet",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Run Water in The Baths, Showers And Toilets Not used regularly",
       "description": "Run Water in The Baths, Showers And Toilets Not used regularly",
       "importance": "LOW",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Unclog Sinks and Drain Holes",
       "description": "Unclog Sinks and Drain Holes",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Light Fixtures",
       "description": "Clean Light Fixtures",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Dust Blinds and Curtains",
       "description": "Dust Blinds and Curtains",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Turn Over Mattresses And Clean Them",
       "description": "Turn Over Mattresses And Clean Them",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Vacuum Vents",
       "description": "Vacuum Vents",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Wash Bins",
       "description": "Wash Bins",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Wash Cushion Covers",
       "description": "Wash Cushion Covers",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Wash Mattress Protectors",
       "description": "Wash Mattress Protectors",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Wash Throw Blankets",
       "description": "Wash Throw Blankets",
       "importance": "MEDIUM",
-      "frequency": "MONTHLY"
+      "frequency": "MONTHLY",
+      "season": "NONE"
     },
     {
       "taskName": "Check The Covers Of Electrical Outlets For Loose Screws And Covers",
       "description": "Check The Covers Of Electrical Outlets For Loose Screws And Covers",
       "importance": "LOW",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Check Visible Pipes For Leaks, Repair As Necessary",
       "description": "Check Visible Pipes For Leaks, Repair As Necessary",
       "importance": "HIGH",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Air Filters",
       "description": "Clean Air Filters",
       "importance": "HIGH",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Drains With Baking Soda",
       "description": "Clean Drains With Baking Soda",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Grout Between Tiles",
       "description": "Clean Grout Between Tiles",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Kitchen Exhaust Fan",
       "description": "Clean Kitchen Exhaust Fan",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Clean Windows",
       "description": "Clean Windows",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Organize Closet, Give Unwanted Items To Charity",
       "description": "Organize Closet, Give Unwanted Items To Charity",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Deep Clean House",
       "description": "Deep Clean House",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Vacuum Refrigerator Coil",
       "description": "Vacuum Refrigerator Coil",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Inspect Basement And Cracks For Moisture",
       "description": "Inspect Basement And Cracks For Moisture",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Inspect Bathroom Area For Leaks",
       "description": "Inspect Bathroom Area For Leaks",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Inspect The Water Heater For Leaks",
       "description": "Inspect The Water Heater For Leaks",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Lubricate Hinges",
       "description": "Lubricate Hinges",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Organize Cabinets",
       "description": "Organize Cabinets",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Polish Wood Furniture",
       "description": "Polish Wood Furniture",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Run Water And Flush In Unused Drains",
       "description": "Run Water And Flush In Unused Drains",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Sort And Organize Cooking Utensils",
       "description": "Sort And Organize Cooking Utensils",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Steam Clean Carpet",
       "description": "Steam Clean Carpet",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "SPRING"
     },
     {
       "taskName": "Test Garage Door",
       "description": "Test Garage Door",
       "importance": "LOW",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Test Water Heater Release Valve",
       "description": "Test Water Heater Release Valve",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Wash Pillows And Comforters",
       "description": "Wash Pillows And Comforters",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Cover AC",
       "description": "Cover AC",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Cover outdoor furniture",
       "description": "Cover outdoor furniture",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Sweep gazebo",
       "description": "Sweep gazebo",
       "importance": "MEDIUM",
-      "frequency": "QUARTERLY"
+      "frequency": "QUARTERLY",
+      "season": "NONE"
     },
     {
       "taskName": "Cut olive trees",
       "description": "Cut olive trees",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Check For Cracks In The Walkway & Driveway Around Your Home",
       "description": "Check For Cracks In The Walkway & Driveway Around Your Home",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Check For Leaning And Loose Parts On Exterior Fences",
       "description": "Check For Leaning And Loose Parts On Exterior Fences",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Clean Out Gutters",
       "description": "Clean Out Gutters",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Clean Outside Of Windows",
       "description": "Clean Outside Of Windows",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "SPRING"
     },
     {
       "taskName": "Inspect Roof For Damage And Debris",
       "description": "Inspect Roof For Damage And Debris",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Check Outdoor Taps",
       "description": "Check Outdoor Taps",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "SPRING"
     },
     {
       "taskName": "Check The Exterior Of Your Home For Gaps Between Windows And Wall",
       "description": "Check The Exterior Of Your Home For Gaps Between Windows And Wall",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Check Trees For Interference With Electric Lines",
       "description": "Check Trees For Interference With Electric Lines",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "SUMMER"
     },
     {
       "taskName": "Examine Foundation For Cracks",
       "description": "Examine Foundation For Cracks",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Clean Garage",
       "description": "Clean Garage",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "SPRING"
     },
     {
       "taskName": "Check Locks And Bolts On Doors And Windows",
       "description": "Check Locks And Bolts On Doors And Windows",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "SUMMER"
     },
     {
       "taskName": "Check And Repair Caulking Around Bath Tubs and sink",
       "description": "Check And Repair Caulking Around Bath Tubs and sink",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "WINTER"
     },
     {
       "taskName": "Inspect Baths For Cracks",
       "description": "Inspect Baths, Sinks And Toilet Bowls For Cracks Move The Toilets And See That It Does Not Rock.",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Clean Dryer And Vents",
       "description": "Clean Dryer And Vents",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Inspection Of The Plumbing System For Leaks",
       "description": "Do A Thorough Inspection Of The Plumbing System For Leaks",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Drain The Water Heater And Remove Sediments",
       "description": "Drain The Water Heater And Remove Sediments",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     },
     {
       "taskName": "Tighten Handles, Knob And Racks",
       "description": "Tighten Handles, Knob And Racks",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "SUMMER"
     },
     {
       "taskName": "Examine The House For Cracked Tiles",
       "description": "Examine The House For Cracked Tiles",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "SUMMER"
     },
     {
       "taskName": "Inspect The Ceilings For Stains And Patches",
       "description": "Inspect The Ceilings For Stains And Patches. This Could Be An Indication Of Leaks",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "WINTER"
     },
     {
       "taskName": "Replace Batteries In Smoke/ Carbon Dioxide Detector",
       "description": "Replace Batteries In Smoke/ Carbon Dioxide Detector",
       "importance": "MEDIUM",
-      "frequency": "YEARLY"
+      "frequency": "YEARLY",
+      "season": "FALL"
     }
   ]

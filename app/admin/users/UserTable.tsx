@@ -1,5 +1,4 @@
 import prisma from '@/prisma/client';
-import axios from 'axios';
 import Link from 'next/link';
 
 interface User {

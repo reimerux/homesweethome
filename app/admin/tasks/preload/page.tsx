@@ -7,6 +7,7 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Frequency, Importance } from '@prisma/client';
 import preloadTask from  '../preloadTask.json'
+import toast from 'react-hot-toast';
 
 interface TaskForm {
       taskName: string;
@@ -24,11 +25,10 @@ interface TaskForm {
     <div className='flex'><AdminSideNav/>
     <div className='p-3'>
     <form className='max-w-m mx-auto' onSubmit={handleSubmit(async () => {
-      preloadTask.forEach(async task => {
-        await axios.post('../../api/tasks',task);
-      });
-      
-      router.push("/admin/tasks")
+
+        await axios.post('../../api/tasks/mass',preloadTask);
+        router.push("/admin/tasks");
+        toast("Seed data loaded");
     })
       }>
       <h1>Create preload Task</h1>

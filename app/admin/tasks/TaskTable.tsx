@@ -1,4 +1,5 @@
 import ImportanceBadge from '@/app/components/ImportanceBadge';
+import SeasonBadge from '@/app/components/SeasonBadge';
 import prisma from '@/prisma/client';
 import { Frequency, Importance } from '@prisma/client';
 import Link from 'next/link';
@@ -34,7 +35,7 @@ const TaskTable = async () => {
                         <td>{task.description}</td>
                         <td><ImportanceBadge importance={task.importance} /></td>
                         <td>{task.frequency}</td>
-                        <td>{task.season}</td>
+                        <td><SeasonBadge season={task.season}/></td>
                     </tr>)}
                 </tbody>
             </table>
