@@ -1,6 +1,7 @@
 import React from 'react'
 import HistoryChart from './HistoryChart'
 
+export const dynamic = 'force-dynamic';
 const HistoryPage = () => {
     return (
         <div className="p-3"><h1>Tasks Completed</h1><section className="flex my-4 px-4 gap-3">

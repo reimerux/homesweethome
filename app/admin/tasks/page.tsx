@@ -3,6 +3,7 @@ import React from 'react'
 import AdminSideNav from '../AdminSideNav'
 import Link from 'next/link'
 
+export const dynamic = 'force-dynamic';
 const tasksPage = () => {
   return (
     <div className='flex'>
