@@ -24,6 +24,7 @@ const TaskTable = async () => {
                         <th>Description</th>
                         <th>Importance</th>
                         <th>Frequency</th>
+                        <th>Season</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,6 +34,7 @@ const TaskTable = async () => {
                         <td>{task.description}</td>
                         <td><ImportanceBadge importance={task.importance} /></td>
                         <td>{task.frequency}</td>
+                        <td>{task.season}</td>
                     </tr>)}
                 </tbody>
             </table>

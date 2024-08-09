@@ -20,7 +20,7 @@ export async function POST(request: NextRequest) {
         return NextResponse.json({error: 'Validation not successful!'},{status: 400}        ) 
 
     const newTask = await prisma.maintenanceTask.create({
-        data: {taskName: body.taskName, description: body.description, importance: body.importance, frequency: body.frequency}
+        data: {taskName: body.taskName, description: body.description, importance: body.importance, frequency: body.frequency, season: body.season}
     })
     return NextResponse.json(newTask, {status: 201})
 }

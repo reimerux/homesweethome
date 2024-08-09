@@ -32,6 +32,7 @@ model MaintenanceTask {
   importance   Importance     @default(MEDIUM)
   taskSchedule taskSchedule[]
   taskHistory  taskHistory[]
+  season       Season?
 }
 
 model taskSchedule {
@@ -90,4 +91,11 @@ enum Importance {
   HIGH
   MEDIUM
   LOW
+}
+
+enum Season {
+  WINTER
+  SPRING
+  SUMMER
+  FALL
 }

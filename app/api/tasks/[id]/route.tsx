@@ -36,7 +36,8 @@ export async function PUT(
             taskName: body.taskName,
             description: body.description,
             importance: body.importance,
-            frequency: body.frequency
+            frequency: body.frequency,
+            season: body.season
         }
     })
 

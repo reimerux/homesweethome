@@ -3,6 +3,7 @@ import { Frequency, Importance, Prisma, Status } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { MdCheck, MdRedo } from "react-icons/md";
+import ImportanceBadge from "../components/ImportanceBadge";
 
 interface taskSchedule {
      task: { taskId: number, taskName: string, description: string | null, frequency: Frequency, importance: Importance }
@@ -31,6 +32,16 @@ interface taskSchedule {
     {
       accessorKey: "task.importance",
       header: "Importance",
+      cell: ({ cell, row }) => {
+        return (<><ImportanceBadge importance={row.original.task.importance} /></>)}
+    },
+    {
+      accessorKey: "task.frequency",
+      header: "Frequency",
+    },
+    {
+      accessorKey: "task.season",
+      header: "Season",
     },
     {
       accessorKey: "nextDueDate",

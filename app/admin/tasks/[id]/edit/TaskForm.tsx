@@ -1,5 +1,5 @@
 'use client'
-import { Frequency, Importance } from '@prisma/client';
+import { Frequency, Importance, Season } from '@prisma/client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -10,7 +10,8 @@ interface TaskForm {
     description: string;
     importance: Importance;
     frequency: Frequency;
-  }
+    season: Season;
+}
 
 type Props = {
     currentTask: any,
@@ -49,6 +50,12 @@ const TaskForm = (props: Props) => {
                     <label htmlFor="frequency" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
                     <select id="frequency" className="select select-bordered w-full max-w-sm" defaultValue={props.currentTask.frequency} {...register('frequency')}>
                         {Object.keys(Frequency).map(item => <option key={item} value={item}>{item}</option>)}
+                    </select>
+                </div>
+                <div className="mb-5">
+                    <label htmlFor="season" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Suggested Season</label>
+                    <select id="season" className="select select-bordered w-full max-w-sm"  defaultValue={props.currentTask.season} {...register('season')}>
+                        {Object.keys(Season).map(item => <option key={item} value={item}>{item}</option>)}
                     </select>
                 </div>
                 <button className="btn btn-primary mr-4" type='submit'>Change</button>
