@@ -1,37 +1,37 @@
-import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
+import { NextRequest, NextResponse } from "next/server";
 
 interface Props {
-    params: { id: number}
+    params: { id: number }
 }
 
 export async function GET(
     request: NextRequest,
-    {params}: {params: { id: string}}){
+    { params }: { params: { id: string } }) {
     const task = await prisma.maintenanceTask.findUnique({
 
-        where: {taskId: parseInt(params.id)}
+        where: { taskId: parseInt(params.id) }
     })
-        if (!task)
-        return NextResponse.json({error: "Task not found"}, {status: 404})
-        
-    
+    if (!task)
+        return NextResponse.json({ error: "Task not found" }, { status: 404 })
+
+
     return NextResponse.json(task);
 }
 
 export async function PUT(
     request: NextRequest,
-    {params}: {params: { id: string}}){
-        const body = await request.json();
+    { params }: { params: { id: string } }) {
+    const body = await request.json();
     const task = await prisma.maintenanceTask.findUnique({
 
-        where: {taskId: parseInt(params.id)}
+        where: { taskId: parseInt(params.id) }
     })
-        if (!task)
-        return NextResponse.json({error: "Task not found"}, {status: 404})
-        
+    if (!task)
+        return NextResponse.json({ error: "Task not found" }, { status: 404 })
+
     const updatedUser = await prisma.maintenanceTask.update({
-        where: { taskId: task.taskId},
+        where: { taskId: task.taskId },
         data: {
             taskName: body.taskName,
             description: body.description,
@@ -46,18 +46,18 @@ export async function PUT(
 
 export async function DELETE(
     request: NextRequest,
-    {params} : {params: {id: string}}){
-        const body = await request.json();
-    const task = await prisma.maintenanceTask.findUnique({
+    { params }: { params: { id: string } }) {
 
-        where: {taskId: parseInt(params.id)}
+    const taskUsage = await prisma.taskSchedule.count({
+        where: { taskId: parseInt(params.id) }
+    });
+    console.log(taskUsage)
+    if (taskUsage > 1)
+        return NextResponse.json({ error: "Task is scheduled. Remove all schedules first." }, { status: 404 })
+
+    const updatedUser = await prisma.maintenanceTask.delete({
+        where: { taskId: parseInt(params.id) }
     })
-        if (!task)
-        return NextResponse.json({error: "Task not found"}, {status: 404})
-        
-    const updatedUser = await prisma.user.delete({
-        where: { id: task.taskId}
-        })
 
-        return NextResponse.json(updatedUser);
-    }
+    return NextResponse.json(updatedUser);
+}

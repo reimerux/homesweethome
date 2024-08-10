@@ -1,6 +1,6 @@
 import AdminSideNav from '@/app/admin/AdminSideNav';
 import prisma from '@/prisma/client';
-import UserForm from '../UserForm';
+import UserDeleteForm from '../UserDeleteForm';
 
 interface Props {
   params: { id: string }
@@ -14,7 +14,7 @@ const EditUserPage = async ({ params: { id } }: Props) => {
   return (
     <div className='flex'><AdminSideNav />
       <div className='p-3'>
-        <UserForm id={parseInt(id)} currentUser={currentUser} />
+        <UserDeleteForm id={parseInt(id)} currentUser={currentUser} />
       </div>
     </div>
   )

@@ -46,7 +46,6 @@ export async function PUT(
 export async function DELETE(
     request: NextRequest,
     {params} : {params: {id: string}}){
-        const body = await request.json();
     const user = await prisma.user.findUnique({
 
         where: {id: parseInt(params.id)}
@@ -55,7 +54,7 @@ export async function DELETE(
         return NextResponse.json({error: "User not found"}, {status: 404})
         
     const updatedUser = await prisma.user.delete({
-        where: { id: user.id}
+        where: { id: parseInt(params.id)}
         })
 
         return NextResponse.json(updatedUser);

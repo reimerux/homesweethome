@@ -24,7 +24,8 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
   })
 
-  return (
+  return (<>
+  <p className="text-xs ml-2 mb-1">{data.length} items</p>
     <div className="rounded-md border">
       <table className="table">
         <thead>
@@ -88,5 +89,6 @@ export function DataTable<TData, TValue>({
         </tbody>
       </table>
     </div>
+    </>
   )
 }

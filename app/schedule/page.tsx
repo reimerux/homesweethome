@@ -2,7 +2,7 @@ import prisma from '@/prisma/client';
 import ScheduleForm from './ScheduleForm';
 
 
-
+export const dynamic = 'force-dynamic';
 const ScheduleTaskPage = async () => {
         const tasks = 
     
