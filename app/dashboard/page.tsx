@@ -9,8 +9,7 @@ const Dashboard = () => {
   return (
     <div className='p-3'>
       <div className="flex w-full">
-        <Kpis />
-        <div className="divider divider-horizontal"></div>
+        <div className='hidden sm:block max-w-80'><Kpis /></div>
         <div className="flex-col">
           <HouseInfo />
           <TaskCards />
