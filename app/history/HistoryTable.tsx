@@ -1,7 +1,6 @@
-import React from 'react'
-import { DataTable } from '../components/Data-table'
 import prisma from '@/prisma/client';
-import { columns } from './columns'
+import { DataTable } from '../components/Data-table';
+import { columns } from './columns';
 
 const HistoryTable = async () => {
     const taskHistory =  await prisma.taskHistory.findMany({
@@ -9,9 +8,11 @@ const HistoryTable = async () => {
         orderBy: {datePerformed: 'desc'}
     });
 
-
   return (
-    <div><DataTable columns={columns} data={taskHistory} /></div>
+    <div>
+        <p>Last 10 completed tasks</p>
+        <DataTable columns={columns} data={taskHistory.slice(0,10)} />
+        </div>
   )
 }
 

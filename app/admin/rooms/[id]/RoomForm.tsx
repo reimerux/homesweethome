@@ -33,7 +33,7 @@ const RoomForm =  (props: Props) => {
                 </div>
                 <div className="mb-5">
                     <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notes</label>
-                    <textarea id="notes" className="input input-bordered w-full max-w-xs" defaultValue={props.currentRoom.notes} required {...register('notes')} />
+                    <textarea id="notes" className="input input-bordered w-full max-w-xs" defaultValue={props.currentRoom.notes}  {...register('notes')} />
                 </div>
                 <button className="btn btn-primary mr-4" type='submit'>Update</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>
