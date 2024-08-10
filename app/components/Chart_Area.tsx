@@ -10,6 +10,7 @@ type Props = {
     height: number;
 };
 
+
 const Chart_Area = (props: Props) => {
     
   return (
@@ -28,7 +29,7 @@ const Chart_Area = (props: Props) => {
           </linearGradient>
         </defs>
         <XAxis dataKey={props.XKey} />
-        <YAxis />
+        <YAxis domain={['dataMin0', 'dataMax']} interval={1}/>
         <Tooltip />
         <Area type="monotone" dataKey={props.dataKey} stroke="#8884d8" fillOpacity={1} fill="url(#colorUv)" />
       </AreaChart>   

@@ -4,14 +4,15 @@ import AdminSideNav from '../AdminSideNav'
 import Link from 'next/link'
 
 export const dynamic = 'force-dynamic';
-const tasksPage = () => {
+const tasksPage = ({ searchParams}: {searchParams: {page: string, pagesize: string}}) => {
   return (
     <div className='flex'>
       <AdminSideNav />
       <div className="flex-col p-3">
         <h1>Maintenance Tasks</h1>
         <div className="mb-5"><Link href="/admin/tasks/new" className='btn btn-sm mr-4'>New Task</Link><Link href="/admin/tasks/preload" className='btn btn-sm'>Preload</Link></div>
-        <TaskTable />
+        <TaskTable page={parseInt(searchParams.page)} pagesize={parseInt(searchParams.pagesize)}/>
+        
       </div></div>
   )
 }

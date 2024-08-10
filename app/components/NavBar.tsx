@@ -1,13 +1,13 @@
 'use client'
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Md1kPlus, MdHouse } from "react-icons/md";
+import { MdHouse } from "react-icons/md";
 
 const NavBar = () => {
   const currentPath = usePathname();
 
   const links = [
-    { href: "/alltasks", label: "All Tasks" },
+    { href: "/alltasks?page=1&pagesize=10", label: "All Tasks" },
     { href: "/history", label: "History" },
     { href: "/schedule", label: "Schedule" }];
 

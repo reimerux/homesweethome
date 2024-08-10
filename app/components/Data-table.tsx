@@ -11,11 +11,13 @@ import {
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  customCount?: number
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  customCount,
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -25,7 +27,7 @@ export function DataTable<TData, TValue>({
   })
 
   return (<>
-  <p className="text-xs ml-2 mb-1">{data.length} items</p>
+  <p className="text-xs ml-2 mb-1">{customCount || data.length} items</p>
     <div className="rounded-md border">
       <table className="table">
         <thead>
