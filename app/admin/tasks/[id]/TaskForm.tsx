@@ -25,7 +25,7 @@ const TaskForm = (props: Props) => {
         <>
             <form className='max-w-m mx-auto' onSubmit={handleSubmit(async (data) => {
                 await axios.put('/api/tasks/' + props.id, data);
-                router.push("/admin/tasks");
+                router.push("/admin/tasks?page=1&pagesize=10");
                 toast("Task updated");
                 
             })

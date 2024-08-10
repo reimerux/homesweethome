@@ -59,7 +59,6 @@ const TaskForm = (props: Props) => {
                     </select>
                 </div>
                 <button className="btn btn-error mr-4" type='submit'>Delete</button>
-                <button className="btn btn-ghost" type='reset'>Reset</button>
             </form>
         </>
     )
