@@ -13,6 +13,7 @@ interface TaskForm {
     importance: Importance;
     frequency: Frequency;
     season: Season;
+    timeEstimate: number;
 }
 
  const NewTaskPage = () => {
@@ -22,7 +23,7 @@ interface TaskForm {
    return (
     <div className='flex'><AdminSideNav/>
     <div className='p-3'>
-    <form className='max-w-m mx-auto' onSubmit={handleSubmit(async (data) => {
+    <form className='' onSubmit={handleSubmit(async (data) => {
       await axios.post('../../api/tasks',data);
       router.push("/admin/tasks")
     })
@@ -30,20 +31,20 @@ interface TaskForm {
       <h1>Create Task</h1>
           <div className="mb-5">
             <label htmlFor="taskName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Task Name</label>
-            <input type="text" id="taskName" className='input input-bordered w-full max-w-xs' placeholder="Task Name" {...register('taskName')} />
+            <input type="text" id="taskName" className='input input-bordered w-full' placeholder="Task Name" {...register('taskName')} />
           </div>
           <div className="mb-5">
             <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
             <textarea className="textarea textarea-bordered w-full" id="description" placeholder="Description" {...register('description')} />
           </div>
           <div className="mb-5">
-            <label htmlFor="importance" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+            <label htmlFor="importance" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Importance</label>
             <select id="importance" className="select select-bordered w-full max-w-sm"  {...register('importance')} >
               {Object.keys(Importance).map(item => <option key={item} value={item}>{item}</option>)}
             </select>
           </div>
           <div className="mb-5">
-            <label htmlFor="frequency" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
+            <label htmlFor="frequency" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Frequency</label>
             <select id="frequency" className="select select-bordered w-full max-w-sm"  {...register('frequency')}>
               {Object.keys(Frequency).map(item => <option key={item} value={item}>{item}</option>)}
             </select>
@@ -53,6 +54,10 @@ interface TaskForm {
             <select id="season" className="select select-bordered w-full max-w-sm"  {...register('season')}>
               {Object.keys(Season).map(item => <option key={item} value={item}>{item}</option>)}
             </select>
+          </div>
+          <div className="mb-5">
+            <label htmlFor="timeEstimate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estimated time in minutes</label>
+            <input type="number" id="timeEstimate" className='input input-bordered w-full max-w-xs'  {...register('timeEstimate')} />
           </div>
           <button className="btn btn-primary mr-4" type='submit'>Create</button>
           <button className="btn btn-ghost" type='reset'>Reset</button>

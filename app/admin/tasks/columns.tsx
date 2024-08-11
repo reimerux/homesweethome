@@ -1,13 +1,26 @@
 "use client"
-import { Frequency, Importance, Prisma, Season, Status } from "@prisma/client";
+import { Frequency, Importance, Season } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-import { MdCheck, MdRedo } from "react-icons/md";
 import ImportanceBadge from "../../components/ImportanceBadge";
 import SeasonBadge from "../../components/SeasonBadge";
+import RoomPills from "@/app/components/RoomPills";
 
 interface task {
-     taskId: number, taskName: string, description: string | null, frequency: Frequency, importance: Importance, season: Season | null
+     taskId: number, taskName: string, description: string | null, frequency: Frequency, importance: Importance, season: Season | null; timeEstimate: number | null
+     rooms: ({
+      room: {
+          roomId: number;
+          name: string;
+          notes: string | null;
+          houseId: number;
+      };
+  } & {
+      taskId: number;
+      roomId: number;
+      assignedAt: Date;
+      assignedBy: string;
+  })[]
     }
 
   export const columns: ColumnDef<task>[] = [
@@ -36,13 +49,24 @@ interface task {
         return (<><ImportanceBadge importance={row.original.importance} /></>)}
     },
     {
-      accessorKey: "frequency",
-      header: "Frequency",
+      accessorKey: "task.timeEstimate",
+      header: "Estimated time",
+      cell: ({ row }) => {
+        return ((row.original.timeEstimate) ? <div>{row.original.timeEstimate} min</div>: null)}
     },
     {
+      accessorKey: "frequency",
+      header: "Frequency",
+    },{
       accessorKey: "season",
       header: "Season",
       cell: ({ row }) => {
         return (<><SeasonBadge season={row.original.season} /></>)}
+    },
+    
+    {
+      accessorKey: "task.rooms",
+      header: "Rooms",
+      cell: ({ row }) => {return (<RoomPills rooms={row.original.rooms}/>)}
     }
   ]

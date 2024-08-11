@@ -9,9 +9,8 @@ const EditSchedulePage = async ({ params: { id } }: Props) => {
 
   const currentTask =  await prisma.taskSchedule.findFirst({
     where: { scheduleId: parseInt(id) },
-    include: {task: true}
+    include: { task: {include:{rooms: {include: {room: true}}}}},
   })
-
 
   return (
     <div className='p-3'>

@@ -6,13 +6,13 @@ type Props = {
 
 
 const ImportanceBadge = (props: Props)  => {
-    var badgeclass = "badge badge-ghost";
+    var badgeclass = "badge bg-blue-100 text-gray-400";
   switch (props.importance) {
     case 'MEDIUM':
-        badgeclass = "badge badge-secondary"
+        badgeclass = "badge bg-blue-400 text-gray-200"
         break;
     case 'HIGH':
-        badgeclass = "badge badge-primary"
+        badgeclass = "badge bg-blue-700 text-gray-100"
         break;
     default:
         break;

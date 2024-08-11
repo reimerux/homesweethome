@@ -7,16 +7,19 @@ interface Props {
   params: { id: string }
 }
 
+export const dynamic = 'force-dynamic';
 const EditUserPage = async ({ params: { id } }: Props) => {
 
   const currentTask =  await prisma.maintenanceTask.findFirst({
-    where: {taskId: parseInt(id)}
+    where: {taskId: parseInt(id)},
+    include: {rooms: true}
 })
+const rooms =  await prisma.room.findMany()
 
   return (
     <div className='flex'><AdminSideNav />
       <div className='p-3'>
-        <TaskForm currentTask={currentTask} id={parseInt(id)} />
+        <TaskForm currentTask={currentTask} allRooms={rooms} id={parseInt(id)} />
       </div>
     </div>
   )

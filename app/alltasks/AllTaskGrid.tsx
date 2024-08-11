@@ -12,7 +12,7 @@ type Props =
 const AllTaskGrid = async ({ page, pagesize }: Props) => {
 
   const taskSchedules = await prisma.taskSchedule.findMany({
-    include: { task: true },
+    include: { task: {include:{rooms: {include: {room: true}}}}},
     orderBy: { nextDueDate: 'asc' }
   });
 

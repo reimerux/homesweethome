@@ -5,11 +5,30 @@ import Link from "next/link";
 import { MdCheck, MdRedo } from "react-icons/md";
 import ImportanceBadge from "../components/ImportanceBadge";
 import SeasonBadge from "../components/SeasonBadge";
+import RoomPills from "../components/RoomPills";
+
 
 interface taskSchedule {
-     task: { taskId: number, taskName: string, description: string | null, frequency: Frequency, importance: Importance, season: Season | null}
-     scheduleId: number; taskId: number; nextDueDate: Date; lastCompletedDate: Date | null; status: Status; notes: string | null; 
-    }
+  scheduleId: number; taskId: number; nextDueDate: Date; lastCompletedDate: Date | null; status: Status; notes: string | null;
+  task: {
+    rooms: ({
+        room: {
+            roomId: number;
+            name: string;
+            notes: string | null;
+            houseId: number;
+        };
+    } & {
+        taskId: number;
+        roomId: number;
+        assignedAt: Date;
+        assignedBy: string;
+    })[];
+}  & {
+  taskId: number; description: string | null; timeEstimate: number | null;
+  frequency: string; importance: string;
+  season: string | null;
+}}
 
   export const columns: ColumnDef<taskSchedule>[] = [
     {
@@ -27,8 +46,10 @@ interface taskSchedule {
       enableSorting: true
     },
     {
-      accessorKey: "task.description",
-      header: "Description",
+      accessorKey: "task.timeEstimate",
+      header: "Estimated time",
+      cell: ({ row }) => {
+        return ((row.original.task.timeEstimate) ? <div>{row.original.task.timeEstimate} min</div>: null)}
     },
     {
       accessorKey: "task.importance",
@@ -45,6 +66,11 @@ interface taskSchedule {
       header: "Season",
       cell: ({ row }) => {
         return (<><SeasonBadge season={row.original.task.season} /></>)}
+    },
+    {
+      accessorKey: "task.rooms",
+      header: "Rooms",
+      cell: ({ row }) => {return (<RoomPills rooms={row.original.task.rooms}/>)}
     },
     {
       accessorKey: "nextDueDate",

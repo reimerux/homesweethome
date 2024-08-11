@@ -9,9 +9,10 @@ const PushSchedulePage = async ({ params: { id } }: Props) => {
 
   const currentTask =  await prisma.taskSchedule.findFirst({
     where: { scheduleId: parseInt(id) },
-    include: {task: true}
+    include: { task: {include:{rooms: {include: {room: true}}}}},
   })
 
+  const allRooms = await prisma.room.findMany()
 
   return (
     <div className='p-3'>

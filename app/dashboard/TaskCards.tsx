@@ -3,24 +3,37 @@ import Link from 'next/link';
 import { MdCalendarMonth, MdCheck, MdRedo } from 'react-icons/md';
 import ImportanceBadge from '../components/ImportanceBadge';
 import { addDays, dateColor } from '../components/URfunctions';
+import RoomPills from '../components/RoomPills';
+import { Status } from '@prisma/client';
 
 interface taskSchedule {
-    scheduleId: number;
+    scheduleId: number; taskId: number; nextDueDate: Date; lastCompletedDate: Date | null; status: Status; notes: string | null;
     task: {
-        taskName: string;
-        description: string;
-        importance: string;
-    }
-    nextDueDate: Date;
-    status: string;
-}
+      rooms: ({
+          room: {
+              roomId: number;
+              name: string;
+              notes: string | null;
+              houseId: number;
+          };
+      } & {
+          taskId: number;
+          roomId: number;
+          assignedAt: Date;
+          assignedBy: string;
+      })[];
+  }  & {
+    taskId: number; description: string | null;
+    frequency: string; importance: string;
+    season: string | null;
+  }}
 
 const TaskCards = async () => {
 
     const tasks = await prisma.taskSchedule.findMany({
         where:
             { nextDueDate: { lt: addDays(new Date(), 30) } },
-        include: { task: true },
+            include: { task: {include:{rooms: {include: {room: true}}}}},
         orderBy: { nextDueDate: 'asc' }
     });
 
@@ -33,7 +46,9 @@ const TaskCards = async () => {
                 {tasks.map(task => <div key={task.scheduleId} className="card card-compact bg-base-100 w-88 shadow-xl">
                     <div className="card-body">
                         <h2 className="sm:card-title">{task.task.taskName}</h2>
-                        <div className='hidden sm:flex'><ImportanceBadge importance={task.task.importance} /></div>
+                        <div className='sm:flex'><RoomPills rooms={task.task.rooms}/></div>
+                        
+                        <div className='hidden sm:flex'><ImportanceBadge importance={task.task.importance} />{(task.task.timeEstimate) ? <div className="ml-2">{task.task.timeEstimate} min</div>: null}</div>
                         <p className={dateColor(task.nextDueDate.toString())+ ` hidden sm:block`}>{new Date(task.nextDueDate).toDateString()}</p>
                         <p className={dateColor(task.nextDueDate.toString()) + ` sm:hidden`}>{new Date(task.nextDueDate).toLocaleDateString().slice(0, -5)}</p>
                         <div className="hidden join-vertical sm:join">

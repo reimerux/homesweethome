@@ -27,7 +27,7 @@ interface TaskForm {
     <form className='max-w-m mx-auto' onSubmit={handleSubmit(async () => {
 
         await axios.post('../../api/tasks/mass',preloadTask);
-        router.push("/admin/tasks");
+        router.push("/admin/tasks?page=1&pagesize=10");
         toast("Seed data loaded");
     })
       }>

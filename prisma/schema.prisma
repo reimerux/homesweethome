@@ -15,23 +15,26 @@ datasource db {
 }
 
 model User {
-  id           Int      @id @default(autoincrement())
-  email        String   @unique
+  id           Int           @id @default(autoincrement())
+  email        String        @unique
   firstName    String?
   lastName     String
-  followers    Int      @default(0)
-  isActive     Boolean  @default(true)
-  registeredAt DateTime @default(now())
+  followers    Int           @default(0)
+  isActive     Boolean       @default(true)
+  registeredAt DateTime      @default(now())
+  TaskHistory  taskHistory[]
 }
 
 model MaintenanceTask {
   taskId       Int            @id @default(autoincrement())
   taskName     String
   description  String?        @db.Text
+  timeEstimate Int?
   frequency    Frequency      @default(YEARLY)
   importance   Importance     @default(MEDIUM)
   taskSchedule taskSchedule[]
   taskHistory  taskHistory[]
+  rooms        RoomsOnTasks[]
   season       Season?
 }
 
@@ -46,14 +49,16 @@ model taskSchedule {
 }
 
 model taskHistory {
-  historyId      Int             @id @default(autoincrement())
-  task           MaintenanceTask @relation(fields: [taskId], references: [taskId])
-  taskId         Int
-  datePerformed  DateTime        @default(now())
-  monthPerformed Int             @default(8)
-  yearPerformed  Int             @default(2024)
-  status         Status          @default(COMPLETED)
-  notes          String?         @db.Text
+  historyId       Int             @id @default(autoincrement())
+  task            MaintenanceTask @relation(fields: [taskId], references: [taskId])
+  taskId          Int
+  datePerformed   DateTime        @default(now())
+  monthPerformed  Int             @default(8)
+  yearPerformed   Int             @default(2024)
+  status          Status          @default(COMPLETED)
+  User            User            @relation(fields: [userPerformedId], references: [id])
+  userPerformedId Int             @default(1)
+  notes           String?         @db.Text
 }
 
 model House {
@@ -65,11 +70,23 @@ model House {
 }
 
 model Room {
-  roomId  Int     @id @default(autoincrement())
+  roomId  Int            @id @default(autoincrement())
   name    String
   notes   String?
-  House   House   @relation(fields: [houseId], references: [houseId])
+  House   House          @relation(fields: [houseId], references: [houseId])
   houseId Int
+  tasks   RoomsOnTasks[]
+}
+
+model RoomsOnTasks {
+  task       MaintenanceTask @relation(fields: [taskId], references: [taskId])
+  taskId     Int // relation scalar field (used in the `@relation` attribute above)
+  room       Room            @relation(fields: [roomId], references: [roomId])
+  roomId     Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime        @default(now())
+  assignedBy String
+
+  @@id([taskId, roomId])
 }
 
 enum Status {
