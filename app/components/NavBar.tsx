@@ -9,7 +9,8 @@ const NavBar = () => {
   const links = [
     { href: "/alltasks?page=1&pagesize=10", label: "All Tasks" },
     { href: "/history", label: "History" },
-    { href: "/schedule", label: "Schedule" }];
+    { href: "/calendar", label: "Calendar" },
+    { href: "/schedule", label: "Schedule New Tasks" }];
 
   return (
     <div className="navbar bg-base-300">

@@ -24,7 +24,7 @@ const UserForm =  (props: Props) => {
             <form className='max-w-sm mx-auto' onSubmit={handleSubmit(async (data) => {
                 await axios.put('/api/users/' + props.id, data);
                 router.push("/admin/users");
-                toast("User updated");
+                toast.success("User updated");
             })
             }>
                 <h1>Edit User</h1>

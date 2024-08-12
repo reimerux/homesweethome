@@ -23,7 +23,7 @@ const RoomDeleteForm =  (props: Props) => {
             <form className='max-w-lg mx-auto' onSubmit={handleSubmit(async (data) => {
                 await axios.delete('/api/rooms/' + props.id);
                 router.push("/admin/rooms", );
-                toast("Room deleted");
+                toast.success("Room deleted");
             })
             }>
                 <h1>Delete User</h1>

@@ -30,7 +30,7 @@ const TaskForm = ({currentTask, allRooms, id}: Props) => {
             <form className='' onSubmit={handleSubmit(async (data) => {
                 await axios.put('/api/tasks/' + id, data);
                 router.push("/admin/tasks?page=1&pagesize=10");
-                toast("Task updated");
+                toast.success("Task updated");
                 
             })
             }>

@@ -24,7 +24,7 @@ const UserDeleteForm =  (props: Props) => {
             <form className='max-w-sm mx-auto' onSubmit={handleSubmit(async (data) => {
                 await axios.delete('/api/users/' + props.id);
                 router.push("/admin/users", );
-                toast("User deleted");
+                toast.success("User deleted");
             })
             }>
                 <h1>Delete User</h1>

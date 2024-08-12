@@ -26,8 +26,8 @@ const TaskForm = (props: Props) => {
             <form className='max-w-m mx-auto' onSubmit={handleSubmit(async (data) => {
 
                     await axios.delete('/api/tasks/' + props.id);
-                    router.push("/admin/tasks");
-                    toast("Task deleted");
+                    router.push("/admin/tasks?page=1&pagesize=10");
+                    toast.success("Task deleted");
 
             })
             }>

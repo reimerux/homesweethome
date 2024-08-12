@@ -21,7 +21,7 @@ interface UserForm {
     <form className='max-w-sm mx-auto' onSubmit={handleSubmit(async (data) => {
       await axios.post('../../api/users',data);
       router.push("/admin/users")
-      toast("User created")
+      toast.success("User created")
     })
       }>
       <h1>Create new User</h1>

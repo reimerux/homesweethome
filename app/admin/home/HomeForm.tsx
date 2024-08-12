@@ -25,7 +25,7 @@ const HomeForm = ({home, id}: Props) => {
             <form className='max-w-m mx-auto' onSubmit={handleSubmit(async (data) => {
                 await axios.put('/api/house/', data);
                 router.push("/admin/home");
-                toast("Home updated");
+                toast.success("Home Info updated");
                 
             })
             }>

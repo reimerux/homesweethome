@@ -28,7 +28,6 @@ const ScheduleForm = (props: Props) => {
   return (
     <>
     <form className="max-w-sm mx-auto" onSubmit={handleSubmit(async (data) => {
-                console.log(data);
                 try {
                     const response = await axios.post('../../api/schedules', data);;
                     toast.success("Task scheduled");

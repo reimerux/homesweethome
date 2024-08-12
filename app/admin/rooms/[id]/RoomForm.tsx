@@ -23,7 +23,7 @@ const RoomForm =  (props: Props) => {
             <form className='max-w-sm mx-auto' onSubmit={handleSubmit(async (data) => {
                 await axios.put('/api/rooms/' + props.id, data);
                 router.push("/admin/rooms");
-                toast("Room updated");
+                toast.success("Room updated");
             })
             }>
                 <h1>Edit Room</h1>
