@@ -2,6 +2,7 @@ import './globals.css'
 import { Inter } from 'next/font/google'
 import { Toaster } from 'react-hot-toast'
 import NavBar from './components/NavBar'
+import NextAuthSessionProvider from "@/app/nextauth/NextAuthSessionProvider"
 
 
 const inter = Inter({ subsets: ['latin'] })
@@ -17,7 +18,9 @@ export default function RootLayout({
         <Toaster position="bottom-left"/>
           <NavBar/>
         <main>
-          {children}
+          <NextAuthSessionProvider>
+            {children}
+          </NextAuthSessionProvider>
         </main>
         </body>
     </html>

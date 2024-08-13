@@ -1,7 +1,6 @@
-import React from 'react'
-import Kpis from '../components/Kpis'
-import TaskCards from './TaskCards'
-import HouseInfo from './HouseInfo'
+import Kpis from '../components/Kpis';
+import HouseInfo from './HouseInfo';
+import TaskCards from './TaskCards';
 
 export const dynamic = 'force-dynamic';
 const Dashboard = () => {

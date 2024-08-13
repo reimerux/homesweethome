@@ -45,7 +45,7 @@ const TaskCards = async () => {
             <Link className="btn btn-sm" href="/dashboard/print" target="_blank">Print</Link>
             <div className='grid grid-cols-4 gap-4'>
                 {tasks.map(task => 
-                <div key={task.toString()}><TaskCard task={task} /></div>
+                <div key={task.task.taskId}><TaskCard task={task} /></div>
                 )}
             </div>
 

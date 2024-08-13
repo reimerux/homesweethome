@@ -18,7 +18,8 @@ const HistoryChart = async (props: Props) => {
             where: { datePerformed: { gt: addDays(new Date(), -180) } },
             having: {
                 status: { in: ['COMPLETED'] },
-            }
+            },
+                orderBy: {monthPerformed: 'asc'}
         }
         );
     } else {
@@ -27,7 +28,8 @@ const HistoryChart = async (props: Props) => {
             _count: { taskId: true, historyId: true },
             having: {
                 status: { in: ['COMPLETED'] }
-            }
+            },
+            orderBy: {monthPerformed: 'asc'}
         }
         );
     }
