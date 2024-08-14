@@ -7,6 +7,7 @@ import toast from 'react-hot-toast';
 interface RoomForm {
     roomId: number;
     name: string;
+    shortName: string | null;
     notes: string;
 }
 
@@ -23,6 +24,7 @@ const RoomForm =  (props: Props) => {
             <form className='max-w-sm mx-auto' onSubmit={handleSubmit(async (data) => {
                 await axios.put('/api/rooms/' + props.id, data);
                 router.push("/admin/rooms");
+                router.refresh();
                 toast.success("Room updated");
             })
             }>
@@ -32,11 +34,16 @@ const RoomForm =  (props: Props) => {
                     <input type="text" id="name" className="input input-bordered w-full max-w-xs" defaultValue={props.currentRoom.name} required {...register('name')} />
                 </div>
                 <div className="mb-5">
+                    <label htmlFor="shortName" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Short Name</label>
+                    <input type="text" id="shortName" className="input input-bordered w-full max-w-xs" defaultValue={props.currentRoom.shortName} required {...register('shortName')} />
+                </div>
+                <div className="mb-5">
                     <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notes</label>
                     <textarea id="notes" className="input input-bordered w-full max-w-xs" defaultValue={props.currentRoom.notes}  {...register('notes')} />
                 </div>
                 <button className="btn btn-primary mr-4" type='submit'>Update</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>
+                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
             </form>
         </>
     )

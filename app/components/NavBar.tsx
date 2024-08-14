@@ -8,10 +8,10 @@ const NavBar = () => {
   const currentPath = usePathname();
   
   const links = [
-    { href: "/alltasks?page=1&pagesize=10", label: "All Tasks" },
+    { href: "/tasks/all?page=1&pagesize=10", label: "Tasks" },
+    { href: "/issues/pending?page=1&pagesize=10", label: "Issues" },
     { href: "/history", label: "History" },
-    { href: "/calendar", label: "Calendar" },
-    { href: "/schedule", label: "Schedule New Tasks" }];
+    { href: "/calendar", label: "Calendar" }];
 
   return (
     <div className="navbar bg-base-300">

@@ -40,6 +40,7 @@ const HomeForm = ({home, id}: Props) => {
                 </div>
                 <button className="btn btn-primary mr-4" type='submit'>Change</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>
+                <button className="btn btn-ghost" type="button" onClick={() => router.back()}>Back</button>
             </form>
         </>
     )

@@ -27,7 +27,6 @@ const TaskForm = (props: Props) => {
 
                     await axios.delete('/api/tasks/' + props.id);
                     router.push("/admin/tasks?page=1&pagesize=10");
-                    router.refresh();
                     toast.success("Task deleted");
 
             })
@@ -60,7 +59,6 @@ const TaskForm = (props: Props) => {
                     </select>
                 </div>
                 <button className="btn btn-error mr-4" type='submit'>Delete</button>
-                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
             </form>
         </>
     )

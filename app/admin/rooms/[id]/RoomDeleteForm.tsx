@@ -22,7 +22,8 @@ const RoomDeleteForm =  (props: Props) => {
         <>
             <form className='max-w-lg mx-auto' onSubmit={handleSubmit(async (data) => {
                 await axios.delete('/api/rooms/' + props.id);
-                router.push("/admin/rooms", );
+                router.push("/admin/rooms");
+                router.refresh();
                 toast.success("Room deleted");
             })
             }>
@@ -36,6 +37,7 @@ const RoomDeleteForm =  (props: Props) => {
                     <textarea id="notes" className="input input-bordered w-full max-w-xs" disabled  defaultValue={props.currentRoom.notes} required {...register('notes')} />
                 </div>
                 <button className="btn btn-error mr-4" type='submit'>Delete</button>
+                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
             </form>
         </>
     )

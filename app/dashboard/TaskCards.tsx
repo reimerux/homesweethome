@@ -1,11 +1,8 @@
 import prisma from '@/prisma/client';
-import Link from 'next/link';
-import { MdCalendarMonth, MdCheck, MdRedo } from 'react-icons/md';
-import ImportanceBadge from '../components/ImportanceBadge';
-import { addDays, dateColor } from '../components/URfunctions';
-import RoomPills from '../components/RoomPills';
 import { Status } from '@prisma/client';
+import Link from 'next/link';
 import TaskCard from '../components/TaskCard';
+import { addDays } from '../components/URfunctions';
 
 interface taskSchedule {
     scheduleId: number; taskId: number; nextDueDate: Date; lastCompletedDate: Date | null; status: Status; notes: string | null;
@@ -40,10 +37,10 @@ const TaskCards = async () => {
 
     return (
 
-        <div className='flex-column'>
+        <div className='flex-column items-stretch'>
             <h1 className='text-sm sm:text-2xl'>Tasks scheduled for next 30 days ({tasks.length})</h1>
             <Link className="btn btn-sm" href="/dashboard/print" target="_blank">Print</Link>
-            <div className='grid grid-cols-4 gap-4'>
+            <div className='grid grid-cols-4 gap-2'>
                 {tasks.map(task => 
                 <div key={task.task.taskId}><TaskCard task={task} /></div>
                 )}

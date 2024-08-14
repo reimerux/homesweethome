@@ -32,10 +32,7 @@ export async function PUT(
         
     const updatedroom = await prisma.room.update({
         where: { roomId: parseInt(params.id)},
-        data: {
-            name: body.name,
-            notes: body.notes
-        }
+        data: body
     })
 
     return NextResponse.json(updatedroom);

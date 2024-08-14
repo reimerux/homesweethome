@@ -27,5 +27,8 @@ interface user {
     },
     {
       accessorKey: "email",
-      header: "Email"}
+      header: "Email"},
+    {
+      accessorKey: "role",
+      header: "Role"}
   ]

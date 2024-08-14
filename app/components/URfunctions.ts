@@ -65,3 +65,7 @@ export function date_diff_indays(date1: Date, date2: Date) {
 
     return response
   }
+
+  export function classNames(...classes: any) {
+    return classes.filter(Boolean).join(' ')
+}

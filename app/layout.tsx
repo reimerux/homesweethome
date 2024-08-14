@@ -14,6 +14,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+      <title>Home Sweet Home</title>
+      </head>
       <body className={inter.className}>      
         <Toaster position="bottom-left"/>
           <NavBar/>

@@ -6,14 +6,18 @@ import prisma from '@/prisma/client';
 type Props =
   {
     page: number,
-    pagesize: number
+    pagesize: number,
+    selection: string
   }
 
-const AllTaskGrid = async ({ page, pagesize }: Props) => {
+const TaskGrid = async ({ page, pagesize,selection }: Props) => {
 
+  if (!page)  {page=1};
+  if (!pagesize)  {pagesize=10};
   const taskSchedules = await prisma.taskSchedule.findMany({
     include: { task: {include:{rooms: {include: {room: true}}}}},
-    orderBy: { nextDueDate: 'asc' }
+    orderBy: { nextDueDate: 'asc' },
+    where:  {...((selection === "pending") ? { status: "PENDING" }: {})}
   });
 
   const begPage = (page - 1) * pagesize
@@ -27,5 +31,5 @@ const AllTaskGrid = async ({ page, pagesize }: Props) => {
   )
 }
 
-export default AllTaskGrid
+export default TaskGrid
 

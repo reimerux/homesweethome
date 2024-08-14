@@ -30,6 +30,7 @@ const TaskForm = ({currentTask, allRooms, id}: Props) => {
             <form className='' onSubmit={handleSubmit(async (data) => {
                 await axios.put('/api/tasks/' + id, data);
                 router.push("/admin/tasks?page=1&pagesize=10");
+                router.refresh();
                 toast.success("Task updated");
                 
             })
@@ -74,6 +75,7 @@ const TaskForm = ({currentTask, allRooms, id}: Props) => {
                 </div>
                 <button className="btn btn-primary mr-4" type='submit'>Change</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>
+                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
             </form>
         </>
     )

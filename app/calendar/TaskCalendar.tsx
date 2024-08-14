@@ -14,11 +14,8 @@ import {
 } from 'date-fns'
 import { useState } from 'react'
 import TaskCard from '../components/TaskCard'
+import { classNames } from '../components/URfunctions'
 
-
-function classNames(...classes: any) {
-    return classes.filter(Boolean).join(' ')
-}
 
 type Props = {
     tasks: any

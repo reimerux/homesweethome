@@ -22,6 +22,11 @@ interface room {
       enableSorting: true
     },
     {
+      accessorKey: "shortName",
+      header: "Short Name",
+      enableSorting: true
+    },
+    {
       accessorKey: "notes",
       header: "Notes",
     }

@@ -41,6 +41,7 @@ const UserDeleteForm =  (props: Props) => {
                     <input type="email" id="email" className="input input-bordered w-full max-w-xs" disabled defaultValue={props.currentUser.email} required {...register('email')} />
                 </div>
                 <button className="btn btn-error mr-4" type='submit'>Delete</button>
+                <button className="btn btn-ghost" onClick={() => router.back()}>Back</button>
             </form>
         </>
     )

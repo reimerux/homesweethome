@@ -1,9 +1,6 @@
 // This is your Prisma schema file,
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider        = "prisma-client-js"
   previewFeatures = ["views"]
@@ -14,6 +11,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// Admin
+
 model User {
   id           Int           @id @default(autoincrement())
   email        String        @unique
@@ -21,8 +20,28 @@ model User {
   lastName     String
   followers    Int           @default(0)
   isActive     Boolean       @default(true)
+  password     String         @default("password")
   registeredAt DateTime      @default(now())
   TaskHistory  taskHistory[]
+  role         Role @default(VIEWER)
+}
+
+model House {
+  houseId       Int    @id
+  street        String
+  city          String
+  squarefootage Int?
+  Rooms         Room[]
+}
+
+model Room {
+  roomId    Int            @id @default(autoincrement())
+  name      String
+  shortName String         @default("Short")
+  notes     String?
+  House     House          @relation(fields: [houseId], references: [houseId])
+  houseId   Int
+  tasks     RoomsOnTasks[]
 }
 
 model MaintenanceTask {
@@ -37,6 +56,8 @@ model MaintenanceTask {
   rooms        RoomsOnTasks[]
   season       Season?
 }
+
+// Transactional
 
 model taskSchedule {
   scheduleId        Int             @id @default(autoincrement())
@@ -61,23 +82,6 @@ model taskHistory {
   notes           String?         @db.Text
 }
 
-model House {
-  houseId       Int    @id
-  street        String
-  city          String
-  squarefootage Int?
-  Rooms         Room[]
-}
-
-model Room {
-  roomId  Int            @id @default(autoincrement())
-  name    String
-  notes   String?
-  House   House          @relation(fields: [houseId], references: [houseId])
-  houseId Int
-  tasks   RoomsOnTasks[]
-}
-
 model RoomsOnTasks {
   task       MaintenanceTask @relation(fields: [taskId], references: [taskId])
   taskId     Int // relation scalar field (used in the `@relation` attribute above)
@@ -88,6 +92,36 @@ model RoomsOnTasks {
 
   @@id([taskId, roomId])
 }
+
+model Issue {
+  issueId     Int              @id @default(autoincrement())
+  title       String
+  description String?
+  created_at  DateTime         @default(now())
+  updated_at  DateTime         @default(now())
+  status      Status
+  priority    Importance
+  labels      LabelsonIssues[]
+}
+
+model Label {
+  labelId Int              @id @default(autoincrement())
+  name    String
+  labels  LabelsonIssues[]
+}
+
+model LabelsonIssues {
+  issue      Issue    @relation(fields: [issueId], references: [issueId])
+  issueId    Int // relation scalar field (used in the `@relation` attribute above)
+  label      Label    @relation(fields: [labelId], references: [labelId])
+  labelId    Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([issueId, labelId])
+}
+
+// Enums
 
 enum Status {
   PENDING
@@ -116,4 +150,10 @@ enum Season {
   SPRING
   SUMMER
   FALL
+}
+
+enum Role {
+  ADMIN
+  VIEWER
+  EDIT
 }
