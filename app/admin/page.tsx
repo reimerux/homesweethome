@@ -5,7 +5,7 @@ const AdminPage = () => {
   return (
     <div className='flex'>
         <AdminSideNav/>
-        <p className='p-5'>Select a category from the sideNav</p>
+        <p className='p-5'>Select a category</p>
     </div>
   )
 }

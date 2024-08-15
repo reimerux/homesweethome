@@ -6,6 +6,7 @@ import { MdCheck, MdRedo } from "react-icons/md";
 import ImportanceBadge from "../components/ImportanceBadge";
 import SeasonBadge from "../components/SeasonBadge";
 import RoomPills from "../components/RoomPills";
+import { format } from "date-fns";
 
 
 interface taskSchedule {
@@ -75,6 +76,6 @@ interface taskSchedule {
     {
       accessorKey: "nextDueDate",
       header: "Scheduled Date",
-      cell: ({ row }) => {return (<span>{new Date(row.original.nextDueDate).toLocaleDateString()}</span>)}
+      cell: ({ row }) => {return (<span>{format(row.original.nextDueDate,"MM/dd/yy")}</span>)}
     }
   ]

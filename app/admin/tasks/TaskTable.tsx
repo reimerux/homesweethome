@@ -10,7 +10,10 @@ type Props =
   }
 
 const TaskTable = async ({ page, pagesize }: Props) => {
-    const tasks =  await prisma.maintenanceTask.findMany({
+  if (!page) { page = 1 };
+  if (!pagesize) { pagesize = 10 }; 
+    
+  const tasks =  await prisma.maintenanceTask.findMany({
       include:{rooms: {include: {room: true}}}},
     ); 
 
@@ -18,7 +21,7 @@ const TaskTable = async ({ page, pagesize }: Props) => {
     const endPage = begPage + pagesize
 
     return (
-        <>         
+        <>    
             <DataTable columns={columns} data={tasks.slice(begPage, endPage)} customCount={tasks.length}/>
             <Pagination itemCount={tasks.length} pageSize={pagesize} currentPage={page} />
         </>

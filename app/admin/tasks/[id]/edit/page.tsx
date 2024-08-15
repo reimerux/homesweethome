@@ -18,7 +18,7 @@ const rooms =  await prisma.room.findMany()
 
   return (
     <div className='flex'><AdminSideNav />
-      <div className='p-3'>
+      <div className='p-3 w-96'>
         <TaskForm currentTask={currentTask} allRooms={rooms} id={parseInt(id)} />
       </div>
     </div>

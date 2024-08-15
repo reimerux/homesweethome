@@ -1,5 +1,5 @@
 "use client"
-import { Frequency, Importance, Season } from "@prisma/client";
+import { Frequency, Importance, Room, Season } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import ImportanceBadge from "../../components/ImportanceBadge";
@@ -7,8 +7,10 @@ import SeasonBadge from "../../components/SeasonBadge";
 import RoomPills from "@/app/components/RoomPills";
 
 interface task {
-     taskId: number, taskName: string, description: string | null, frequency: Frequency, importance: Importance, season: Season | null; timeEstimate: number | null
-     rooms: ({
+  taskId: number; description: string | null; timeEstimate: number | null;
+frequency: string; importance: string;
+season: string | null; 
+  rooms: ({
       room: {
           roomId: number;
           name: string;
@@ -20,8 +22,8 @@ interface task {
       roomId: number;
       assignedAt: Date;
       assignedBy: string;
-  })[]
-    }
+  })[];
+} 
 
   export const columns: ColumnDef<task>[] = [
     {
@@ -66,7 +68,7 @@ interface task {
     {
       accessorKey: "task.rooms",
       header: "Rooms",
-      // cell: ({ row }) => {return (<RoomPills rooms={row.original.rooms}/>)}
-      cell: ({ row }) => {return (<span>{JSON.stringify(row.original)}</span>)}
+      cell: ({ row }) => {return (<RoomPills rooms={row.original.rooms}/>)}
+      // cell: ({ row }) => {return (<span>{JSON.stringify(row.original.rooms)}</span>)}
     }
   ]
