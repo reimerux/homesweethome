@@ -150,7 +150,7 @@ const TaskCalendar =  ({tasks}: Props) => {
                         {selectedDayTasks.length > 0 ? (
                             selectedDayTasks.map((task: any) => (
                                 <>
-                                <TaskCard task={task} />
+                                <TaskCard overflow={0} task={task} />
                                 </>
                             ))
                         ) : (
