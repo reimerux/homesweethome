@@ -7,8 +7,9 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider  = "postgresql"
+  url       = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
 // Admin
@@ -20,10 +21,10 @@ model User {
   lastName     String
   followers    Int           @default(0)
   isActive     Boolean       @default(true)
-  password     String         @default("password")
+  password     String        @default("password")
   registeredAt DateTime      @default(now())
   TaskHistory  taskHistory[]
-  role         Role @default(VIEWER)
+  role         Role          @default(VIEWER)
 }
 
 model House {

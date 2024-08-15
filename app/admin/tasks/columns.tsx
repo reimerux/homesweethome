@@ -63,10 +63,10 @@ interface task {
       cell: ({ row }) => {
         return (<><SeasonBadge season={row.original.season} /></>)}
     },
-    
     {
       accessorKey: "task.rooms",
       header: "Rooms",
-      cell: ({ row }) => {return (<RoomPills rooms={row.original.rooms}/>)}
+      // cell: ({ row }) => {return (<RoomPills rooms={row.original.rooms}/>)}
+      cell: ({ row }) => {return (<span>{JSON.stringify(row.original)}</span>)}
     }
   ]

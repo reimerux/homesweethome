@@ -26,7 +26,7 @@ const TaskForm = ({currentIssue,  id}: Props) => {
         <>
             <form className='' onSubmit={handleSubmit(async (data) => {
                 await axios.put('/api/issues/' + id, data);
-                router.push("/issues?page=1&pagesize=10");
+                router.push("/issues/pending?page=1&pagesize=10");
                 router.refresh();
                 toast.success("Issue " + id +" updated");
                 

@@ -22,10 +22,10 @@ interface IssueForm {
    return (
     <div className='p-3'>
     <form className='' onSubmit={handleSubmit(async (data) => {
-      await axios.post('../../api/issues',data);
-      router.push("/issues");
-      router.refresh;
-      toast.success("New Issue created");
+      const newissue = await axios.post('../../api/issues',data);
+      router.push("/issues/pending");
+      router.refresh();
+      toast.success("New Issue " + newissue.data.issueId + " - '" + newissue.data.title.substring(0,10) + "' created");
     })
       }>
       <h1>Create Issue</h1>

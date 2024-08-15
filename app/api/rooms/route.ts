@@ -13,6 +13,7 @@ export async function POST(request: NextRequest) {
         data: {
             name: body.name,
             notes: body.notes,
+            shortName: body.shortName,
             houseId: 1
         }
 
