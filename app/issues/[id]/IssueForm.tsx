@@ -1,8 +1,9 @@
 'use client'
+import ImportancePicker from '@/app/components/ImportancePicker';
 import { Importance, Status } from '@prisma/client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { FormProvider, useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 interface IssueForm {
@@ -20,12 +21,13 @@ type Props = {
 
 const TaskForm = ({ currentIssue, id }: Props) => {
     const router = useRouter();
-    const { register, handleSubmit } = useForm<IssueForm>();
+    const { register, handleSubmit } = useForm<IssueForm>();    
 
-    const PriorityMap = [{ "id": 0, "Importance": "LOW" }, { "id": 1, "Importance": "MEDIUM" }, { "id": 2, "Importance": "HIGH" }]
+    // const PriorityMap = [{ "id": 0, "Importance": "LOW" }, { "id": 1, "Importance": "MEDIUM" }, { "id": 2, "Importance": "HIGH" }]
 
     return (
         <>
+        
             <form className='max-w-3xl mx-auto' onSubmit={handleSubmit(async (data) => {
                 await axios.put('/api/issues/' + id, data);
                 router.push("/issues/pending?page=1&pagesize=10");
@@ -43,13 +45,7 @@ const TaskForm = ({ currentIssue, id }: Props) => {
                     <textarea className="textarea textarea-bordered w-full" id="description" placeholder="Description" defaultValue={currentIssue.description}{...register('description')} />
                 </div>
                 <div className="mb-5 max-w-sm">
-                    <label htmlFor="importance" className="block mb-2 text-sm font-medium text-gray-900">Priority</label>
-                    <input id="importance" type="range" min={0} max="2" defaultValue={PriorityMap.find(o => o.Importance ===currentIssue.priority)?.id} className="range" step="1" {...register("priority", { setValueAs: v => PriorityMap[v].Importance, })} />
-                    <div className="flex w-full justify-between px-2 text-xs">
-                        <span>Low</span>
-                        <span>Medium</span>
-                        <span>High</span>
-                    </div>
+                   <ImportancePicker defaultValue={currentIssue.priority} register={register("priority", { setValueAs: v => Object.values(Importance)[2-v], })}/>
                 </div>
                 <div className="mb-5">
                     <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900 ">Status</label>

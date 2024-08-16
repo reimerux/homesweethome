@@ -28,7 +28,7 @@ const ScheduleForm = (props: Props) => {
     const { register, handleSubmit } = useForm<ScheduleForm>();
   return (
     <>
-    <form className="max-w-sm mx-auto" onSubmit={handleSubmit(async (data) => {
+    <form className="max-w-3xl mx-auto" onSubmit={handleSubmit(async (data) => {
                 try {
                     const response = await axios.post('../../api/schedules', data);;
                     if (!data.scheduleAnother){

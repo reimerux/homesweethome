@@ -1,5 +1,5 @@
 import prisma from '@/prisma/client';
-import { MdArrowOutward, MdBrokenImage } from 'react-icons/md';
+import { MdAdd, MdArrowOutward, MdBrokenImage } from 'react-icons/md';
 import IssueCard from '../components/IssueCard';
 
 const IssueCards = async () => {
@@ -22,6 +22,10 @@ const IssueCards = async () => {
                         5 most recent
                     </p>
                 </div>
+                <a href="/issues/new"
+                    className="inline-flex items-center shrink-0 justify-center w-8 h-8 rounded-full text-white bg-gray-900 focus:outline-none"    >
+                    <MdAdd />
+                </a>
                 <a href="/issues/pending"
                     className="inline-flex items-center shrink-0 justify-center w-8 h-8 rounded-full text-white bg-gray-900 focus:outline-none"    >
                     <MdArrowOutward />

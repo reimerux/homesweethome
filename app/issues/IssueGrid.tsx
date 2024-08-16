@@ -14,19 +14,18 @@ const IssueGrid = async ({ page, pagesize, selection }: Props) => {
 
   if (!page) { page = 1 };
   if (!pagesize) { pagesize = 10 };
-  
-    const issues = await prisma.issue.findMany({
-      // include: { task: {include:{rooms: {include: {room: true}}}}},
-      orderBy: { created_at: 'desc' },
-      where:  {...((selection === "pending") ? { status: "PENDING" }: {})}
-    });
+
+  const issues = await prisma.issue.findMany({
+    orderBy: { created_at: 'desc' },
+    where: { ...((selection === "pending") ? { status: "PENDING" } : {}) }
+  });
 
   const begPage = (page - 1) * pagesize
   const endPage = begPage + pagesize
 
   return (
     <>
-        <DataTable columns={columns} data={issues.slice(begPage, endPage)} customCount={issues.length} />
+      <DataTable columns={columns} data={issues.slice(begPage, endPage)} customCount={issues.length} />
       <Pagination itemCount={issues.length} pageSize={pagesize} currentPage={page} />
     </>
   )
