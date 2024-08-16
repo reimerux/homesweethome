@@ -61,7 +61,7 @@ const TaskCards = async () => {
                     <MdArrowOutward />
                 </a>
             </div>
-            <div aria-label="content" className="mt-9 grid grid-cols-4 gap-2.5 items-stretch">
+            <div aria-label="content" className="mt-9 grid grid-cols-2 md:grid-cols-4 gap-2.5 items-stretch">
                 {tasks.map(task => 
                 <div key={task.task.taskId}><TaskCard task={task} overflow={0} /></div>
                 )}

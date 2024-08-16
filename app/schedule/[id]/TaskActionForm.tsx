@@ -88,6 +88,7 @@ const  TaskActionForm = ( {operation, currentTask, id} : Props) => {
         <></>}
         <button className="btn btn-primary mr-4" type='submit'>{(operation==="COMPLETE") ? "Mark Complete" : (operation==="UNSCHEDULE") ? "Unschedule" : "Push" }</button>
         <button className="btn btn-ghost" type='reset'>Reset</button>
+        <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
         {(operation==="PUSH") ? <p className='text-sm text-gray-400'>Pushing will mark the task as &quot;not completed&quot; and autoschedule for the next frequency.</p>:<></>}
         {(operation==="UNSCHEDULE")? <p className='text-sm text-gray-400'>Unscheduling will remove the task from the schedule. History will remain. Task can be rescheduled at a later time.</p>:<></>}
       </form>
