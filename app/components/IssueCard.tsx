@@ -9,7 +9,9 @@ type Props = {
 }
 
 const IssueCard = ({ issue }: Props) => {
+    const address = "/issues/" + issue.issueId + "/edit"
     return (
+        <a href={address}>
         <div className="flex items-center space-x-4 p-3.5 rounded-full bg-gray-100"  >
             <span className="flex items-center justify-center w-10 h-10 shrink-0 rounded-full bg-white text-gray-900"            >
                 <MdWarningAmber />
@@ -21,11 +23,12 @@ const IssueCard = ({ issue }: Props) => {
                         className="inline-block px-3 text-xs leading-none text-gray-400 font-normal first:pl-0"
                     ><ImportanceBadge importance={issue.priority}/></span                    >
                     <span                        className="inline-block px-3 text-xs leading-none text-gray-400 font-normal first:pl-0"
-                    >{format(issue.created_at, "MM/dd/yy")}</span                    >
+                    >{format(issue.created_at, "MM/dd")}</span                    >
                 </div>
             </div>
             <MdArrowForwardIos />
         </div>
+        </a>
     )
 }
 

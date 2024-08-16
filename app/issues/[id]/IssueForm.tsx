@@ -48,13 +48,14 @@ const TaskForm = ({currentIssue,  id}: Props) => {
                     </select>
                 </div>
                 <div className="mb-5">
-                    <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">status</label>
+                    <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Status</label>
                     <select id="status" className="select select-bordered w-full max-w-sm" defaultValue={currentIssue.status} {...register('status')}>
                         {Object.keys(Status).map(item => <option key={item} value={item}>{item}</option>)}
                     </select>
                 </div>
                 <button className="btn btn-primary mr-4" type='submit'>Change</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>
+                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
             </form>
         </>
     )

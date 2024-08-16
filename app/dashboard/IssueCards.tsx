@@ -11,9 +11,9 @@ const IssueCards = async () => {
 
     return (
 
-        <div aria-label="card" className="mt-6 p-8 rounded-3xl bg-white max-w-xl shadow-md w-full">
+        <div aria-label="card" className="mt-6 p-8 rounded-2xl bg-white max-w-4xl shadow-md w-full">
             <div aria-label="header" className="flex items-center space-x-2">
-                <MdBrokenImage />
+                <MdBrokenImage size={48}/>
                 <div className="space-y-0.5 flex-1">
                     <h3 className="font-medium text-lg tracking-tight text-gray-900 leading-tight"          >
                         Issues

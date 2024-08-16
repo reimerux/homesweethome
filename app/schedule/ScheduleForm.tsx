@@ -15,6 +15,7 @@ interface Task {
 interface ScheduleForm {
     taskId: number;
     nextDueDate: Date;
+    scheduleAnother: boolean;
 }
 
 type Props = {
@@ -30,8 +31,14 @@ const ScheduleForm = (props: Props) => {
     <form className="max-w-sm mx-auto" onSubmit={handleSubmit(async (data) => {
                 try {
                     const response = await axios.post('../../api/schedules', data);;
-                    toast.success("Task scheduled");
-                    router.push("/dashboard");
+                    if (!data.scheduleAnother){
+                        toast.success("Task scheduled");
+                        router.push("/dashboard");} else
+                        {
+                            toast.success("Task scheduled");
+                            router.push("/schedule");
+                            router.refresh();
+                        }
                 } catch (error) {
                     toast.error("Task schedule failed " + error);
                     console.error(error);
@@ -48,6 +55,11 @@ const ScheduleForm = (props: Props) => {
                     <label htmlFor="startDate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Start Date</label>
                     <input type="date" id="startdate" className="input input-bordered w-full max-w-xs" required {...register('nextDueDate')} />
                 </div>
+                <div className="mb-5">
+                    <label htmlFor="startDate" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"><input className="mr-2 leading-tight" type="checkbox" required {...register('scheduleAnother')}/> Schedule Another
+                    </label>
+                </div>
+                
                 <button className="btn btn-primary mr-4" type='submit'>Schedule</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>
             </form>
