@@ -3,7 +3,7 @@ import ImportancePicker from '@/app/components/ImportancePicker';
 import { Importance, Status } from '@prisma/client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
-import { FormProvider, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
 interface IssueForm {
@@ -23,8 +23,6 @@ const TaskForm = ({ currentIssue, id }: Props) => {
     const router = useRouter();
     const { register, handleSubmit } = useForm<IssueForm>();    
 
-    // const PriorityMap = [{ "id": 0, "Importance": "LOW" }, { "id": 1, "Importance": "MEDIUM" }, { "id": 2, "Importance": "HIGH" }]
-
     return (
         <>
         
@@ -35,7 +33,7 @@ const TaskForm = ({ currentIssue, id }: Props) => {
                 toast.success("Issue " + id + " updated");
             })
             }>
-                <h1>Edit Issue</h1>
+                <h1>Edit Issue {currentIssue.issueId}</h1>
                 <div className="mb-5">
                     <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 ">Title</label>
                     <input type="text" id="title" className='input input-bordered w-full' placeholder="Task Name" defaultValue={currentIssue.title} {...register('title')} />

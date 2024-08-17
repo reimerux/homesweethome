@@ -40,7 +40,6 @@ const MultiSelect = ({formFieldName, values, selected }: Props) => {
 
       <div className="absolute bg-white border p-2 transition-opacity opacity-0 pointer-events-none peer-checked:opacity-100 peer-checked:pointer-events-auto">
       <ul>
-        {/* {JSON.stringify(values)} */}
         {JSON.stringify(selected)}
           {values.map((value: Room, i: number) => {
             return (
@@ -53,7 +52,6 @@ const MultiSelect = ({formFieldName, values, selected }: Props) => {
                     value={value.roomId}
                     className="cursor-pointer"
                     onChange={handleChange}
-                    
                   />
                   <span className="ml-1">{value.name}</span>
                 </label>
