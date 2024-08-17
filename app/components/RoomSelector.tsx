@@ -1,6 +1,7 @@
 'use client'
 import { Room } from '@prisma/client';
 import { useRouter, useSearchParams } from 'next/navigation';
+import { classNames } from './URfunctions';
 
 interface Props {
     roomSelected: number;
@@ -21,15 +22,18 @@ const RoomSelector = ({ roomSelected, allRooms }: Props) => {
 
     return (
         <>
-            {/* <div className="join">
-                <button className="join-item btn" onClick={() => changePage(1)} disabled={currentPage === 1}>First</button>
-                <button className="join-item btn" onClick={() => changePage(currentPage - 1)} disabled={currentPage === 1}>Previous</button>
-                <button className="join-item btn" onClick={() => changePage(currentPage + 1)} disabled={currentPage === pageCount}>Next</button>
-                <button className="join-item btn" onClick={() => changePage(pageCount)} disabled={currentPage === pageCount}>Last</button>
-            </div> */}
-            <select defaultValue={10} onChange={e => changeRoom(parseInt(e.target.value))}>
+            <div className='hidden sm:block'>
+            {allRooms.map(room =>
+                <button key={room.roomId} className={classNames(
+                    (roomSelected === room.roomId) ? 'btn-active':null,
+                    "btn btn-sm"
+                )} onClick={() => changeRoom(room.roomId)} >{room.shortName}</button>
+            )}
+            </div>
+            <select className="sm:hidden" onChange={e => changeRoom(parseInt(e.target.value))}>
+                {roomSelected}
                 {allRooms.map(room =>
-                    <option key={room.roomId} value={room.roomId}>{room.name}</option>
+                    <option key={room.roomId} selected={(roomSelected === room.roomId)} value={room.roomId}>{room.name}</option>
                 )}
             </select>
         </>

@@ -38,7 +38,8 @@ interface issues {
     },
     {
       accessorKey: "description",
-      header: "Description"
+      header: "Description",
+      meta: "hidden md:table-cell",
     },
     {
       accessorKey: "priority",

@@ -4,8 +4,10 @@ import {
   flexRender,
   getCoreRowModel,
   getSortedRowModel,
+  RowData,
   useReactTable,
 } from "@tanstack/react-table"
+import { classNames } from "./URfunctions"
 
 
 interface DataTableProps<TData, TValue> {
@@ -13,6 +15,7 @@ interface DataTableProps<TData, TValue> {
   data: TData[]
   customCount?: number
 }
+
 
 export function DataTable<TData, TValue>({
   columns,
@@ -26,16 +29,20 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
   })
 
+
   return (<>
   <p className="text-xs ml-2 mb-1">{customCount || data.length} items</p>
     <div className="rounded-md border">
       <table className="table">
-        <thead>
+        <thead >
           {table.getHeaderGroups().map((headerGroup) => (
             <tr key={headerGroup.id}>
               {headerGroup.headers.map((header) => {
+ 
+            const breakpoints: any = header.column.columnDef.meta; 
+
                 return (
-                  <th key={header.id}>
+                  <th key={header.id} className={classNames(header.column.columnDef.meta)}>
                     {header.isPlaceholder
                       ? null
                       : 
@@ -51,6 +58,7 @@ export function DataTable<TData, TValue>({
                           >
                             {flexRender(
                               header.column.columnDef.header,
+                              // classNames(breakpoints),
                               header.getContext()
                             )}
                             {{
@@ -72,9 +80,11 @@ export function DataTable<TData, TValue>({
               <tr
                 key={row.id}
                 data-state={row.getIsSelected() && "selected"}
+                
               >
                 {row.getVisibleCells().map((cell) => {return (
-                  <td key={cell.id}>
+                  <td key={cell.id}
+                  className={classNames(cell.column.columnDef.meta)}>
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 )}
