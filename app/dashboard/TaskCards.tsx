@@ -34,7 +34,7 @@ const TaskCards = async () => {
         where:
             { nextDueDate: { lt: addDays(new Date(), 30) } },
         include: { task: { include: { rooms: { include: { room: true } } } } },
-        orderBy: { nextDueDate: 'asc' }
+        orderBy:  [{nextDueDate: 'asc'},{task: {importance: 'asc'}} ]
     });
 
     if (tasks.length > 7) { taskOverflow = tasks.length - 7; tasks = tasks.slice(0, 7); }
@@ -45,10 +45,10 @@ const TaskCards = async () => {
                 <MdCalendarMonth size={48} />
                 <div className="space-y-0.5 flex-1">
                     <h3 className="font-medium text-lg tracking-tight text-gray-900 leading-tight"          >
-                        Scheduled Tasks
+                        Scheduled Tasks ({tasks.length + taskOverflow})
                     </h3>
                     <p className="text-sm font-normal text-gray-400 leading-none">
-                        next 30 days ({tasks.length + taskOverflow})
+                        next 30 days
                     </p>
                 </div>
                 <a href="/dashboard/print" target="_blank"

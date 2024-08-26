@@ -3,7 +3,7 @@ import { Frequency, Importance, Prisma, Season, Status } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 import { MdCheck, MdRedo } from "react-icons/md";
-import ImportanceBadge from "../components/ImportanceBadge";
+import ImportanceBadge from "../components/Badge_Importance";
 import SeasonBadge from "../components/SeasonBadge";
 
 interface taskHistory {

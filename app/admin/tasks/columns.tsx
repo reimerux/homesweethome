@@ -2,9 +2,9 @@
 import { Frequency, Importance, Room, Season } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-import ImportanceBadge from "../../components/ImportanceBadge";
+import ImportanceBadge from "../../components/Badge_Importance";
 import SeasonBadge from "../../components/SeasonBadge";
-import RoomPills from "@/app/components/RoomPills";
+import RoomPills from "@/app/components/Badge_Rooms";
 
 interface task {
   taskId: number; description: string | null; timeEstimate: number | null;
@@ -73,6 +73,5 @@ export const columns: ColumnDef<task>[] = [
     accessorKey: "task.rooms",
     header: "Rooms",
     cell: ({ row }) => { return (<RoomPills rooms={row.original.rooms} />) }
-    // cell: ({ row }) => {return (<span>{JSON.stringify(row.original.rooms)}</span>)}
   }
 ]

@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
 import RoomSelector from "../components/RoomSelector";
 import HouseInfo from "../dashboard/HouseInfo";
-import IssueCards from "../dashboard/IssueCards";
+import IssueCards from "./IssueCards";
 import TaskCards from "./TaskCards";
 
 
@@ -16,7 +16,7 @@ const byRoomPage = async ({ searchParams}: {searchParams: {roomSelected: string}
           <HouseInfo />
           <RoomSelector allRooms={allRooms} roomSelected={parseInt(searchParams.roomSelected)} />
           <TaskCards roomId={parseInt(searchParams.roomSelected)} />
-          <IssueCards />
+          <IssueCards roomId={parseInt(searchParams.roomSelected)} />
       </div>
     </div>
   )

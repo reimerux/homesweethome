@@ -16,7 +16,36 @@ export async function POST(request: NextRequest) {
     //     return NextResponse.json({error: 'Validation not successful!'},{status: 400}        ) 
 
     const newIssue = await prisma.issue.create({
-        data: body
+        data: {
+            title: body.title,
+            description: body.description,
+            priority: body.priority,
+            status: body.status,
+            createdBy: 1,
+            notes: body.notes
+        }
     })
+
+    // create new relationships
+    let multiAdd: any = []
+    body.rooms.map((selectedRoom: any) => {
+        multiAdd.push(
+
+            {
+                issueId: newIssue.issueId,
+                roomId: parseInt(selectedRoom),
+                assignedAt: new Date(),
+                assignedBy: "API"
+            }
+        )
+    })
+
+    if (multiAdd.length > 0) {
+        await prisma.roomsOnIssues.createMany({
+            data: multiAdd
+        })
+    }
+
+
     return NextResponse.json(newIssue, {status: 201})
 }

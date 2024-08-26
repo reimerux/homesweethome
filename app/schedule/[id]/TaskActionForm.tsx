@@ -1,5 +1,5 @@
 'use client'
-import RoomPills from '@/app/components/RoomPills';
+import RoomPills from '@/app/components/Badge_Rooms';
 import { calcDueDate, dateColor, formatDateWithDiff } from '@/app/components/URfunctions';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';

@@ -1,8 +1,8 @@
 import Link from 'next/link'
 import React from 'react'
 import { MdCheck, MdRedo, MdCalendarMonth } from 'react-icons/md'
-import ImportanceBadge from './ImportanceBadge'
-import RoomPills from './RoomPills'
+import ImportanceBadge from './Badge_Importance'
+import RoomPills from './Badge_Rooms'
 import { dateColor } from './URfunctions'
 import { format } from 'date-fns'
 

@@ -36,13 +36,14 @@ model House {
 }
 
 model Room {
-  roomId    Int            @id @default(autoincrement())
+  roomId    Int             @id @default(autoincrement())
   name      String
-  shortName String         @default("Short")
+  shortName String          @default("Short")
   notes     String?
-  House     House          @relation(fields: [houseId], references: [houseId])
+  House     House           @relation(fields: [houseId], references: [houseId])
   houseId   Int
   tasks     RoomsOnTasks[]
+  issues    RoomsOnIssues[]
 }
 
 model MaintenanceTask {
@@ -100,9 +101,12 @@ model Issue {
   description String?
   created_at  DateTime         @default(now())
   updated_at  DateTime         @default(now())
+  createdBy   Int?
+  notes       String?
   status      Status
   priority    Importance
   labels      LabelsonIssues[]
+  rooms       RoomsOnIssues[]
 }
 
 model Label {
@@ -120,6 +124,17 @@ model LabelsonIssues {
   assignedBy String
 
   @@id([issueId, labelId])
+}
+
+model RoomsOnIssues {
+  issue      Issue    @relation(fields: [issueId], references: [issueId])
+  issueId    Int // relation scalar field (used in the `@relation` attribute above)
+  room       Room     @relation(fields: [roomId], references: [roomId])
+  roomId     Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime @default(now())
+  assignedBy String
+
+  @@id([issueId, roomId])
 }
 
 // Enums

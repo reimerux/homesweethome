@@ -1,12 +1,12 @@
 "use client"
-import { Frequency, Importance, Prisma, Season, Status } from "@prisma/client";
+import { Status } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
+import { format } from "date-fns";
 import Link from "next/link";
 import { MdCheck, MdRedo } from "react-icons/md";
-import ImportanceBadge from "../components/ImportanceBadge";
+import ImportanceBadge from "../components/Badge_Importance";
+import RoomPills from "../components/Badge_Rooms";
 import SeasonBadge from "../components/SeasonBadge";
-import RoomPills from "../components/RoomPills";
-import { format } from "date-fns";
 
 
 interface taskSchedule {

@@ -3,11 +3,13 @@ import { MdAdd, MdArrowOutward, MdBrokenImage } from 'react-icons/md';
 import IssueCard from '../components/IssueCard';
 
 const IssueCards = async () => {
-    const issues = await prisma.issue.findMany({
-        // include: { task: {include:{rooms: {include: {room: true}}}}},
-        orderBy: { created_at: 'desc' },
+    let issues = await prisma.issue.findMany({
+        include: { rooms: {include: {room: true}}},
+        orderBy:  [{priority: 'asc'} ,{created_at: 'desc'} ],
         where: {status: "PENDING"}
     });
+
+    issues = issues.slice(0, 5)
 
     return (
 

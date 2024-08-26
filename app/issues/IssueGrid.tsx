@@ -17,7 +17,8 @@ const IssueGrid = async ({ page, pagesize, selection }: Props) => {
 
   const issues = await prisma.issue.findMany({
     orderBy: { created_at: 'desc' },
-    where: { ...((selection === "pending") ? { status: "PENDING" } : {}) }
+    where: { ...((selection === "pending") ? { status: "PENDING" } : {}) },
+    include: {rooms: {include: {room: true}}}
   });
 
   const begPage = (page - 1) * pagesize

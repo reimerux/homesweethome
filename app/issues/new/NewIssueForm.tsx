@@ -18,51 +18,45 @@ interface IssueForm {
 }
 
 type Props = {
-    currentIssue: any,
-    id: number, allRooms: any
+    allRooms: any
 }
 
-const IssueForm = ({ currentIssue, id, allRooms }: Props) => {
+const NewIssueForm = ({ allRooms }: Props) => {
     const router = useRouter();
-    const { register, handleSubmit } = useForm<IssueForm>();    
+    const { register, handleSubmit } = useForm<IssueForm>();
 
     return (
         <>
-        
+
             <form className='max-w-3xl mx-auto' onSubmit={handleSubmit(async (data) => {
-                await axios.put('/api/issues/' + id, data);
-                router.push("/issues/pending?page=1&pagesize=10");
+                const newissue = await axios.post('../../api/issues', data);
+                router.push("/issues/pending");
                 router.refresh();
-                toast.success("Issue " + id + " updated");
+                toast.success("New Issue " + newissue.data.issueId + " - '" + newissue.data.title.substring(0, 15) + "' created");
             })
             }>
-                <h1>Edit Issue {currentIssue.issueId}</h1>
+                <h1>New Issue </h1>
                 <div className="mb-5">
                     <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 ">Title</label>
-                    <input type="text" id="title" className='input input-bordered w-full' placeholder="Task Name" defaultValue={currentIssue.title} {...register('title')} />
+                    <input type="text" id="title" className='input input-bordered w-full' placeholder="Task Name"  {...register('title')} />
                 </div>
                 <div className="mb-5">
                     <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
-                    <textarea className="textarea textarea-bordered w-full" id="description" placeholder="Description" defaultValue={currentIssue.description}{...register('description')} />
+                    <textarea className="textarea textarea-bordered w-full" id="description" placeholder="Description" {...register('description')} />
                 </div>
                 <div className="mb-5 max-w-sm">
-                   <ImportancePicker defaultValue={currentIssue.priority} register={register("priority", { setValueAs: v => Object.values(Importance)[2-v], })}/>
-                </div>
-                <div className="mb-5">
-                    <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
-                    <select id="status" className="select select-bordered w-full max-w-sm" defaultValue={currentIssue.status} {...register('status')}>
-                        {Object.keys(Status).map(item => <option key={item} value={item}>{item}</option>)}
-                    </select>
+                    <ImportancePicker defaultValue={"LOW"} register={register("priority", { setValueAs: v => Object.values(Importance)[2 - v], })} />
                 </div>
                 <div className="mb-5 max-w-sm">
-                    {/* {JSON.stringify(currentIssue.rooms)} */}
-                    <RoomMultiSelect register={register("rooms")} allRooms={allRooms} roomsSelected={currentIssue.rooms.map((room: any) => room.roomId.toString())}/>
+                    <RoomMultiSelect register={register("rooms")} allRooms={allRooms} roomsSelected={[]}/>
                 </div>
                 <div className="mb-5">
                     <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900 ">Notes</label>
                     <textarea className="textarea textarea-bordered w-full" id="notes" placeholder="Notes" {...register('notes')} />
                 </div>
-                <button className="btn btn-primary mr-4" type='submit'>Change</button>
+                <input id="status" className="hidden" defaultValue={"PENDING"} {...register('status')} />
+
+                <button className="btn btn-primary mr-4" type='submit'>Create</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>
                 <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
             </form>
@@ -70,4 +64,4 @@ const IssueForm = ({ currentIssue, id, allRooms }: Props) => {
     )
 }
 
-export default IssueForm
+export default NewIssueForm

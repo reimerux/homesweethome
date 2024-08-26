@@ -1,5 +1,5 @@
 'use client'
-import FormField from '@/app/components/FormField';
+import RoomMultiSelect from '@/app/components/RoomMultiSelect';
 import { Frequency, Importance, Season } from '@prisma/client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -69,10 +69,11 @@ const TaskForm = ({currentTask, allRooms, id}: Props) => {
                 </div>
                 <div className="mb-5">
                     <label htmlFor="rooms" className="block mb-2 text-sm font-medium text-gray-900 ">Rooms</label>
-                   
-                    <select id="rooms" multiple className="select select-bordered w-full max-w-sm"  {...register("rooms")} defaultValue={currentTask.rooms.map((element: any) => element.roomId)} >
+                    {JSON.stringify(currentTask.rooms)}
+                    {/* <select id="rooms" multiple className="select select-bordered w-full max-w-sm"  {...register("rooms")} defaultValue={currentTask.rooms.map((element: any) => element.roomId)} >
                         {allRooms.map(item => <option key={item.roomId}  value={item.roomId}>{item.name}</option>)}
-                    </select>
+                    </select> */}
+                    <RoomMultiSelect register={register("rooms")} allRooms={allRooms} roomsSelected={currentTask.rooms.map((room: any) => room.roomId.toString())}/>
                 </div>
                 <button className="btn btn-primary mr-4" type='submit'>Change</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>

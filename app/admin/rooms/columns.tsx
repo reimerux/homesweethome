@@ -1,4 +1,5 @@
 "use client"
+import RoomPills from "@/app/components/Badge_Rooms";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
 
@@ -25,7 +26,13 @@ interface room {
       accessorKey: "shortName",
       header: "Short Name",
       enableSorting: true
-    },
+    }
+    ,
+  {
+    accessorKey: "task.rooms",
+    header: "Badge Preview",
+    cell: ({ row }) => { return (<RoomPills rooms={[{"room" : row.original}]} />) }
+  },
     {
       accessorKey: "notes",
       header: "Notes",

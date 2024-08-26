@@ -17,7 +17,6 @@ const ImportancePicker = ({ register, defaultValue }:Props): ReactElement => {
             <label htmlFor="importance" className="block mb-2 text-sm font-medium text-gray-900">Priority</label>
             <input id="importance" type="range" min={0} max="2" defaultValue={PriorityMap.find(o => o.Importance === defaultValue)?.id} className="range" step="1"
             {...register}
-            // {...register("priority", { setValueAs: v => PriorityMap[v].Importance, })}
              />
             <div className="flex w-full justify-between px-2 text-xs">
                 <span>Low</span>

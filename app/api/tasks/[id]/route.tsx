@@ -31,7 +31,7 @@ export async function PUT(
         return NextResponse.json({ error: "Task not found" }, { status: 404 })
 
 
-    const allRooms = await prisma.room.findMany()
+    // const allRooms = await prisma.room.findMany()
     const assignedRooms = await prisma.roomsOnTasks.findMany({
         where: { taskId: parseInt(params.id) }
     }
@@ -110,9 +110,15 @@ export async function DELETE(
     if (taskUsage > 1)
         return NextResponse.json({ error: "Task is scheduled. Remove all schedules first." }, { status: 404 })
 
-    const updatedUser = await prisma.maintenanceTask.delete({
+    
+    await prisma.roomsOnTasks.deleteMany({
+        where: 
+            { taskId: parseInt(params.id)}
+        }    )
+
+    const updatedTask = await prisma.maintenanceTask.delete({
         where: { taskId: parseInt(params.id) }
     })
 
-    return NextResponse.json(updatedUser);
+    return NextResponse.json(updatedTask);
 }

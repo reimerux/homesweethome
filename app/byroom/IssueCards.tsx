@@ -2,13 +2,22 @@ import prisma from '@/prisma/client';
 import { MdAdd, MdArrowOutward, MdBrokenImage } from 'react-icons/md';
 import IssueCard from '../components/IssueCard';
 
+type Props = {
+    roomId: number
+}
 
-
-const IssueCards = async () => {
+const IssueCards = async ({roomId}: Props) => {
     const issues = await prisma.issue.findMany({
-        // include: { task: {include:{rooms: {include: {room: true}}}}},
+        include: {rooms: {include: {room: true}}},
         orderBy: { created_at: 'desc' },
-        where: {status: "PENDING"}
+        where: {
+            AND: [
+            {status: "PENDING"},
+            {
+                rooms: {some: {roomId:  roomId}}
+            }
+        ]
+        }
     });
 
     return (
