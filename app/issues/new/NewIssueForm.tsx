@@ -4,6 +4,7 @@ import RoomMultiSelect from '@/app/components/RoomMultiSelect';
 import { Importance, Status } from '@prisma/client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
@@ -22,6 +23,7 @@ type Props = {
 }
 
 const NewIssueForm = ({ allRooms }: Props) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
     const { register, handleSubmit } = useForm<IssueForm>();
 
@@ -29,6 +31,8 @@ const NewIssueForm = ({ allRooms }: Props) => {
         <>
 
             <form className='max-w-3xl mx-auto' onSubmit={handleSubmit(async (data) => {
+                setIsSubmitting(true);
+
                 const newissue = await axios.post('../../api/issues', data);
                 router.push("/issues/pending");
                 router.refresh();
@@ -56,7 +60,7 @@ const NewIssueForm = ({ allRooms }: Props) => {
                 </div>
                 <input id="status" className="hidden" defaultValue={"PENDING"} {...register('status')} />
 
-                <button className="btn btn-primary mr-4" type='submit'>Create</button>
+                <button className="btn btn-primary mr-4" disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner": "hidden"}> </span>Create</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>
                 <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
             </form>

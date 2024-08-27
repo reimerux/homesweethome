@@ -4,12 +4,11 @@ import IssueCard from '../components/IssueCard';
 
 const IssueCards = async () => {
     let issues = await prisma.issue.findMany({
+        take: 5,
         include: { rooms: {include: {room: true}}},
         orderBy:  [{priority: 'asc'} ,{created_at: 'desc'} ],
         where: {status: "PENDING"}
     });
-
-    issues = issues.slice(0, 5)
 
     return (
 

@@ -3,7 +3,9 @@ import RoomMultiSelect from '@/app/components/RoomMultiSelect';
 import { Frequency, Importance, Season } from '@prisma/client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 interface TaskForm {
     taskName: string;
@@ -21,14 +23,24 @@ type Props = {
 
 
 const NewTaskForm = ({ allRooms }: Props) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
     const { register, handleSubmit } = useForm<TaskForm>();
 
     return (
         <>
             <form className='' onSubmit={handleSubmit(async (data) => {
-                await axios.post('../../api/tasks', data);
-                router.push("/admin/tasks")
+                try {
+                    setIsSubmitting(true);
+                    await axios.post('../../api/tasks', data);
+                    toast.success("Task created");
+                    router.push("/admin/tasks");
+                    router.refresh();
+                } catch (error) {
+                    toast.error("Task creation failed " + error);
+                    console.error(error);
+                    setIsSubmitting(false);
+                }
             })
             }>
                 <h1>Create Task</h1>
@@ -65,7 +77,7 @@ const NewTaskForm = ({ allRooms }: Props) => {
                 <div className='mb-5 max-w-sm'>
                     <RoomMultiSelect register={register("rooms")} allRooms={allRooms} roomsSelected={[]} />
                 </div>
-                <button className="btn btn-primary mr-4" type='submit'>Create</button>
+                <button className="btn btn-primary mr-4" disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner": "hidden"}> </span>Create</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>
                 <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
             </form>

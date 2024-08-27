@@ -3,6 +3,7 @@ import RoomMultiSelect from '@/app/components/RoomMultiSelect';
 import { Frequency, Importance, Season } from '@prisma/client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 
@@ -22,24 +23,32 @@ type Props = {
     id: number
 }
 
-const TaskForm = ({currentTask, allRooms, id}: Props) => {
+const TaskForm = ({ currentTask, allRooms, id }: Props) => {
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
     const { register, handleSubmit } = useForm<TaskForm>();
-  
+
     return (
         <>
             <form className="w-full" onSubmit={handleSubmit(async (data) => {
-                await axios.put('/api/tasks/' + id, data);
+                try {
+                    setIsSubmitting(true);
+                    await axios.put('/api/tasks/' + id, data);
                 router.push("/admin/tasks?page=1&pagesize=10");
                 router.refresh();
-                toast.success("Task" + id + " updated");  
+                toast.success("Task" + id + " updated");
+            } catch (error) {
+                toast.error("Task update failed " + error);
+                console.error(error);
+                setIsSubmitting(false);
+            }
             })
             }>
                 <h1>Edit Task</h1>
                 <div className="mb-5">
                     <label htmlFor="taskName" className="block mb-2 text-sm font-medium text-gray-900 ">Task Name</label>
                     <input type="text" id="taskName" className='input input-bordered w-full' placeholder="Task Name" defaultValue={currentTask.taskName} {...register('taskName')} />
-                   
+
                 </div>
                 <div className="mb-5">
                     <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
@@ -59,23 +68,18 @@ const TaskForm = ({currentTask, allRooms, id}: Props) => {
                 </div>
                 <div className="mb-5">
                     <label htmlFor="season" className="block mb-2 text-sm font-medium text-gray-900 ">Suggested Season</label>
-                    <select id="season" className="select select-bordered w-full max-w-sm"  defaultValue={currentTask.season} {...register('season')}>
+                    <select id="season" className="select select-bordered w-full max-w-sm" defaultValue={currentTask.season} {...register('season')}>
                         {Object.keys(Season).map(item => <option key={item} value={item}>{item}</option>)}
                     </select>
                 </div>
                 <div className="mb-5">
                     <label htmlFor="timeEstimate" className="block mb-2 text-sm font-medium text-gray-900 ">Estimate in minutes</label>
-                    <input id="timeEstimate" type="number" className="input input-bordered w-full"  defaultValue={currentTask.timeEstimate} {...register('timeEstimate')}/>   
+                    <input id="timeEstimate" type="number" className="input input-bordered w-full" defaultValue={currentTask.timeEstimate} {...register('timeEstimate')} />
                 </div>
                 <div className="mb-5">
-                    <label htmlFor="rooms" className="block mb-2 text-sm font-medium text-gray-900 ">Rooms</label>
-                    {JSON.stringify(currentTask.rooms)}
-                    {/* <select id="rooms" multiple className="select select-bordered w-full max-w-sm"  {...register("rooms")} defaultValue={currentTask.rooms.map((element: any) => element.roomId)} >
-                        {allRooms.map(item => <option key={item.roomId}  value={item.roomId}>{item.name}</option>)}
-                    </select> */}
-                    <RoomMultiSelect register={register("rooms")} allRooms={allRooms} roomsSelected={currentTask.rooms.map((room: any) => room.roomId.toString())}/>
+                    <RoomMultiSelect register={register("rooms")} allRooms={allRooms} roomsSelected={currentTask.rooms.map((room: any) => room.roomId.toString())} />
                 </div>
-                <button className="btn btn-primary mr-4" type='submit'>Change</button>
+                <button className="btn btn-primary mr-4" disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner": "hidden"}> </span>Change</button>
                 <button className="btn btn-ghost" type='reset'>Reset</button>
                 <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
             </form>

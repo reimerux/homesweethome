@@ -14,8 +14,11 @@ const TaskTable = async ({ page, pagesize }: Props) => {
   if (!pagesize) { pagesize = 10 }; 
     
   const tasks =  await prisma.maintenanceTask.findMany({
-      include:{rooms: {include: {room: true}}}},
-    ); 
+      include:
+         {rooms: {include: {room: true}}},
+      orderBy: {taskId: 'asc'}
+      
+}); 
 
     const begPage = (page - 1) * pagesize
     const endPage = begPage + pagesize

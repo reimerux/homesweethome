@@ -16,16 +16,21 @@ type Props = {
     id: number
 }
 
-const RoomForm =  (props: Props) => {
+const RoomForm = (props: Props) => {
     const router = useRouter();
     const { register, handleSubmit } = useForm<RoomForm>();
     return (
         <>
             <form className='max-w-sm mx-auto' onSubmit={handleSubmit(async (data) => {
-                await axios.put('/api/rooms/' + props.id, data);
-                router.push("/admin/rooms");
-                router.refresh();
-                toast.success("Room updated");
+                try {
+                    await axios.put('/api/rooms/' + props.id, data);
+                    router.push("/admin/rooms");
+                    router.refresh();
+                    toast.success("Room updated");
+                } catch (error) {
+                    toast.error("Room update failed " + error);
+                    console.error(error);
+                }
             })
             }>
                 <h1>Edit Room</h1>

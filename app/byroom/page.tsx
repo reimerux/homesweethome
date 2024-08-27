@@ -12,7 +12,7 @@ const byRoomPage = async ({ searchParams}: {searchParams: {roomSelected: string}
 
   return (
     <div className='p-3  bg-slate-100'>
-      <div className="flex flex-col w-full ">
+      <div className="flex flex-col max-w-3xl mx-auto">
           <HouseInfo />
           <RoomSelector allRooms={allRooms} roomSelected={parseInt(searchParams.roomSelected)} />
           <TaskCards roomId={parseInt(searchParams.roomSelected)} />

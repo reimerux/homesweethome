@@ -15,16 +15,21 @@ type Props = {
     id: number
 }
 
-const RoomDeleteForm =  (props: Props) => {
+const RoomDeleteForm = (props: Props) => {
     const router = useRouter();
     const { register, handleSubmit } = useForm<RoomForm>();
     return (
         <>
             <form className='max-w-lg mx-auto' onSubmit={handleSubmit(async (data) => {
-                await axios.delete('/api/rooms/' + props.id);
-                router.push("/admin/rooms");
-                router.refresh();
-                toast.success("Room deleted");
+                try {
+                    await axios.delete('/api/rooms/' + props.id);
+                    router.push("/admin/rooms");
+                    router.refresh();
+                    toast.success("Room deleted");
+                } catch (error) {
+                    toast.error("Room deletion failed " + error);
+                    console.error(error);
+                }
             })
             }>
                 <h1>Delete User</h1>
@@ -34,7 +39,7 @@ const RoomDeleteForm =  (props: Props) => {
                 </div>
                 <div className="mb-5">
                     <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notes</label>
-                    <textarea id="notes" className="input input-bordered w-full max-w-xs" disabled  defaultValue={props.currentRoom.notes} required {...register('notes')} />
+                    <textarea id="notes" className="input input-bordered w-full max-w-xs" disabled defaultValue={props.currentRoom.notes} required {...register('notes')} />
                 </div>
                 <button className="btn btn-error mr-4" type='submit'>Delete</button>
                 <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>

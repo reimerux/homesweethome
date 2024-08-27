@@ -37,6 +37,9 @@ const TaskCards = async () => {
         orderBy:  [{nextDueDate: 'asc'},{task: {importance: 'asc'}} ]
     });
 
+    const totalTime = tasks.reduce((accumulator, currentValue) => (currentValue.task.timeEstimate) ? accumulator + currentValue.task.timeEstimate : accumulator,
+    0,)
+
     if (tasks.length > 7) { taskOverflow = tasks.length - 7; tasks = tasks.slice(0, 7); }
     return (
 
@@ -45,7 +48,7 @@ const TaskCards = async () => {
                 <MdCalendarMonth size={48} />
                 <div className="space-y-0.5 flex-1">
                     <h3 className="font-medium text-lg tracking-tight text-gray-900 leading-tight"          >
-                        Scheduled Tasks ({tasks.length + taskOverflow})
+                        Scheduled Tasks ({tasks.length + taskOverflow}) Est. Time: {totalTime} min
                     </h3>
                     <p className="text-sm font-normal text-gray-400 leading-none">
                         next 30 days

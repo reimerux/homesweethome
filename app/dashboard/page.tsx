@@ -11,7 +11,7 @@ const Dashboard = () => {
       <div className="flex w-full ">
         <div className='hidden sm:block max-w-80'>
           <Kpis /></div>
-        <div className="flex-col">
+        <div className="flex-col max-w-3xl mx-auto">
           <HouseInfo />
           <TaskCards />
           <IssueCards />
