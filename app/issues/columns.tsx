@@ -46,7 +46,8 @@ interface issues {
       accessorKey: "priority",
       header: "Priority",
       cell: ({ row }) => {
-        return (<ImportanceBadge importance={row.original.priority}/>)}
+        return (<ImportanceBadge importance={row.original.priority}/>)},
+        meta: "hidden md:table-cell",
     },
     {
       accessorKey: "status",
@@ -55,7 +56,8 @@ interface issues {
     {
       accessorKey: "task.rooms",
       header: "Rooms",
-      cell: ({ row }) => { return (<RoomPills rooms={row.original.rooms} />) }
+      cell: ({ row }) => { return (<RoomPills rooms={row.original.rooms} />) },
+      meta: "hidden md:table-cell"
     },
     {
       accessorKey: "created_at",
