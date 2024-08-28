@@ -6,6 +6,7 @@ import AdminSideNav from '../../AdminSideNav';
 import toast from 'react-hot-toast';
 import { Role } from '@prisma/client';
 import { useState } from 'react';
+import FormButtons from '@/app/components/FormButtons';
 
 interface UserForm {
   id: number;
@@ -56,9 +57,7 @@ const NewUserPage = () => {
               {Object.keys(Role).map(item => <option key={item} value={item}>{item}</option>)}
             </select>
           </div>
-          <button className="btn btn-primary mr-4" disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner" : "hidden"}> </span>Create</button>
-          <button className="btn btn-ghost" type='reset'>Reset</button>
-          <button className="btn btn-ghost" type="button" onClick={() => router.back()}>Back</button>
+          <FormButtons isSubmitting={isSubmitting} SubmitText="Create" />
         </form>
       </div>
     </div>

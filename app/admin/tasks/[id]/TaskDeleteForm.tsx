@@ -1,4 +1,5 @@
 'use client'
+import FormButtons from '@/app/components/FormButtons';
 import { Frequency, Importance, Season } from '@prisma/client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -63,8 +64,7 @@ const TaskForm = (props: Props) => {
                         {Object.keys(Season).map(item => <option key={item} value={item}>{item}</option>)}
                     </select>
                 </div>
-                <button className="btn btn-error mr-4" type='submit'>Delete</button>
-                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
+                <FormButtons isSubmitting={false} SubmitText="Delete" />
             </form>
         </>
     )

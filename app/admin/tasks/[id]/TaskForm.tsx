@@ -1,4 +1,5 @@
 'use client'
+import FormButtons from '@/app/components/FormButtons';
 import RoomMultiSelect from '@/app/components/RoomMultiSelect';
 import { Frequency, Importance, Season } from '@prisma/client';
 import axios from 'axios';
@@ -79,9 +80,7 @@ const TaskForm = ({ currentTask, allRooms, id }: Props) => {
                 <div className="mb-5">
                     <RoomMultiSelect register={register("rooms")} allRooms={allRooms} roomsSelected={currentTask.rooms.map((room: any) => room.roomId.toString())} />
                 </div>
-                <button className="btn btn-primary mr-4" disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner": "hidden"}> </span>Change</button>
-                <button className="btn btn-ghost" type='reset'>Reset</button>
-                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
+                <FormButtons isSubmitting={isSubmitting} SubmitText="Change" />
             </form>
         </>
     )

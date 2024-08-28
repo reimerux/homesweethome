@@ -1,4 +1,5 @@
 'use client'
+import FormButtons from '@/app/components/FormButtons';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -38,9 +39,7 @@ const HomeForm = ({home, id}: Props) => {
                     <label htmlFor="city" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">City</label>
                     <input type="text" id="city" className='input input-bordered w-full max-w-xs' defaultValue={home.city}{...register('city')} />
                 </div>
-                <button className="btn btn-primary mr-4" type='submit'>Change</button>
-                <button className="btn btn-ghost" type='reset'>Reset</button>
-                <button className="btn btn-ghost" type="button" onClick={() => router.back()}>Back</button>
+                <FormButtons isSubmitting={false} SubmitText="Change" />
             </form>
         </>
     )

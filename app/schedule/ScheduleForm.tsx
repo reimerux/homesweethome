@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import FormButtons from '../components/FormButtons';
 
 interface Task {
     taskId: number;
@@ -62,9 +63,7 @@ const ScheduleForm = (props: Props) => {
                 <div className="mb-5">
                     <input className="mr-2 leading-tight" type="checkbox"  {...register('scheduleAnother')} /> Schedule Another
                 </div>
-                <button className="btn btn-primary mr-4" disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner" : "hidden"}> </span>Schedule</button>
-                <button className="btn btn-ghost" type='reset'>Reset</button>
-                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
+                <FormButtons isSubmitting={isSubmitting} SubmitText="Schedule" />
             </form>
         </>
     )

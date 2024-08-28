@@ -1,4 +1,5 @@
 'use client'
+import FormButtons from '@/app/components/FormButtons';
 import { Role } from '@prisma/client';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
@@ -49,9 +50,7 @@ const UserForm =  ({currentUser, id}: Props) => {
                         {Object.keys(Role).map(item => <option key={item} value={item}>{item}</option>)}
                     </select>
                 </div>
-                <button className="btn btn-primary mr-4" type='submit'>Update</button>
-                <button className="btn btn-ghost" type='reset'>Reset</button>
-                <button className="btn btn-ghost" type="button" onClick={() => router.back()}>Back</button>
+                <FormButtons isSubmitting={false} SubmitText="Change" />
             </form>
             
         </>

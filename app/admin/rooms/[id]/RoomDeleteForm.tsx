@@ -1,4 +1,5 @@
 'use client'
+import FormButtons from '@/app/components/FormButtons';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
@@ -41,8 +42,7 @@ const RoomDeleteForm = (props: Props) => {
                     <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Notes</label>
                     <textarea id="notes" className="input input-bordered w-full max-w-xs" disabled defaultValue={props.currentRoom.notes} required {...register('notes')} />
                 </div>
-                <button className="btn btn-error mr-4" type='submit'>Delete</button>
-                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
+                <FormButtons isSubmitting={false} SubmitText="Delete" />
             </form>
         </>
     )

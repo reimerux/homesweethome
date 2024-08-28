@@ -1,4 +1,5 @@
 'use client'
+import FormButtons from '@/app/components/FormButtons';
 import ImportancePicker from '@/app/components/ImportancePicker';
 import RoomMultiSelect from '@/app/components/RoomMultiSelect';
 import { Importance, Status } from '@prisma/client';
@@ -60,9 +61,7 @@ const NewIssueForm = ({ allRooms }: Props) => {
                 </div>
                 <input id="status" className="hidden" defaultValue={"PENDING"} {...register('status')} />
 
-                <button className="btn btn-primary mr-4" disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner": "hidden"}> </span>Create</button>
-                <button className="btn btn-ghost" type='reset'>Reset</button>
-                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
+                <FormButtons isSubmitting={isSubmitting} SubmitText="Create" />
             </form>
         </>
     )

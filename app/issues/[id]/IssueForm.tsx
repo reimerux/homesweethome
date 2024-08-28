@@ -1,4 +1,5 @@
 'use client'
+import FormButtons from '@/app/components/FormButtons';
 import ImportancePicker from '@/app/components/ImportancePicker';
 import RoomMultiSelect from '@/app/components/RoomMultiSelect';
 import { Importance, Status } from '@prisma/client';
@@ -62,9 +63,7 @@ const IssueForm = ({ currentIssue, id, allRooms }: Props) => {
                     <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900 ">Notes</label>
                     <textarea className="textarea textarea-bordered w-full" id="notes" placeholder="Notes" {...register('notes')} />
                 </div>
-                <button className="btn btn-primary mr-4" type='submit'>Change</button>
-                <button className="btn btn-ghost" type='reset'>Reset</button>
-                <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
+                <FormButtons isSubmitting={false} SubmitText="Change" />
             </form>
         </>
     )
