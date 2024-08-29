@@ -1,3 +1,4 @@
+
 import prisma from '@/prisma/client';
 
 interface House {
@@ -5,6 +6,7 @@ interface House {
     street: string;
     city: string;
 }
+
 
 const HouseInfo = async () => {
 

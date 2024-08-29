@@ -6,7 +6,7 @@ const IssueCards = async () => {
     let issues = await prisma.issue.findMany({
         take: 5,
         include: { rooms: {include: {room: true}}},
-        orderBy:  [{priority: 'asc'} ,{created_at: 'desc'} ],
+        orderBy:  [{priority: 'asc'} ,{createdAt: 'desc'} ],
         where: {status: "PENDING"}
     });
 

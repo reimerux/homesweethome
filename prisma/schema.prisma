@@ -15,16 +15,17 @@ datasource db {
 // Admin
 
 model User {
-  id           Int           @id @default(autoincrement())
-  email        String        @unique
+  id           Int                  @id @default(autoincrement())
+  email        String               @unique
   firstName    String?
   lastName     String
-  followers    Int           @default(0)
-  isActive     Boolean       @default(true)
-  password     String        @default("password")
-  registeredAt DateTime      @default(now())
+  followers    Int                  @default(0)
+  isActive     Boolean              @default(true)
+  password     String               @default("password")
+  registeredAt DateTime             @default(now())
   TaskHistory  taskHistory[]
-  role         Role          @default(VIEWER)
+  role         Role                 @default(VIEWER)
+  achievements AchievementOnUsers[]
 }
 
 model House {
@@ -99,8 +100,9 @@ model Issue {
   issueId     Int              @id @default(autoincrement())
   title       String
   description String?
-  created_at  DateTime         @default(now())
-  updated_at  DateTime         @default(now())
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @default(now())
+  completedAt DateTime?
   createdBy   Int?
   notes       String?
   status      Status
@@ -135,6 +137,25 @@ model RoomsOnIssues {
   assignedBy String
 
   @@id([issueId, roomId])
+}
+
+model Achievement {
+  achievementId Int                  @id @default(autoincrement())
+  category      AchievementCategory
+  name          String
+  description   String?
+  pointsValue   Int?
+  users         AchievementOnUsers[]
+}
+
+model AchievementOnUsers {
+  achievement   Achievement @relation(fields: [achievementId], references: [achievementId])
+  achievementId Int
+  user          User        @relation(fields: [userId], references: [id])
+  userId        Int
+  unlockedAt    DateTime
+
+  @@id([achievementId, userId])
 }
 
 // Enums
@@ -172,4 +193,10 @@ enum Role {
   ADMIN
   VIEWER
   EDIT
+}
+
+enum AchievementCategory {
+  TIME
+  ROOM
+  ISSUES
 }

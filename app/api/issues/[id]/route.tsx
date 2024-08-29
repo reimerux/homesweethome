@@ -38,6 +38,7 @@ export async function PUT(
         description: body.description,
         priority: body.priority,
         status: body.status,
+        updatedAt: new Date(),
         notes: body.notes
         }
     })

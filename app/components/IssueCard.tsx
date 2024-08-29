@@ -22,7 +22,7 @@ const IssueCard = ({ issue }: Props) => {
                             className="inline-block px-3 text-xs leading-none text-gray-400 font-normal first:pl-0"
                         ><ImportanceBadge importance={issue.priority} />  <RoomPills rooms={issue.rooms} /></span                    >
                         <span className="inline-block px-3 text-xs leading-none text-gray-400 font-normal first:pl-0"
-                        >{format(issue.created_at, "MM/dd")}</span                    >
+                        >{format(issue.createdAt, "MM/dd")}</span                    >
                     </div>
                 </div>
                 <MdArrowForwardIos />

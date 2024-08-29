@@ -10,8 +10,8 @@ import RoomPills from "../components/Badge_Rooms";
 
 interface issues {
   issueId: number; title: string; description: string | null;
-  created_at:  Date;
-  updated_at:  Date;
+  createdAt:  Date;
+  updatedAt:  Date;
   status:      Status;
   priority:    Importance;
   rooms: Array<any>;
@@ -63,6 +63,6 @@ interface issues {
       accessorKey: "created_at",
       header: "Created On",
       cell: ({ row }) => {
-        return (<>{format(row.original.created_at, "MM/dd/yyyy")}</>)}
+        return (<>{format(row.original.createdAt, "MM/dd/yyyy")}</>)}
     }
   ]

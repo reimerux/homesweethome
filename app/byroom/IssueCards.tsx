@@ -9,7 +9,7 @@ type Props = {
 const IssueCards = async ({roomId}: Props) => {
     const issues = await prisma.issue.findMany({
         include: {rooms: {include: {room: true}}},
-        orderBy: { created_at: 'desc' },
+        orderBy: { createdAt: 'desc' },
         where: {
             AND: [
             {status: "PENDING"},

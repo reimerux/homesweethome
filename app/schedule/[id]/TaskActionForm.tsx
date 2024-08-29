@@ -1,4 +1,5 @@
 'use client'
+import ImportanceBadge from '@/app/components/Badge_Importance';
 import RoomPills from '@/app/components/Badge_Rooms';
 import { calcDueDate, dateColor, formatDateWithDiff } from '@/app/components/URfunctions';
 import axios from 'axios';
@@ -53,16 +54,13 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
     })
     }>
       <h1>Edit Scheduled Task: {currentTask.task.taskName}</h1>
-      <RoomPills rooms={currentTask.task.rooms} />
+      <div><RoomPills rooms={currentTask.task.rooms} /></div>
+      <ImportanceBadge importance={currentTask.task.importance} />
       <input type="text" className="hidden" id="scheduleId" value={id} required {...register('scheduleId')}></input>
       <input type="text" className="hidden" id="taskId" value={currentTask.taskId} {...register('taskId')}></input>
       <div className="mb-5 mt-5">
         <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900">Description</label >
         {currentTask.task.description}
-      </div>
-      <div className="mb-5">
-        <label htmlFor="importance" className="block mb-2 text-sm font-medium text-gray-900">Importance</label >
-        {currentTask.task.importance}
       </div>
       <div className="mb-5">
         <label htmlFor="frequency" className="block mb-2 text-sm font-medium text-gray-900">Frequency</label >
@@ -94,7 +92,7 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
           <textarea id="notes" className="textarea textarea-bordered w-full" placeholder="Enter your Notes" {...register('notes')}></textarea>
         </div> :
         <></>}
-      <button className="btn btn-primary mr-4" disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner": "hidden"}> </span>{(operation === "COMPLETE") ? "Mark Complete" : (operation === "UNSCHEDULE") ? "Unschedule" : "Push"}</button>
+      <button className="btn btn-primary mr-4" disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner" : "hidden"}> </span>{(operation === "COMPLETE") ? "Mark Complete" : (operation === "UNSCHEDULE") ? "Unschedule" : "Push"}</button>
       <button className="btn btn-ghost" type='reset'>Reset</button>
       <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
       {(operation === "PUSH") ? <p className='text-sm text-gray-400'>Pushing will mark the task as &quot;not completed&quot; and autoschedule for the next frequency.</p> : <></>}

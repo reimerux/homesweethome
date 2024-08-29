@@ -15,7 +15,7 @@ const PrintTaskList = async () => {
   const issues = await prisma.issue.findMany({
     where:
     {status: "PENDING"},
-    orderBy: {created_at: 'asc'}
+    orderBy: {createdAt: 'asc'}
 });
 
   return (
@@ -67,7 +67,7 @@ const PrintTaskList = async () => {
           <td className='border border-slate-800'>{issue.title}</td>
           <td className='border border-slate-800'>{issue.description}</td>
           <td className='border border-slate-800'>{issue.priority}</td>
-          <td className='border border-slate-800'>{format(issue.created_at, "MM/dd/yy")}</td>
+          <td className='border border-slate-800'>{format(issue.createdAt, "MM/dd/yy")}</td>
           <td className='border border-slate-800'><MdCheckBoxOutlineBlank /></td>
           <td className='border border-slate-800'></td>
         </tr>
