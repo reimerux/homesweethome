@@ -1,8 +1,8 @@
 import prisma from '@/prisma/client';
 import { Importance, Room, Status } from '@prisma/client';
-import { useRouter } from 'next/navigation';
-import { useForm } from 'react-hook-form';
 import NewIssueForm from './NewIssueForm';
+import { auth } from '@/auth';
+import { devNull } from 'node:os';
 
 interface IssueForm {
   issueId: number; title: string; description: string | null;
@@ -15,10 +15,11 @@ interface IssueForm {
 
 const NewTaskPage = async () => {
   const allRooms = await prisma.room.findMany();
+  const session = await auth();
 
   return (
     <div className='p-3'>
-      <NewIssueForm allRooms={allRooms} />
+      <NewIssueForm allRooms={allRooms} userId={session?.user.id} />
     </div>
   )
 }

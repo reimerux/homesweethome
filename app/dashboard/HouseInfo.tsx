@@ -1,4 +1,5 @@
 
+import { auth } from '@/auth';
 import prisma from '@/prisma/client';
 
 interface House {
@@ -9,13 +10,14 @@ interface House {
 
 
 const HouseInfo = async () => {
+    const session = await auth()
 
     const house =  await prisma.house.findFirst();
     
     return (
         
         <div>
-            {house?.street}
+            {house?.street} / {session?.user.email} 
         </div>
     )
 }

@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
             description: body.description,
             priority: body.priority,
             status: body.status,
-            createdBy: 1,
+            createdBy: body.createdBy,
             notes: body.notes
         }
     })

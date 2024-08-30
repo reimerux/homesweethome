@@ -1,14 +1,14 @@
-import { getServerSession } from 'next-auth';
+// import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 
 const SignOutPage = async () => {
 
-    const session = await getServerSession();
-    console.log({ session });
+    // const session = await getServerSession();
+    // console.log({ session });
   
-    // if (session) {
-    //   redirect("/");
-    // }
+    // // if (session) {
+    // //   redirect("/");
+    // // }
 
 
   return (

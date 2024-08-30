@@ -1,12 +1,10 @@
-import React from 'react'
-import SignInForm from './SignInForm'
-
-const SignInPage = () => {
+import SignInForm from "./SignInForm";
+ 
+export default async function SignInPage() {
+  
   return (
-    <div>SignInPage
+    <div className="flex flex-col gap-2">
       <SignInForm />
     </div>
   )
 }
-
-export default SignInPage

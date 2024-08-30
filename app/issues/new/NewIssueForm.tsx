@@ -8,12 +8,14 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { auth, signIn, signOut } from '@/auth';
 
 interface IssueForm {
     issueId: number; title: string; description: string | null;
     created_at: Date;
     updated_at: Date;
     status: Status;
+    createdBy: number;
     priority: Importance;
     notes: string | null;
     rooms: Array<number>
@@ -21,11 +23,13 @@ interface IssueForm {
 
 type Props = {
     allRooms: any
+    userId: string | undefined
 }
 
-const NewIssueForm = ({ allRooms }: Props) => {
+const NewIssueForm = ({ allRooms , userId}: Props) => {
     const [isSubmitting, setIsSubmitting] = useState(false);
     const router = useRouter();
+
     const { register, handleSubmit } = useForm<IssueForm>();
 
     return (
@@ -33,7 +37,7 @@ const NewIssueForm = ({ allRooms }: Props) => {
 
             <form className='max-w-3xl mx-auto' onSubmit={handleSubmit(async (data) => {
                 setIsSubmitting(true);
-
+                
                 const newissue = await axios.post('../../api/issues', data);
                 router.push("/issues/pending");
                 router.refresh();
@@ -60,6 +64,7 @@ const NewIssueForm = ({ allRooms }: Props) => {
                     <textarea className="textarea textarea-bordered w-full" id="notes" placeholder="Notes" {...register('notes')} />
                 </div>
                 <input id="status" className="hidden" defaultValue={"PENDING"} {...register('status')} />
+                <input id="status" className="hidden" defaultValue={(!userId)? "1":userId} {...register('createdBy')} />
 
                 <FormButtons isSubmitting={isSubmitting} SubmitText="Create" />
             </form>
