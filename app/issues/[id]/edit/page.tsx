@@ -1,6 +1,7 @@
 
 import prisma from '@/prisma/client';
 import IssueForm from '../IssueForm';
+import { auth } from '@/auth';
 
 interface Props {
   params: { id: string }
@@ -14,11 +15,12 @@ const EditUserPage = async ({ params: { id } }: Props) => {
     include: {rooms: true}
 })
 const allRooms =  await prisma.room.findMany()
+const session = await auth();
 
   return (
     
       <div className='p-3'>
-        <IssueForm currentIssue={currentIssue} allRooms={allRooms} id={parseInt(id)} />
+        <IssueForm currentIssue={currentIssue} allRooms={allRooms} id={parseInt(id)} userId={session?.user.id}/>
       </div>
 
   )

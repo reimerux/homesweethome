@@ -53,7 +53,7 @@ const NavBar = async () => {
               <li>
                 <a href="/profile">Profile</a>
               </li>
-              {(session.user.role!="VIEWER") ? (<li>
+              {(session.user.role==="ADMIN") ? (<li>
                 <a href="/admin">Settings</a>
               </li>): null}
               <li>

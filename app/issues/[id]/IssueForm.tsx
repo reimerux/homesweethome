@@ -20,10 +20,10 @@ interface IssueForm {
 
 type Props = {
     currentIssue: any,
-    id: number, allRooms: any
+    id: number, allRooms: any, userId: string | undefined
 }
 
-const IssueForm = ({ currentIssue, id, allRooms }: Props) => {
+const IssueForm = ({ currentIssue, id, allRooms, userId }: Props) => {
     const router = useRouter();
     const { register, handleSubmit } = useForm<IssueForm>();    
 
@@ -35,6 +35,7 @@ const IssueForm = ({ currentIssue, id, allRooms }: Props) => {
                 router.push("/issues/pending?page=1&pagesize=10");
                 router.refresh();
                 toast.success("Issue " + id + " updated");
+                if (userId) await axios.post('/api/achievements/', {"userId": userId});;
             })
             }>
                 <h1>Edit Issue {currentIssue.issueId}</h1>
