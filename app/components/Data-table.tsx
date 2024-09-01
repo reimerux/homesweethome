@@ -79,6 +79,7 @@ export function DataTable<TData, TValue>({
             table.getRowModel().rows.map((row) => (
               <tr
                 key={row.id}
+                aria-label={row.id}
                 data-state={row.getIsSelected() && "selected"}
                 
               >

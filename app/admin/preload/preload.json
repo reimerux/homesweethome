@@ -1,4 +1,5 @@
-[
+{
+  "tasks": [
     {
       "taskName": "Check Carbon Monoxide Alarms",
       "description": "Check Carbon Monoxide Alarms",
@@ -482,4 +483,31 @@
       "frequency": "YEARLY",
       "season": "FALL"
     }
+  ],
+  "rooms": [
+    {
+      "name": "Bedroom",
+      "notes": "",
+      "shortName": "Bedroom",
+      "houseId": 1
+    },
+    {
+      "name": "Bathroom",
+      "notes": "",
+      "shortName": "Bathroom",
+      "houseId": 1
+    },
+    {
+      "name": "Kitchen",
+      "notes": "",
+      "shortName": "Kitchen",
+      "houseId": 1
+    },
+    {
+      "name": "Backyard",
+      "notes": "",
+      "shortName": "Backyard",
+      "houseId": 1
+    }
   ]
+}

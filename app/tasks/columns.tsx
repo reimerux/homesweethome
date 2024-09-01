@@ -38,7 +38,7 @@ export const columns: ColumnDef<taskSchedule>[] = [
     accessorKey: "scheduleID",
     cell: ({ cell, row }) => {
       return (<>
-        <Link className='btn btn-sm btn-primary' href={'/schedule/' + row.original.scheduleId + '/complete'}><MdCheck /></Link><Link className='btn btn-sm' href={'/schedule/' + row.original.scheduleId + '/push/'}><MdRedo /></Link>
+        <Link aria-label="Complete" className='btn btn-sm btn-primary' href={'/schedule/' + row.original.scheduleId + '/complete'}><MdCheck /></Link><Link className='btn btn-sm' aria-label="Push" href={'/schedule/' + row.original.scheduleId + '/push/'}><MdRedo /></Link>
       </>)
     }
   },

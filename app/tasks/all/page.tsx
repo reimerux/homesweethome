@@ -7,7 +7,7 @@ const allTasks = ({ searchParams}: {searchParams: {page: string, pagesize: strin
   return (
     <div className='p-3'>
       <h1>All Scheduled Tasks
-        <a href="/schedule"
+        <a href="/schedule" aria-label="ScheduleTask"
           className="ml-5 inline-flex items-center shrink-0 justify-center w-8 h-8 rounded-full text-white bg-gray-900 focus:outline-none"    >
           <MdOutlineCalendarToday />
         </a>

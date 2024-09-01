@@ -8,7 +8,7 @@ const pendingIssues = ({ searchParams }: { searchParams: { page: string, pagesiz
   return (
     <div className='p-3'>
       <h1>Issues
-        <a href="/issues/new"
+        <a href="/issues/new" aria-label="NewIssue"
           className="ml-5 inline-flex items-center shrink-0 justify-center w-6 h-6 rounded-full text-white bg-gray-900 focus:outline-none"    >
           <MdAdd />
         </a>

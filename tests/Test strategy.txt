@@ -1,0 +1,31 @@
+Ensure that nothing breaks
+
+SetUp
+- Seed Data
+- Login
+
+Settings
+- Creating and editing tasks
+- Creating and editing users
+- Creating and editing rooms
+
+Tasks
+- Scheduling tasks
+- completing task
+- pushing task
+- unschedule task
+
+Issues
+- Creating new Issues
+- Editing Issue
+- Completing Issue
+
+Other stuff
+- dashboard
+- charts
+- calendar
+- by rooms
+- achievements
+
+Breakdown
+- delete all records
