@@ -1,7 +1,7 @@
-import prisma from '@/prisma/client'
-import { format } from 'date-fns'
-import React from 'react'
-import { MdStar } from 'react-icons/md'
+import prisma from '@/prisma/client';
+import { format } from 'date-fns';
+import { GiFlame } from "react-icons/gi";
+import { MdStar } from 'react-icons/md';
 
 type Props = {
     userId: string | undefined
@@ -23,7 +23,7 @@ const AchievementsBadges = async ({ userId }: Props) => {
                         return (
                             <div key={i} className="flex rounded-full py-1 px-1 font-medium border bg-slate-600 border-gray-300 gap-2 items-center">
                                 <div className="w-10 rounded-full bg-slate-900 text-white content-center">
-                                    <MdStar size={40} color='gold' />
+                                    {(badge.achievement.category === "ISSUES") ? <MdStar size={40} color='gold' /> : <GiFlame size={40} color='gold' />}
                                 </div>
                                 <div className="flex-col">
                                     <span className="text-sm text-white mr-2">{badge.achievement.name}</span>

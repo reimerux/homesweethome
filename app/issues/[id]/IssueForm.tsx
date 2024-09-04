@@ -15,7 +15,8 @@ interface IssueForm {
     status: Status;
     priority: Importance;
     notes: string | null;
-    rooms: Array<number>
+    rooms: Array<number>;
+    userId: number;
 }
 
 type Props = {
@@ -39,6 +40,7 @@ const IssueForm = ({ currentIssue, id, allRooms, userId }: Props) => {
             })
             }>
                 <h1>Edit Issue {currentIssue.issueId}</h1>
+                <input className='hidden' {...register('userId')} value={userId}/>
                 <div className="mb-5">
                     <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 ">Title</label>
                     <input type="text" id="title" className='input input-bordered w-full' placeholder="Task Name" defaultValue={currentIssue.title} {...register('title')} />

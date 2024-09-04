@@ -486,15 +486,39 @@
   ],
   "rooms": [
     {
-      "name": "Bedroom",
+      "name": "Master Bedroom",
       "notes": "",
-      "shortName": "Bedroom",
+      "shortName": "Master Bed",
       "houseId": 1
     },
     {
-      "name": "Bathroom",
+      "name": "Bedroom 1",
       "notes": "",
-      "shortName": "Bathroom",
+      "shortName": "Bed 1",
+      "houseId": 1
+    },
+    {
+      "name": "Bedroom 2",
+      "notes": "",
+      "shortName": "Bed 2",
+      "houseId": 1
+    },
+    {
+      "name": "Master Bathroom",
+      "notes": "",
+      "shortName": "Master Bath",
+      "houseId": 1
+    },
+    {
+      "name": "Bathroom 1",
+      "notes": "",
+      "shortName": "Bath 1",
+      "houseId": 1
+    },
+    {
+      "name": "Bathroom 2",
+      "notes": "",
+      "shortName": "Bath 2",
       "houseId": 1
     },
     {
@@ -504,10 +528,86 @@
       "houseId": 1
     },
     {
+      "name": "Living Room",
+      "notes": "",
+      "shortName": "Living",
+      "houseId": 1
+    },
+    {
+      "name": "Dining Room",
+      "notes": "",
+      "shortName": "Dining",
+      "houseId": 1
+    },
+    {
       "name": "Backyard",
       "notes": "",
       "shortName": "Backyard",
       "houseId": 1
+    },
+    {
+      "name": "Frontyard",
+      "notes": "",
+      "shortName": "Frontyard",
+      "houseId": 1
     }
+  ],
+  "achievements":  [
+  {
+    
+    "name" : "2 week streak",
+    "category": "STREAK",
+    "description": "Complete issues in 2 consecutive weeks",
+    "pointsValue": 20,
+    "target": 2
+},
+{
+    
+    "name" : "4 week streak",
+    "category": "STREAK",
+    "description": "Complete issues in 4 consecutive weeks",
+    "pointsValue": 40,
+    "target": 4
+},
+{
+    
+    "name" : "8 week streak",
+    "category": "STREAK",
+    "description": "Complete issues in 8 consecutive weeks",
+    "pointsValue": 80,
+    "target": 8
+},
+{
+    
+    "name" : "First Issue",
+    "category": "ISSUES",
+    "description": "Complete first issue",
+    "pointsValue": 10,
+    "target": 1
+},
+{
+    
+    "name" : "10 Issues",
+    "category": "ISSUES",
+    "description": "Complete 10 issues",
+    "pointsValue": 20,
+    "target": 10
+},
+{
+    
+    "name" : "50 Issues",
+    "category": "ISSUES",
+    "description": "Complete 50 issues",
+    "pointsValue": 40,
+    "target": 50
+},
+{
+    
+    "name" : "100 Issues",
+    "category": "ISSUES",
+    "description": "Complete 100 issues",
+    "pointsValue": 80,
+    "target": 100
+}
   ]
 }

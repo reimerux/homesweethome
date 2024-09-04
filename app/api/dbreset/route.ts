@@ -4,7 +4,6 @@ import prisma  from "@/prisma/client";
 
 export async function POST(request: NextRequest) {
     const objects=[
-        {"tablename":"achievement"},
         {"tablename":"achievementOnUsers"},
         {"tablename":"issue"},
         {"tablename":"label"},
@@ -16,8 +15,6 @@ export async function POST(request: NextRequest) {
         {"tablename":"taskSchedule"}
     ]
     
-
-
     objects.map(async(object: any, i: number) =>  {
         const tableName=object.tablename
         const deleted = await (prisma[tableName] as any).deleteMany({})

@@ -12,7 +12,7 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-// Admin
+// Meta
 
 model User {
   id           Int                  @id @default(autoincrement())
@@ -27,6 +27,18 @@ model User {
   role         Role                 @default(VIEWER)
   achievements AchievementOnUsers[]
 }
+
+model Achievement {
+  achievementId Int                  @id @default(autoincrement())
+  category      AchievementCategory
+  name          String
+  description   String?
+  target        Int                  @default(0)
+  pointsValue   Int?
+  users         AchievementOnUsers[]
+}
+
+// Admin
 
 model House {
   houseId       Int    @id
@@ -100,10 +112,11 @@ model Issue {
   issueId     Int              @id @default(autoincrement())
   title       String
   description String?
-  createdAt   DateTime        @default(now())
-  updatedAt   DateTime        @default(now())
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @default(now())
   completedAt DateTime?
   createdBy   Int?
+  completedBy Int?
   notes       String?
   status      Status
   priority    Importance
@@ -137,15 +150,6 @@ model RoomsOnIssues {
   assignedBy String
 
   @@id([issueId, roomId])
-}
-
-model Achievement {
-  achievementId Int                  @id @default(autoincrement())
-  category      AchievementCategory
-  name          String
-  description   String?
-  pointsValue   Int?
-  users         AchievementOnUsers[]
 }
 
 model AchievementOnUsers {
@@ -196,7 +200,6 @@ enum Role {
 }
 
 enum AchievementCategory {
-  TIME
-  ROOM
+  STREAK
   ISSUES
 }

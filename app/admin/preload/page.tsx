@@ -22,6 +22,7 @@ const NewTaskPage = () => {
   const { register, handleSubmit } = useForm<TaskForm>();
   const tasks = preloadData.tasks
   const rooms = preloadData.rooms
+  const achievements = preloadData.achievements
 
   return (
     <div className='flex'>
@@ -43,13 +44,23 @@ const NewTaskPage = () => {
         <form className='max-w-m mx-auto' onSubmit={handleSubmit(async () => {
 
           await axios.post('../../api/rooms/mass', rooms);
-          router.push("/admin/rooms");
           router.refresh();
           toast.success("Room Seed data loaded");
         })
         }>
           <button className="btn btn-primary mr-4" type='submit'>Create {rooms.length} Rooms</button>
           <p className='text-sm text-gray-400'>NOTICE: This action will load new rooms into the database.</p>
+        </form>
+
+        <form className='max-w-m mx-auto' onSubmit={handleSubmit(async () => {
+
+          await axios.post('../../api/achievements/mass', achievements);
+          router.refresh();
+          toast.success("Achievement Seed data loaded");
+        })
+        }>
+          <button className="btn btn-primary mr-4" type='submit'>Create {achievements.length} Achievements</button>
+          <p className='text-sm text-gray-400'>NOTICE: This action will load new achievements into the database.</p>
         </form>
 
         <form className='max-w-m mx-auto' onSubmit={handleSubmit(async () => {
