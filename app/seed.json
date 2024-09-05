@@ -609,5 +609,10 @@
     "pointsValue": 80,
     "target": 100
 }
-  ]
+  ],
+  "home" : {
+    "street": "Your Street Address",
+    "city": "Your City",
+    "squarefootage": 0
+  }
 }

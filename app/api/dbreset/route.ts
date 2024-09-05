@@ -12,6 +12,7 @@ export async function POST(request: NextRequest) {
         {"tablename":"roomsOnIssues"},
         {"tablename":"roomsOnTasks"},
         {"tablename":"taskHistory"},
+        {"tablename":"maintenanceTask"},
         {"tablename":"taskSchedule"}
     ]
     

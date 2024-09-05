@@ -1,9 +1,8 @@
 import prisma from '@/prisma/client';
 import { Status } from '@prisma/client';
-import Link from 'next/link';
+import { MdArrowOutward, MdCalendarMonth, MdLocalPrintshop } from 'react-icons/md';
 import TaskCard from '../components/TaskCard';
 import { addDays } from '../components/URfunctions';
-import { MdBrokenImage, MdArrowOutward, MdCalendarMonth, MdLocalPrintshop } from 'react-icons/md';
 
 interface taskSchedule {
     scheduleId: number; taskId: number; nextDueDate: Date; lastCompletedDate: Date | null; status: Status; notes: string | null;

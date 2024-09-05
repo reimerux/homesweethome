@@ -10,7 +10,7 @@ const tasksPage = ({ searchParams}: {searchParams: {page: string, pagesize: stri
       <AdminSideNav />
       <div className="flex-col p-3">
         <h1>Maintenance Tasks</h1>
-        <div className="mb-5"><Link href="/admin/tasks/new" className='btn btn-sm mr-4'>New Task</Link><Link href="/admin/tasks/preload" className='btn btn-sm'>Preload</Link></div>
+        <div className="mb-5"><Link href="/admin/tasks/new" className='btn btn-sm mr-4'>New Task</Link></div>
         <TaskTable page={parseInt(searchParams.page)} pagesize={parseInt(searchParams.pagesize)}/>
         
       </div></div>

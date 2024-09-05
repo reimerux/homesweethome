@@ -1,13 +1,14 @@
 import Link from 'next/link'
 import { env } from 'process'
 import React from 'react'
-import { MdBedroomParent, MdChecklist, MdHomeFilled, MdOutlineWarningAmber, MdPerson, MdSuperscript } from 'react-icons/md'
+import { MdBackup, MdBedroomParent, MdChecklist, MdHomeFilled, MdOutlineWarningAmber, MdPerson, MdSuperscript } from 'react-icons/md'
 
 const Menu = [
   {"title": "Users", "link": "/admin/users/", "icon": <MdPerson />},
   {"title": "Tasks", "link": "/admin/tasks", "icon": <MdChecklist />},
   {"title": "Home Info", "link": "/admin/home", "icon": <MdHomeFilled />},
   {"title": "Rooms", "link": "/admin/rooms", "icon": <MdBedroomParent />},
+  {"title": "Backup", "link": "/admin/backup", "icon": <MdBackup />},
   {"title": "Preload", "link": "/admin/preload", "icon": <MdOutlineWarningAmber />}
 ]
 

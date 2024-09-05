@@ -6,7 +6,6 @@ import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { Frequency, Importance } from '@prisma/client';
-import preloadData from './preload.json'
 import toast from 'react-hot-toast';
 
 
@@ -20,48 +19,14 @@ interface TaskForm {
 const NewTaskPage = () => {
   const router = useRouter();
   const { register, handleSubmit } = useForm<TaskForm>();
-  const tasks = preloadData.tasks
-  const rooms = preloadData.rooms
-  const achievements = preloadData.achievements
+
 
   return (
     <div className='flex'>
+    <AdminSideNav/>
       <div className='p-3'>
-        <h1>Create preload Data</h1>
+        <h1>Database reset</h1>
 
-        <form className='max-w-m mx-auto' onSubmit={handleSubmit(async () => {
-
-          await axios.post('../../api/tasks/mass', tasks);
-          router.push("/admin/tasks?page=1&pagesize=10");
-          router.refresh();
-          toast.success("TaskSeed data loaded");
-        })
-        }>
-          <button className="btn btn-primary mr-4" type='submit'>Create {tasks.length} Tasks</button>
-          <p className='text-sm text-gray-400'>NOTICE: This action will load new tasks into the database.</p>
-        </form>
-
-        <form className='max-w-m mx-auto' onSubmit={handleSubmit(async () => {
-
-          await axios.post('../../api/rooms/mass', rooms);
-          router.refresh();
-          toast.success("Room Seed data loaded");
-        })
-        }>
-          <button className="btn btn-primary mr-4" type='submit'>Create {rooms.length} Rooms</button>
-          <p className='text-sm text-gray-400'>NOTICE: This action will load new rooms into the database.</p>
-        </form>
-
-        <form className='max-w-m mx-auto' onSubmit={handleSubmit(async () => {
-
-          await axios.post('../../api/achievements/mass', achievements);
-          router.refresh();
-          toast.success("Achievement Seed data loaded");
-        })
-        }>
-          <button className="btn btn-primary mr-4" type='submit'>Create {achievements.length} Achievements</button>
-          <p className='text-sm text-gray-400'>NOTICE: This action will load new achievements into the database.</p>
-        </form>
 
         <form className='max-w-m mx-auto' onSubmit={handleSubmit(async () => {
 
@@ -71,7 +36,7 @@ const NewTaskPage = () => {
         })
         }>
           <button className="btn btn-error mr-4" type='submit'>Delete All</button>
-          <p className='text-sm text-gray-400'>NOTICE: This action will delete the entire database except user, home and tasks.</p>
+          <p className='text-sm text-gray-400'>NOTICE: This action will delete the entire database except user and home. Use backup to save the data and restore it if necessary.</p>
         </form>
       </div>
     </div>
