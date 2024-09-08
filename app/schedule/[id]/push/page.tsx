@@ -16,7 +16,7 @@ const PushSchedulePage = async ({ params: { id } }: Props) => {
 
   return (
     <div className='p-3'>
-     <TaskActionForm operation='PUSH' currentTask={currentTask} id={parseInt(id)} />
+     <TaskActionForm operation='Push' currentTask={currentTask} id={parseInt(id)} />
     </div>
 
   )

@@ -52,17 +52,12 @@ const TaskCards = async ({roomId}: Props) => {
                 <MdCalendarMonth size={48} />
                 <div className="space-y-0.5 flex-1">
                     <h3 className="font-medium text-lg tracking-tight text-gray-900 leading-tight"          >
-                        Scheduled Tasks
+                        Scheduled Tasks ({tasks.length + taskOverflow})
                     </h3>
-                    <p className="text-sm font-normal text-gray-400 leading-none">
-                        for Room {roomId} ({tasks.length + taskOverflow})
-                        
-                    </p>
                 </div>
                 <a href="/dashboard/print" target="_blank"
                     className="inline-flex items-center shrink-0 justify-center w-8 h-8 rounded-full text-white bg-gray-900 focus:outline-none"    >
                     <MdLocalPrintshop />
-                
                 </a>
                 <a href="/tasks/all"
                     className="inline-flex items-center shrink-0 justify-center w-8 h-8 rounded-full text-white bg-gray-900 focus:outline-none"    >

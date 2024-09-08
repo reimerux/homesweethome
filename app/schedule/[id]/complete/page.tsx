@@ -14,7 +14,7 @@ const EditSchedulePage = async ({ params: { id } }: Props) => {
 
   return (
     <div className='p-3'>
-     <TaskActionForm operation='COMPLETE' currentTask={currentTask} id={parseInt(id)} />
+     <TaskActionForm operation='Complete' currentTask={currentTask} id={parseInt(id)} />
     </div>
 
   )

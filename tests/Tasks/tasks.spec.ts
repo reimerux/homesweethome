@@ -47,7 +47,7 @@ test.describe('schedule Task', () => {
 
     await page.getByLabel('Tasks').click();
     await page.getByLabel('0').getByLabel('Complete').click();
-    await page.getByRole('button', { name: 'Mark Complete' }).click();
+    await page.getByRole('button', { name: 'Complete' }).click();
 
     //check toast message
     await expect(toastMsg).toBeVisible()

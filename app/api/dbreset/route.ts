@@ -15,16 +15,15 @@ export async function POST(request: NextRequest) {
         {"tablename":"maintenanceTask"},
         {"tablename":"taskSchedule"}
     ]
-    
-    objects.map(async(object: any, i: number) =>  {
+    const response = [] as any
+    await Promise.all(objects.map(async(object: any, i: number) =>  {
         const tableName=object.tablename
         const deleted = await (prisma[tableName] as any).deleteMany({})
+        response.push({"table": tableName, "count" : deleted.count})
 
-        console.log(tableName + " : " + deleted.count)
-
-    })
-
+    }))
     
-    return NextResponse.json({}, {status: 201});
+    
+    return NextResponse.json(response, {status: 201});
 
 }

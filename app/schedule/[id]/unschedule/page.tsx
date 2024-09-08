@@ -16,7 +16,7 @@ const UnscheduleSchedulePage = async ({ params: { id } }: Props) => {
 
   return (
     <div className='p-3'>
-     <TaskActionForm operation='UNSCHEDULE' currentTask={currentTask} id={parseInt(id)} />
+     <TaskActionForm operation='Unschedule' currentTask={currentTask} id={parseInt(id)} />
     </div>
 
   )

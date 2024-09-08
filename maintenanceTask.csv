@@ -1,0 +1,95 @@
+taskId,taskName,description,timeEstimate,frequency,importance,season
+1,Check Carbon Monoxide Alarms,Check Carbon Monoxide Alarms,15,MONTHLY,MEDIUM,NONE
+2,Check Fire Extinguishers And Fire Blankets,Check Fire Extinguishers And Fire Blankets,15,MONTHLY,LOW,NONE
+3,Check Smoke Alarms,Press the test button on each smoke alarm to ensure it's functioning correctly. Replace batteries if necessary.,15,MONTHLY,MEDIUM,NONE
+4,Check Other Alarms,Check Other Alarms,10,MONTHLY,LOW,NONE
+5,Clean Dryer,"* Clean the lint trap after each load.
+* Periodically inspect and clean the dryer vent to prevent lint buildup, which can be a fire hazard.
+* If you notice excessive lint buildup, consider calling a professional to clean the vent.",15,MONTHLY,MEDIUM,NONE
+6,Clean Washing Machine,"* Run an empty hot water cycle with a cleaning solution designed for washing machines.
+* Wipe down the rubber gasket and detergent dispenser.
+* Leave the door open after use to prevent mold and mildew growth.",45,MONTHLY,MEDIUM,NONE
+7,Clean Fridge Inside,"* Remove all food and shelves.
+* Wipe down the interior with a mild detergent solution.
+* Clean the shelves and drawers.
+* Replace shelves and food.",45,MONTHLY,HIGH,NONE
+8,Defrost And Clean Freezer,"* Remove all food and place it in a cooler.
+* Allow the freezer to defrost completely.
+* Wipe down the interior with a mild detergent solution.
+* Remove any ice buildup.
+* Replace food.",60,MONTHLY,MEDIUM,NONE
+9,Clean Microwave,"* Mix a solution of water and white vinegar.
+* Place a bowl of the solution in the microwave and heat it for a few minutes.
+* Wipe down the interior with a cloth.
+* Clean the turntable and door seal.",15,MONTHLY,HIGH,NONE
+10,Clean Oven,"* Uuse a commercial oven cleaner or create your own using baking soda and water.
+* Apply the cleaner to the oven interior and let it sit for the recommended time.
+* Scrub the interior with a sponge or brush.
+* Wipe down the interior with a clean cloth.",60,MONTHLY,MEDIUM,NONE
+11,Clean Small Appliances,"* Unplug appliances, wipe down exteriors and interiors with a damp cloth, and clean any removable parts.",30,MONTHLY,MEDIUM,NONE
+12,Clean Inside of Kitchen Cabinet,"* Remove contents 
+* Wipe down shelves and sides with a damp cloth
+* Replace items.",60,MONTHLY,MEDIUM,NONE
+13,Clean Inside of Bathroom Cabinet,"* Remove contents 
+* Wipe down shelves and sides with a damp cloth
+* Check for mold and mildew growth.
+* Replace items.",30,QUARTERLY,MEDIUM,NONE
+14,"Run Water in The Baths, Showers And Toilets Not used regularly","Run Water in The Baths, Showers And Toilets Not used regularly",15,MONTHLY,LOW,NONE
+15,Unclog Sinks and Drain Holes,"Use a plunger or drain snake to remove clogs. For stubborn clogs, consider using a commercial drain cleaner.",20,MONTHLY,MEDIUM,NONE
+16,Clean Light Fixtures,"* Turn off power
+* Remove fixtures
+* Clean glass and bulbs
+* Reinstall.",30,MONTHLY,MEDIUM,NONE
+17,Dust Blinds and Curtains,"Use a duster or vacuum attachment to remove dust. For curtains, consider washing or dry cleaning.",45,MONTHLY,MEDIUM,NONE
+18,Turn Over Mattresses And Clean Them,Turn Over Mattresses And Clean Them,20,MONTHLY,MEDIUM,NONE
+19,Vacuum Vents,Use a vacuum attachment to remove dust and debris from air vents.,20,MONTHLY,MEDIUM,NONE
+20,Wash Bins,Wash Bins,15,MONTHLY,MEDIUM,NONE
+21,Wash Cushion Covers,"Remove covers, wash in a washing machine, and air dry or tumble dry on low heat.",45,MONTHLY,MEDIUM,NONE
+22,Wash Mattress Protectors,"Remove protectors, wash in a washing machine on a gentle cycle, and air dry.",45,MONTHLY,MEDIUM,NONE
+23,Wash Throw Blankets,Wash in a washing machine according to care instructions.,45,MONTHLY,MEDIUM,NONE
+24,Check The Covers Of Electrical Outlets For Loose Screws And Covers,Inspect outlets for loose screws or missing covers. Tighten screws and replace missing covers.,15,QUARTERLY,LOW,NONE
+25,"Check Visible Pipes For Leaks, Repair As Necessary","Inspect pipes for signs of leaks. If a leak is found, repair it immediately.",15,QUARTERLY,HIGH,NONE
+26,Clean Air Filters,"Replace or clean air filters in HVAC systems, air purifiers, and other appliances.",10,QUARTERLY,HIGH,NONE
+27,Clean Drains With Baking Soda,Pour baking soda and vinegar down drains to remove buildup.,15,QUARTERLY,MEDIUM,NONE
+28,Clean Grout Between Tiles,Use a grout cleaner and a brush to scrub grout.,45,QUARTERLY,MEDIUM,NONE
+29,Clean Kitchen Exhaust Fan,"Remove the fan cover, clean the blades and filter, and reinstall.",20,QUARTERLY,MEDIUM,NONE
+30,Clean Windows,Use a glass cleaner and a squeegee to clean windows.,120,QUARTERLY,MEDIUM,NONE
+31,"Organize Closet, Give Unwanted Items To Charity","Remove all items from the closet, sort through belongings, and donate unwanted items. Return remaining items to the closet in an organized manner.",60,QUARTERLY,MEDIUM,NONE
+32,Deep Clean House,"A deep clean involves cleaning all surfaces, floors, appliances, and furniture. Time will vary depending on the size of the house and the level of dirt.",120,QUARTERLY,MEDIUM,NONE
+33,Vacuum Refrigerator Coil,Locate the coil (often behind a panel) and vacuum away dust.,15,QUARTERLY,MEDIUM,NONE
+34,Inspect Basement And Cracks For Moisture,Check for signs of water damage or mold. Repair any cracks or leaks.,45,QUARTERLY,MEDIUM,NONE
+35,Inspect Bathroom Area For Leaks,"Check around faucets, showerheads, and pipes for signs of leaks. Repair as necessary.",20,QUARTERLY,MEDIUM,NONE
+36,Inspect The Water Heater For Leaks,Check for leaks around the tank and pipes.,15,QUARTERLY,MEDIUM,NONE
+37,Lubricate Hinges,Apply a light lubricant to door and window hinges.,15,QUARTERLY,MEDIUM,NONE
+38,Organize Cabinets,"Remove items, sort, and discard unwanted items. Reorganize remaining items.",60,QUARTERLY,MEDIUM,NONE
+39,Polish Wood Furniture,Use a wood polish and a soft cloth to clean and protect furniture.,45,QUARTERLY,MEDIUM,NONE
+40,Run Water And Flush In Unused Drains,Run water and flush unused drains to prevent clogs and mineral buildup.,15,QUARTERLY,MEDIUM,NONE
+41,Sort And Organize Cooking Utensils,"Remove utensils from drawers, sort by type, and return to drawers.",30,QUARTERLY,MEDIUM,NONE
+42,Steam Clean Carpet,Rent or hire a professional carpet cleaning service.,30,YEARLY,MEDIUM,SPRING
+43,Test Garage Door,Manually test the door opener and safety features.,10,QUARTERLY,LOW,NONE
+44,Test Water Heater Release Valve,Open the valve to release pressure and check for proper function.,5,QUARTERLY,MEDIUM,NONE
+45,Wash Pillows And Comforters,Wash in a washing machine according to care instructions.,45,QUARTERLY,MEDIUM,NONE
+46,Cover AC,Cover the outdoor unit of your air conditioner during winter months to protect it from the elements.,15,YEARLY,MEDIUM,FALL
+47,Cover outdoor furniture,"Cover furniture to protect it from rain, snow, and UV rays.",20,YEARLY,MEDIUM,FALL
+48,Sweep gazebo,"Sweep away leaves, debris, and dirt.",20,QUARTERLY,MEDIUM,NONE
+49,Cut olive trees,Trim branches to maintain shape and size.,45,YEARLY,MEDIUM,FALL
+50,Check For Cracks In The Walkway & Driveway Around Your Home,Inspect for cracks and repair as needed.,45,YEARLY,MEDIUM,FALL
+51,Check For Leaning And Loose Parts On Exterior Fences,Inspect fences for structural integrity and repair any issues.,45,YEARLY,MEDIUM,FALL
+52,Clean Out Gutters,"Remove leaves, debris, and dirt from gutters.",45,YEARLY,MEDIUM,FALL
+53,Clean Outside Of Windows,Use a glass cleaner and squeegee to clean windows.,45,YEARLY,MEDIUM,SPRING
+54,Inspect Roof For Damage And Debris,"Look for signs of damage, such as leaks or missing shingles.",45,YEARLY,MEDIUM,FALL
+55,Check Outdoor Taps,Turn off water supply to outdoor taps in winter to prevent freezing.,10,YEARLY,MEDIUM,SPRING
+56,Check The Exterior Of Your Home For Gaps Between Windows And Wall,Seal any gaps to prevent drafts and energy loss.,45,YEARLY,MEDIUM,FALL
+57,Check Trees For Interference With Electric Lines,Trim branches that are too close to power lines.,30,YEARLY,MEDIUM,SUMMER
+58,Examine Foundation For Cracks,Inspect the foundation for signs of cracks or settlement.,45,YEARLY,MEDIUM,FALL
+59,Clean Garage,"Remove clutter, sweep the floor, and organize tools and equipment.",90,YEARLY,MEDIUM,SPRING
+60,Check Locks And Bolts On Doors And Windows,Test locks and bolts to ensure they are functioning properly. Tighten any loose screws.,20,YEARLY,MEDIUM,SUMMER
+61,Check And Repair Caulking Around Bath Tubs and sink,Inspect caulk for signs of wear or damage. Re-caulk as needed.,45,YEARLY,MEDIUM,WINTER
+62,Inspect Baths For Cracks,Check for cracks in the bathtub or shower. Repair any cracks to prevent water damage.,15,YEARLY,MEDIUM,FALL
+63,Clean Dryer And Vents,Clean the lint trap and dryer vent to prevent fire hazards.,15,YEARLY,MEDIUM,FALL
+64,Inspection Of The Plumbing System For Leaks,"Check pipes, faucets, and toilets for signs of leaks. Repair any leaks promptly.",45,YEARLY,MEDIUM,FALL
+65,Drain The Water Heater And Remove Sediments,Drain the water heater to remove sediment and minerals.,45,YEARLY,MEDIUM,FALL
+66,"Tighten Handles, Knob And Racks","Tighten loose handles, knobs, and racks on cabinets, drawers, and appliances.",30,YEARLY,MEDIUM,SUMMER
+67,Examine The House For Cracked Tiles,Inspect floors and walls for cracked tiles. Repair or replace damaged tiles.,30,YEARLY,MEDIUM,SUMMER
+68,Inspect The Ceilings For Stains And Patches,Check for signs of water damage or mold. Repair any stains or patches.,30,YEARLY,MEDIUM,WINTER
+69,Replace Batteries In Smoke/ Carbon Dioxide Detector,Replace batteries in smoke and carbon monoxide detectors according to manufacturer instructions.,20,YEARLY,MEDIUM,FALL

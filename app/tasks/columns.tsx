@@ -3,7 +3,7 @@ import { Status } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import Link from "next/link";
-import { MdCheck, MdRedo } from "react-icons/md";
+import { MdCalendarMonth, MdCheck, MdRedo } from "react-icons/md";
 import ImportanceBadge from "../components/Badge_Importance";
 import RoomPills from "../components/Badge_Rooms";
 import SeasonBadge from "../components/SeasonBadge";
@@ -38,7 +38,7 @@ export const columns: ColumnDef<taskSchedule>[] = [
     accessorKey: "scheduleID",
     cell: ({ cell, row }) => {
       return (<>
-        <Link aria-label="Complete" className='btn btn-sm btn-primary' href={'/schedule/' + row.original.scheduleId + '/complete'}><MdCheck /></Link><Link className='btn btn-sm' aria-label="Push" href={'/schedule/' + row.original.scheduleId + '/push/'}><MdRedo /></Link>
+        <Link aria-label="Complete" className='btn btn-sm btn-primary' href={'/schedule/' + row.original.scheduleId + '/complete'}><MdCheck /></Link><Link className='btn btn-sm' aria-label="Push" href={'/schedule/' + row.original.scheduleId + '/push/'}><MdRedo /></Link><Link className='btn btn-sm' aria-label="Unschedule" href={'/schedule/' + row.original.scheduleId + '/unschedule/'}><MdCalendarMonth /></Link>
       </>)
     }
   },

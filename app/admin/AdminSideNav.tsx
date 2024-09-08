@@ -8,8 +8,8 @@ const Menu = [
   {"title": "Tasks", "link": "/admin/tasks", "icon": <MdChecklist />},
   {"title": "Home Info", "link": "/admin/home", "icon": <MdHomeFilled />},
   {"title": "Rooms", "link": "/admin/rooms", "icon": <MdBedroomParent />},
-  {"title": "Backup", "link": "/admin/backup", "icon": <MdBackup />},
-  {"title": "Preload", "link": "/admin/preload", "icon": <MdOutlineWarningAmber />}
+  {"title": "Backup/Restore", "link": "/admin/backup", "icon": <MdBackup />},
+  {"title": "Reset", "link": "/admin/preload", "icon": <MdOutlineWarningAmber />}
 ]
 
 const AdminSideNav = () => {
@@ -30,7 +30,6 @@ const AdminSideNav = () => {
         </li>
          )}
          </ul>
-        <p className='text-sm'>Version {env.REACT_APP_VERSION}</p>
       </div>
       </div>
     </>

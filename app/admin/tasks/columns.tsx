@@ -43,6 +43,7 @@ export const columns: ColumnDef<task>[] = [
   {
     accessorKey: "description",
     header: "Description",
+    meta: "whitespace-pre-line",
   },
   {
     accessorKey: "importance",

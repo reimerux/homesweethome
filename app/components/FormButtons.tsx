@@ -13,7 +13,7 @@ const FormButtons = ({ isSubmitting, SubmitText }: Props) => {
     return (
         <>
             <button className={classNames((SubmitText==="Delete") && "btn-error", "btn mr-4 btn-primary")} disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner" : "hidden"}> </span>{SubmitText}</button>
-            <button className={classNames((SubmitText==="Delete") && "hidden", "btn btn-ghost")} type='reset'>Reset</button>
+            <button className={classNames((SubmitText==="Delete" || SubmitText==="Unschedule") && "hidden", "btn btn-ghost")} type='reset'>Reset</button>
             <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button>
         </>
     )

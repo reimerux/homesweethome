@@ -40,7 +40,7 @@ interface issues {
     {
       accessorKey: "description",
       header: "Description",
-      meta: "hidden md:table-cell",
+      meta: "hidden md:table-cell md:whitespace-pre-line",
     },
     {
       accessorKey: "priority",

@@ -38,11 +38,11 @@ export function addDays(dt: Date, Days: number) {
   return new Date(dt.setDate(dt.getDate() + Days));
 }
 
-export function calcDueDate(frequency: Frequency, date: string) {
+export function calcDueDate(frequency: Frequency, date: Date) {
   const dt = new Date(date);
 
   let response = dt;
-  console.log(frequency);
+  // console.log(frequency);
 
   switch (frequency) {
     case 'WEEKLY':

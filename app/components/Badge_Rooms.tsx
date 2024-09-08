@@ -2,7 +2,7 @@ type Props = {
     rooms: Array<any>
 }
 
-const RoomPills = async ({ rooms }: Props) => {
+const RoomPills = ({ rooms }: Props) => {
     if (!rooms) { return null }
     return (
         <>
