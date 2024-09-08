@@ -70,3 +70,26 @@ export function classNames(...classes: any) {
   return classes.filter(Boolean).join(' ')
 }
 
+export function stripPrismaArray(fields: any, data: any) {
+  let response = [] as any
+  data.map((record: any) => {
+    response.push(stripPrisma(fields, record))
+  })
+  return response
+}
+
+export function stripPrisma<T extends {}>(input: {fields:{}},data: T) : T {
+    
+  let validKeys = Object.keys(input.fields);
+  let dataCopy: any = {...data};
+  console.log(dataCopy)
+  console.log(validKeys)
+  for(let key of Object.keys(data)) {
+
+      if(!(validKeys.includes(key))) {
+          delete dataCopy[key];
+      }
+  }
+  return dataCopy as T;
+}
+

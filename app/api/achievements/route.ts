@@ -1,6 +1,8 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { getWeek, getYear } from "date-fns";
+import { stripPrismaArray } from "@/app/components/URfunctions";
+
 
 // Types of achievements:
 // total number - count of objects (can be evaluated when an event is triggered)
@@ -94,7 +96,8 @@ async function evaluateAchievements(userId: number, streaks: any, count: any) {
           newAchievements.push({
             "achievementId": condition.achievementId,
             "userId": userId,
-            "unlockedAt": new Date()
+            "unlockedAt": new Date(),
+            "name": condition.name
           })
         }
       };
@@ -105,7 +108,8 @@ async function evaluateAchievements(userId: number, streaks: any, count: any) {
           newAchievements.push({
             "achievementId": condition.achievementId,
             "userId": userId,
-            "unlockedAt": new Date()
+            "unlockedAt": new Date(),
+            "name": condition.name
           })
         }
       }
@@ -123,17 +127,15 @@ export async function POST(request: NextRequest) {
 
   const streaks = await calculateStreak(userId)
 
-  let newAchievements: any = await evaluateAchievements(userId, streaks, countTotals)
-
-  // console.log('Newly aquired Achievements')
-  // console.log(newAchievements)
-
-
+  const newAchievements: any = await evaluateAchievements(userId, streaks, countTotals)
+  const achievementData = stripPrismaArray(prisma.achievementOnUsers, newAchievements)
+  // console.log(achievementData)
           const newAchievement = await prisma.achievementOnUsers.createMany({
-        data: newAchievements,
+        data: achievementData,
         skipDuplicates: true
       })
 
   return NextResponse.json(newAchievements, { status: 201 });
 
 }
+

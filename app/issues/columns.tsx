@@ -20,7 +20,7 @@ interface issues {
   export const columns: ColumnDef<issues>[] = [
     {
       header: "Actions",
-      accessorKey: "issueId",
+      accessorKey: "",
       cell: ({ cell, row }) => {
         return (<>
          <Link className='btn btn-sm btn-primary' href={'/issues/' + row.original.issueId + '/edit'}><MdEdit /></Link>

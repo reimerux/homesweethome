@@ -25,11 +25,14 @@ const TaskForm = (props: Props) => {
     return (
         <>
             <form className='max-w-m mx-auto' onSubmit={handleSubmit(async (data) => {
-
+                try{   
                     await axios.delete('/api/tasks/' + props.id);
                     router.push("/admin/tasks?page=1&pagesize=10");
                     toast.success("Task deleted");
-
+                } catch (error) {
+                    toast.error("Room deletion failed " + error);
+                    console.error(error);
+                }
             })
             }>
                 <h1>Delete Task</h1>
