@@ -1,6 +1,6 @@
-import Chart_Area from '../components/Chart_Area';
 import prisma from '@/prisma/client';
-import { addDays } from '../components/URfunctions';
+import { add } from 'date-fns';
+import Chart_Area from '../components/Chart_Area';
 
 
 type Props = {
@@ -15,7 +15,7 @@ const HistoryChart = async (props: Props) => {
         data = await prisma.taskHistory.groupBy({
             by: ["monthPerformed", "yearPerformed", "status"],
             _count: { taskId: true, historyId: true },
-            where: { datePerformed: { gt: addDays(new Date(), -180) } },
+            where: { datePerformed: { gt: add(new Date(), {days:-180}) } },
             having: {
                 status: { in: ['COMPLETED'] },
             },

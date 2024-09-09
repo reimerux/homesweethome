@@ -1,14 +1,13 @@
-import { addDays } from '@/app/components/URfunctions';
 import prisma from '@/prisma/client';
+import { add, format } from 'date-fns';
 import { MdCheckBoxOutlineBlank } from 'react-icons/md';
 import HouseInfo from '../HouseInfo';
-import { format } from 'date-fns';
 
 export const dynamic = 'force-dynamic';
 const PrintTaskList = async () => {
   const tasks = await prisma.taskSchedule.findMany({
     where:
-    {nextDueDate: {lt: addDays(new Date(),30)}},
+    {nextDueDate: {lt: add(new Date(),{days: 30})}},
     include: {task: true },
     orderBy: {nextDueDate: 'asc'}
 });

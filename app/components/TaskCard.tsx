@@ -5,6 +5,7 @@ import ImportanceBadge from './Badge_Importance'
 import RoomPills from './Badge_Rooms'
 import { dateColor } from './URfunctions'
 import { format } from 'date-fns'
+import { formatInTimeZone } from 'date-fns-tz'
 
 type Props = {
     task: any,
@@ -27,7 +28,7 @@ const TaskCard = ({ task, overflow }: Props) => {
                         <div className='hidden sm:flex'><ImportanceBadge importance={task.task.importance} />{(task.task.timeEstimate) ? <div className="ml-2 text-xs">{task.task.timeEstimate} min</div> : null}</div>
                         <div className='hidden sm:flex'><RoomPills rooms={task.task.rooms} /></div>
 
-                        <p className={dateColor(task.nextDueDate.toString()) + ` inline-block text-xs sm:leading-none`}>{format(task.nextDueDate, "MM/dd")}</p>
+                        <p className={dateColor(task.nextDueDate.toString()) + ` inline-block text-xs sm:leading-none`}>{formatInTimeZone(task.nextDueDate,'Europe/London', "MM/dd")}</p>
                         <div className="hidden join-vertical sm:join">
                             <Link className='btn btn-sm join-item btn-primary' href={'/schedule/' + task.scheduleId + '/complete'}><MdCheck />Complete</Link>
                             <Link className='btn btn-sm join-item bg-white' href={'/schedule/' + task.scheduleId + '/push'}><MdRedo />Push</Link>

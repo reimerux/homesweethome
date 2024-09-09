@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
+import { fromZonedTime } from "date-fns-tz";
 
 interface Props {
     params: { id: number }
@@ -18,9 +19,9 @@ export async function PUT(
 
     const updatedTaskHistory = await prisma.taskHistory.create({
         data: {
-            datePerformed: new Date(body.completionDate),
-            monthPerformed: new Date(body.completionDate).getMonth()+1,
-            yearPerformed: new Date(body.completionDate).getFullYear(),
+            datePerformed: fromZonedTime(body.completionDate, "America/Los_Angeles"),
+            monthPerformed: fromZonedTime(body.completionDate, "America/Los_Angeles").getMonth()+1,
+            yearPerformed: fromZonedTime(body.completionDate, "America/Los_Angeles").getFullYear(),
             taskId: parseInt(body.taskId),
             status: "COMPLETED",
             notes: body.notes

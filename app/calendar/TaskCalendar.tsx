@@ -15,6 +15,7 @@ import {
 import { useState } from 'react'
 import TaskCard from '../components/TaskCard'
 import { classNames } from '../components/URfunctions'
+import { formatInTimeZone, fromZonedTime, toZonedTime } from 'date-fns-tz'
 
 
 type Props = {
@@ -27,14 +28,12 @@ const TaskCalendar =  ({tasks}: Props) => {
     let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
     let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
 
-
     const days = eachDayOfInterval({
         start: firstDayCurrentMonth,
         end: endOfMonth(firstDayCurrentMonth),
     })
 
     function thisMonth() {
-
         setCurrentMonth(format(today, 'MMM-yyyy'))
     }
 
@@ -49,7 +48,7 @@ const TaskCalendar =  ({tasks}: Props) => {
     }
 
     let selectedDayTasks = tasks.filter((task: any) =>
-        isSameDay(task.nextDueDate, selectedDay)
+        isSameDay(toZonedTime(task.nextDueDate,'Europe/London'), selectedDay)
       )
 
     return (
@@ -58,7 +57,7 @@ const TaskCalendar =  ({tasks}: Props) => {
                 <div className="md:pr-14">
                     <div className="flex items-center">
                         <h2 className="flex-auto font-semibold text-gray-900">
-                            {format(firstDayCurrentMonth, 'MMMM yyyy')}
+                            {formatInTimeZone(firstDayCurrentMonth,'Europe/London', 'MMMM yyyy')}
                         </h2>
                         <button
                             type="button"
@@ -92,7 +91,9 @@ const TaskCalendar =  ({tasks}: Props) => {
                         <div>S</div>
                     </div>
                     <div className="grid grid-cols-7 mt-2 text-sm">
-                        {days.map((day, dayIdx) => (
+                        {days.map((day, dayIdx) => {
+                        day = toZonedTime(day, "Europe/London");
+                        return (
                             <div key={day.toString()}
                                 className={classNames(
                                     dayIdx === 0 && colStartClasses[getDay(day)],
@@ -123,17 +124,17 @@ const TaskCalendar =  ({tasks}: Props) => {
                                         'mx-auto flex h-8 w-8 items-center justify-center rounded-full'
                                     )}
                                 >
-                                    <time dateTime={format(day, 'yyy=MM-dd')}>{format(day, 'd')}</time>
+                                    <time dateTime={format(day, 'yyyy-MM-dd')}>{format(day, 'd')}</time>
                                 </button>
                                 <div className="w-1 h-1 mx-auto mt-1">
                                     {tasks.some((task: any) =>
-                                        isSameDay(task.nextDueDate, day)
+                                        isSameDay(toZonedTime(task.nextDueDate, 'Europe/London'), day)
                                     ) && (
                                             <div className="w-1 h-1 rounded-full bg-sky-500"></div>
                                         )}
                                 </div>
                             </div>
-                        )
+                        )}
                         )}
 
 
@@ -143,7 +144,7 @@ const TaskCalendar =  ({tasks}: Props) => {
                     <h2 className="font-semibold text-gray-900">
                         Schedule for{' '}
                         <time dateTime={format(selectedDay, 'yyyy-MM-dd')}>
-                            {format(selectedDay, 'MMM dd, yyy')}
+                            {format(selectedDay, 'EE MMM dd, yyy')}
                         </time>
                     </h2>
                     <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">

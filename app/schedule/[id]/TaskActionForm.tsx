@@ -5,6 +5,7 @@ import DateCompletionEntry from '@/app/components/DateCompletionEntry';
 import FormButtons from '@/app/components/FormButtons';
 import { calcDueDate, dateColor, formatDateWithDiff } from '@/app/components/URfunctions';
 import axios from 'axios';
+import { formatInTimeZone, fromZonedTime } from 'date-fns-tz';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -45,6 +46,8 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
 
   const onDateChange = (event: any) => {
     event.preventDefault();
+
+    // setComplDate(fromZonedTime(new Date(event.target.value), 'America/Los Angeles'));
     setComplDate(event.target.value);
     setCalcDate(calcDueDate(currentTask.task.frequency, event.target.value));
   }

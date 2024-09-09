@@ -1,26 +1,19 @@
 import { Frequency } from "@prisma/client";
+import { add, differenceInDays, format, lightFormat } from "date-fns";
+import {formatInTimeZone} from 'date-fns-tz';
 
 
-export function date_diff_indays(date1: Date, date2: Date) {
-  const dt1 = new Date(date1);
-  const dt2 = new Date(date2);
-  return Math.floor(
-    (Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) -
-      Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) /
-    (1000 * 60 * 60 * 24)
-  );
-};
 
 export function formatDateWithDiff(date: Date) {
-  const dt = new Date(date);
-  let response = dt.toDateString();
-  let diff = date_diff_indays(new Date(), dt);
+  
+  let response = formatInTimeZone(date,'Europe/London', "EEE MMM dd yyyy");
+  let diff = differenceInDays(new Date(), date);
 
   if (diff === 0) { response += " (today)" } else
     if (diff === 1) { response += " (tomorrow)" } else
       if (diff === -1) { response += " (yesterday)" } else
-        if (diff > 0) { response += " ( " + diff + " Days left)" } else
-          if (diff < 0) { response += " ( " + Math.abs(diff) + " Days ago)" };
+        if (diff > 0) { response += " (" + diff + " Days left)" } else
+          if (diff < 0) { response += " (" + Math.abs(diff) + " Days ago)" };
 
   return response;
 }
@@ -33,11 +26,6 @@ export function dateColor(date: string) {
   return response
 }
 
-export function addDays(dt: Date, Days: number) {
-
-  return new Date(dt.setDate(dt.getDate() + Days));
-}
-
 export function calcDueDate(frequency: Frequency, date: Date) {
   const dt = new Date(date);
 
@@ -46,17 +34,16 @@ export function calcDueDate(frequency: Frequency, date: Date) {
 
   switch (frequency) {
     case 'WEEKLY':
-      response = addDays(dt, 7);
+      response = add(dt, {days: 7});
       break;
     case 'MONTHLY':
-      response = addDays(dt, 30);
+      response = add(dt, {months: 1});
       break;
     case 'QUARTERLY':
-      response = addDays(dt, 90);
-      console.log("Quarter");
+      response = add(dt, {months: 3})
       break;
     case 'YEARLY':
-      response = addDays(dt, 365);
+      response = add(dt, {years: 1});
       break;
 
     default:

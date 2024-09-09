@@ -1,8 +1,8 @@
 import prisma from '@/prisma/client';
 import { Status } from '@prisma/client';
+import { add } from 'date-fns';
 import { MdArrowOutward, MdCalendarMonth, MdLocalPrintshop } from 'react-icons/md';
 import TaskCard from '../components/TaskCard';
-import { addDays } from '../components/URfunctions';
 
 interface taskSchedule {
     scheduleId: number; taskId: number; nextDueDate: Date; lastCompletedDate: Date | null; status: Status; notes: string | null;
@@ -31,7 +31,7 @@ const TaskCards = async () => {
     let taskOverflow = 0;
     let tasks = await prisma.taskSchedule.findMany({
         where:
-            { nextDueDate: { lt: addDays(new Date(), 30) } },
+            { nextDueDate: { lt: add(new Date(), {days: 30} ) } },
         include: { task: { include: { rooms: { include: { room: true } } } } },
         orderBy:  [{nextDueDate: 'asc'},{task: {importance: 'asc'}} ]
     });
