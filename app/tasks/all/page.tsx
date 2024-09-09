@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { MdOutlineCalendarToday } from "react-icons/md";
 import TaskGrid from "../TaskGrid";
 
@@ -12,7 +11,6 @@ const allTasks = ({ searchParams}: {searchParams: {page: string, pagesize: strin
           <MdOutlineCalendarToday />
         </a>
       </h1>
-      {/* <div className="mb-5"><Link href="/schedule" className='btn btn-sm mr-4'>Schedule New Task</Link></div> */}
       <TaskGrid selection="all" page={parseInt(searchParams.page)} pagesize={parseInt(searchParams.pagesize)}/>
     </div>
   )

@@ -3,7 +3,7 @@ import { Status } from "@prisma/client";
 import { ColumnDef } from "@tanstack/react-table";
 import { format } from "date-fns";
 import Link from "next/link";
-import { MdCalendarMonth, MdCheck, MdRedo } from "react-icons/md";
+import { MdCalendarMonth, MdCheck, MdModeEditOutline, MdMoreHoriz, MdRedo } from "react-icons/md";
 import ImportanceBadge from "../components/Badge_Importance";
 import RoomPills from "../components/Badge_Rooms";
 import SeasonBadge from "../components/SeasonBadge";
@@ -38,7 +38,19 @@ export const columns: ColumnDef<taskSchedule>[] = [
     accessorKey: "scheduleID",
     cell: ({ cell, row }) => {
       return (<>
-        <Link aria-label="Complete" className='btn btn-sm btn-primary' href={'/schedule/' + row.original.scheduleId + '/complete'}><MdCheck /></Link><Link className='btn btn-sm' aria-label="Push" href={'/schedule/' + row.original.scheduleId + '/push/'}><MdRedo /></Link><Link className='btn btn-sm' aria-label="Unschedule" href={'/schedule/' + row.original.scheduleId + '/unschedule/'}><MdCalendarMonth /></Link>
+        <div className="join join-horizontal w-10">
+                        <Link className='btn btn-sm p-2 join-item btn-primary' href={'/schedule/' + row.original.scheduleId + '/complete'}><MdCheck /></Link>
+                        <div className="dropdown">
+                            <div tabIndex={0} role="button" className="btn btn-sm bg-base-100 join-item"><MdMoreHoriz /></div>
+                            <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-[1] w-40 p-2 shadow">
+                                <li><Link className=' p-1 bg-white' href={'/schedule/' + row.original.scheduleId + '/push'}><MdRedo /> Push</Link></li>
+                                <li><Link className=' p-1 bg-white' href={'/schedule/' + row.original.scheduleId + '/unschedule'}><MdCalendarMonth /> Unschedule</Link></li>
+                                <li><Link className=' p-1 bg-white' href={'/admin/tasks/' + row.original.taskId + '/edit'}><MdModeEditOutline /> Edit</Link></li>
+                            </ul>
+                        </div>
+                    </div>
+        
+        {/* <Link aria-label="Complete" className='btn btn-sm btn-primary' href={'/schedule/' + row.original.scheduleId + '/complete'}><MdCheck /></Link><Link className='btn btn-sm' aria-label="Push" href={'/schedule/' + row.original.scheduleId + '/push/'}><MdRedo /></Link><Link className='btn btn-sm' aria-label="Unschedule" href={'/schedule/' + row.original.scheduleId + '/unschedule/'}><MdCalendarMonth /></Link> */}
       </>)
     }
   },
