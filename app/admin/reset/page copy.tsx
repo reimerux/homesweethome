@@ -8,6 +8,13 @@ import { useRouter } from 'next/navigation';
 import { Frequency, Importance } from '@prisma/client';
 import toast from 'react-hot-toast';
 
+const tables = [
+  { tablename: "issue", name: "Issues"},
+  { tablename: "maintenanceTask", name: "Tasks"},
+  { tablename: "room", name: "Rooms"},
+  { tablename: "taskSchedule", name: "Schedules"},
+]
+
 
 interface TaskForm {
   taskName: string;

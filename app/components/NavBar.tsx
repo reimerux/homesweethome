@@ -9,8 +9,8 @@ const NavBar = async () => {
   const session = await auth()
 
   const links = [
-    { href: "/tasks/all?page=1&pagesize=10", label: "Tasks" },
-    { href: "/issues/pending?page=1&pagesize=10", label: "Issues" },
+    { href: "/tasks/all", label: "Tasks" },
+    { href: "/issues/pending", label: "Issues" },
     { href: "/history", label: "History" },
     { href: "/byroom?roomSelected=1", label: "By Room" },
     { href: "/calendar", label: "Calendar" }];

@@ -9,13 +9,13 @@ const Menu = [
   {"title": "Home Info", "link": "/admin/home", "icon": <MdHomeFilled />},
   {"title": "Rooms", "link": "/admin/rooms", "icon": <MdBedroomParent />},
   {"title": "Backup/Restore", "link": "/admin/backup", "icon": <MdBackup />},
-  {"title": "Reset", "link": "/admin/preload", "icon": <MdOutlineWarningAmber />}
+  {"title": "Reset", "link": "/admin/reset", "icon": <MdOutlineWarningAmber />}
 ]
 
 const AdminSideNav = () => {
   return (
     <>
-      <div className='flex flex-col flex-auto flex-shrink-0 bg-gray-50 text-gray-800 gap-2 p-2 min-w-40 max-w-56'>
+      <div className='flex flex-col flex-auto flex-shrink-0 bg-gray-50 text-gray-800 gap-2 p-2 sm:min-w-40 max-w-56'>
       <div className="flex items-center justify-center h-14 border-b">Settings</div>
       <div className="overflow-y-auto overflow-x-hidden flex-grow">
       <ul className="flex flex-col py-4 space-y-1">
@@ -25,7 +25,7 @@ const AdminSideNav = () => {
             <span className="inline-flex justify-center items-center ml-4">
               {item.icon}
             </span>
-            <span className="ml-2 text-sm tracking-wide truncate">{item.title}</span>
+            <span className="hidden sm:block ml-2 text-sm tracking-wide truncate">{item.title}</span>
           </a>
         </li>
          )}

@@ -49,8 +49,6 @@ export const columns: ColumnDef<taskSchedule>[] = [
                             </ul>
                         </div>
                     </div>
-        
-        {/* <Link aria-label="Complete" className='btn btn-sm btn-primary' href={'/schedule/' + row.original.scheduleId + '/complete'}><MdCheck /></Link><Link className='btn btn-sm' aria-label="Push" href={'/schedule/' + row.original.scheduleId + '/push/'}><MdRedo /></Link><Link className='btn btn-sm' aria-label="Unschedule" href={'/schedule/' + row.original.scheduleId + '/unschedule/'}><MdCalendarMonth /></Link> */}
       </>)
     }
   },

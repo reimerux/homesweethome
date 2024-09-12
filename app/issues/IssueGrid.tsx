@@ -1,19 +1,15 @@
-import { DataTable } from '../components/Data-table'
-import Pagination from '../components/Pagination';
-import { columns } from './columns'
 import prisma from '@/prisma/client';
+import { DataTable } from '../components/Data-table';
+import { columns } from './columns';
 
 type Props =
   {
-    page: number,
-    pagesize: number,
     selection: string;
   }
 
-const IssueGrid = async ({ page, pagesize, selection }: Props) => {
+const IssueGrid = async ({  selection }: Props) => {
 
-  if (!page) { page = 1 };
-  if (!pagesize) { pagesize = 10 };
+
 
   const issues = await prisma.issue.findMany({
     orderBy: { createdAt: 'desc' },
@@ -21,13 +17,10 @@ const IssueGrid = async ({ page, pagesize, selection }: Props) => {
     include: {rooms: {include: {room: true}}}
   });
 
-  const begPage = (page - 1) * pagesize
-  const endPage = begPage + pagesize
 
   return (
     <>
-      <DataTable columns={columns} data={issues.slice(begPage, endPage)} customCount={issues.length} />
-      <Pagination itemCount={issues.length} pageSize={pagesize} currentPage={page} />
+      <DataTable columns={columns} data={issues} customCount={issues.length} /> 
     </>
   )
 }

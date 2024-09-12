@@ -4,7 +4,7 @@ import IssueGrid from "../IssueGrid";
 import { MdAdd } from "react-icons/md";
 
 export const dynamic = 'force-dynamic';
-const pendingIssues = ({ searchParams }: { searchParams: { page: string, pagesize: string } }) => {
+const pendingIssues = () => {
   return (
     <div className='p-3'>
       <h1>Issues
@@ -14,7 +14,7 @@ const pendingIssues = ({ searchParams }: { searchParams: { page: string, pagesiz
         </a>
       </h1>
       <IssueSelector selection="pending" />
-      <IssueGrid selection="pending" page={parseInt(searchParams.page)} pagesize={parseInt(searchParams.pagesize)} />
+      <IssueGrid selection="pending" />
     </div>
   )
 }

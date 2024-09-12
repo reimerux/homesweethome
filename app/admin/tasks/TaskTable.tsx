@@ -1,34 +1,30 @@
 import { DataTable } from '@/app/components/Data-table';
 import prisma from '@/prisma/client';
 import { columns } from './columns';
-import Pagination from '@/app/components/Pagination';
 
-type Props =
-  {
-    page: number,
-    pagesize: number
-  }
 
-const TaskTable = async ({ page, pagesize }: Props) => {
-  if (!page) { page = 1 };
-  if (!pagesize) { pagesize = 10 }; 
-    
-  const tasks =  await prisma.maintenanceTask.findMany({
-      include:
-         {rooms: {include: {room: true}}},
-      orderBy: {taskId: 'asc'}
-      
-}); 
 
-    const begPage = (page - 1) * pagesize
-    const endPage = begPage + pagesize
+const TaskTable = async () => {
 
-    return (
-        <>    
-            <DataTable columns={columns} data={tasks.slice(begPage, endPage)} customCount={tasks.length}/>
-            <Pagination itemCount={tasks.length} pageSize={pagesize} currentPage={page} />
-        </>
-    )
+
+  const tasks = await prisma.maintenanceTask.findMany({
+    include:
+      { rooms: { include: { room: true } } },
+    orderBy: { taskId: 'asc' }
+
+  });
+
+  const taskSchedule = await prisma.taskSchedule.findMany({
+    where: { status: "PENDING" }
+  })
+
+  var data = tasks.map((t: any) => ({ ...t, ...taskSchedule.find(ts => ts.taskId === t.taskId) }));
+
+  return (
+    <>
+      <DataTable columns={columns} data={data} customCount={data.length} />
+    </>
+  )
 }
 
 export default TaskTable

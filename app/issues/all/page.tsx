@@ -4,7 +4,7 @@ import IssueGrid from "../IssueGrid";
 import { MdAdd } from "react-icons/md";
 
 export const dynamic = 'force-dynamic';
-const allIssues = ({ searchParams}: {searchParams: {page: string, pagesize: string}}) => {
+const allIssues = () => {
   return (
     <div className='p-3'>
       <h1>Issues
@@ -14,7 +14,7 @@ const allIssues = ({ searchParams}: {searchParams: {page: string, pagesize: stri
         </a>
       </h1>
       <IssueSelector selection="all" />
-      <IssueGrid selection="all" page={parseInt(searchParams.page)} pagesize={parseInt(searchParams.pagesize)}/>
+      <IssueGrid selection="all"/>
     </div>
   )
 }

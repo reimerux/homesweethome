@@ -2,7 +2,7 @@ import { MdOutlineCalendarToday } from "react-icons/md";
 import TaskGrid from "../TaskGrid";
 
 export const dynamic = 'force-dynamic';
-const allTasks = ({ searchParams}: {searchParams: {page: string, pagesize: string}}) => {
+const allTasks = () => {
   return (
     <div className='p-3'>
       <h1>All Scheduled Tasks
@@ -11,7 +11,7 @@ const allTasks = ({ searchParams}: {searchParams: {page: string, pagesize: strin
           <MdOutlineCalendarToday />
         </a>
       </h1>
-      <TaskGrid selection="all" page={parseInt(searchParams.page)} pagesize={parseInt(searchParams.pagesize)}/>
+      <TaskGrid selection="all" />
     </div>
   )
 }

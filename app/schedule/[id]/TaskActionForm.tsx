@@ -87,7 +87,7 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
 
             <ul className="timeline ">
               <DateCompletionEntry register={register('completionDate', { onChange: (e) => onDateChange(e) })} fieldName="Date of Completion" start={true} Date={complDate} />
-              <li><hr /><div className="timeline-start sm:w-48"></div><div className="timeline-end">{currentTask.task.frequency}</div><hr /></li>
+              <li><hr /><div className="timeline-start sm:w-48"></div><div className="timeline-end text-xs">{currentTask.task.frequency}</div><hr /></li>
               <DateCompletionEntry register={register('calcDueDate')} fieldName="Next Scheduled of Date" start={false} Date={calcDate} />
             </ul>
           </>

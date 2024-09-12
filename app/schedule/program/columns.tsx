@@ -1,11 +1,10 @@
 "use client"
 import RoomPills from "@/app/components/Badge_Rooms";
+import IndeterminateCheckbox from "@/app/components/IndeterminateCheckBox";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
-import React, { HTMLProps } from "react";
 import ImportanceBadge from "../../components/Badge_Importance";
 import SeasonBadge from "../../components/SeasonBadge";
-import IndeterminateCheckbox from "@/app/components/IndeterminateCheckBox";
 
 interface task {
   taskId: number; description: string | null; timeEstimate: number | null;scheduleId: number;
@@ -27,27 +26,37 @@ interface task {
 }
 
 export const columns: ColumnDef<task>[] = [
- 
   {
-    header: "Actions",
-    accessorKey: "scheduleID",
-    cell: ({ cell, row }) => {
-      return (<div className="join">
-        <Link className="btn btn-sm join-item" href={'/admin/tasks/' + row.original.taskId + '/edit'}>Edit</Link>
-        {(!row.original.scheduleId) ? <Link className="btn btn-sm join-item" href={'/admin/tasks/' + row.original.taskId + '/delete'}>Delete</Link> : null}
-      </div>)
-    }
+    id: 'select',
+    header: ({ table }) => (
+      <IndeterminateCheckbox
+        {...{
+          checked: table.getIsAllRowsSelected(),
+          indeterminate: table.getIsSomeRowsSelected(),
+          onChange: table.getToggleAllRowsSelectedHandler(),
+        }}
+      />
+    ),
+    cell: ({ row }) => (
+      <div className="px-1">
+        <IndeterminateCheckbox
+          {...{
+            checked: row.getIsSelected(),
+            disabled: !row.getCanSelect(),
+            indeterminate: row.getIsSomeSelected(),
+            onChange: row.getToggleSelectedHandler(),
+          }}
+        />
+      </div>
+    ),
   },
+
   {
     accessorKey: "taskName",
     header: "Task",
     enableSorting: true
   },
-  {
-    accessorKey: "description",
-    header: "Description",
-    meta: "whitespace-pre-line hidden sm:table-cell"
-  },
+ 
   {
     accessorKey: "importance",
     header: "Importance",

@@ -24,7 +24,8 @@ const SeasonBadge = (props: Props)  => {
         icon = <div className='flex mr-2'><WiThunderstorm />Fall</div>
         break;
     default:
-        break;
+      icon = <div className='flex mr-2'>-</div>
+      break;
   } 
 
     return (
