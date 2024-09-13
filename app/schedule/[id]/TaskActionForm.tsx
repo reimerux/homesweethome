@@ -47,7 +47,6 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
   const onDateChange = (event: any) => {
     event.preventDefault();
 
-    // setComplDate(fromZonedTime(new Date(event.target.value), 'America/Los Angeles'));
     setComplDate(event.target.value);
     setCalcDate(calcDueDate(currentTask.task.frequency, event.target.value));
   }
@@ -75,14 +74,14 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
         <input type="text" className="hidden" id="scheduleId" value={id} required {...register('scheduleId')}></input>
         <input type="text" className="hidden" id="taskId" value={currentTask.taskId} {...register('taskId')}></input>
         <div className="mb-5 mt-5 h-fit ">
-          <text className="block mb-2 text-sm font-medium text-gray-900">Instructions</text >
+          <span className="block mb-2 text-sm font-medium text-gray-900">Instructions</span>
           <blockquote id="description" className="w-full p-2 whitespace-pre-line bg-slate-50">{currentTask.task.description}</blockquote >
         </div>
 
         {(operation != "Unschedule") ?
           <><div className="mb-5">
-            <text className="block mb-2 text-sm font-medium text-gray-900">Scheduled Date</text >
-            <text id="dueDate" className={dateColor(currentTask.nextDueDate)} >{formatDateWithDiff(currentTask.nextDueDate)}</text>
+            <span className="block mb-2 text-sm font-medium text-gray-900">Scheduled Date</span>
+            <span id="dueDate" className={dateColor(currentTask.nextDueDate)} >{formatDateWithDiff(currentTask.nextDueDate)}</span>
           </div>
 
             <ul className="timeline ">
@@ -97,12 +96,9 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
         {(operation != "Unschedule") ?
           <div className="mb-5">
             <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900">Notes</label >
-            <textarea id="notes" className="textarea textarea-bordered w-full" placeholder="Enter your Notes" {...register('notes')}></textarea>
+            <textarea id="notes" className="textarea textarea-bordered w-full" defaultValue={currentTask.notes} placeholder="Enter your Notes" {...register('notes')}></textarea>
           </div> :
           <></>}
-        {/* <button className="btn btn-primary mr-4" disabled={isSubmitting} type='submit'><span className={(isSubmitting) ? "loading loading-spinner" : "hidden"}> </span>{(operation === "COMPLETE") ? "Mark Complete" : (operation === "Unschedule") ? "Unschedule" : "Push"}</button>
-        <button className="btn btn-ghost" type='reset'>Reset</button>
-        <button className="btn btn-ghost" type='button' onClick={() => router.back()}>Back</button> */}
         <FormButtons isSubmitting={isSubmitting} SubmitText={operation}/>
         {(operation === "Push") ? <p className='text-sm text-gray-400'>Pushing will mark the task as &quot;not completed&quot; and autoschedule for the next frequency.</p> : <></>}
         {(operation === "Unschedule") ? <p className='text-sm text-gray-400'>Unscheduling will remove the task from the schedule. History will remain. Task can be rescheduled at a later time.</p> : <></>}

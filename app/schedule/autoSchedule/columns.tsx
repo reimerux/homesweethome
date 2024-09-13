@@ -76,13 +76,7 @@ export const columns: ColumnDef<task>[] = [
     accessorKey: "frequency",
     header: "Frequency",
   },
-  {
-    accessorKey: "scheduleId",
-    header: "Scheduled",
-    cell: ({ row }) => {
-      return ((row.original.scheduleId) ? <Link className="link-hover" href={'/schedule/'+ row.original.scheduleId +'/unschedule'}>YES</Link> : null)
-    },
-  },
+  
   {
     accessorKey: "season",
     header: "Season",

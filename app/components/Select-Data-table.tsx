@@ -5,14 +5,14 @@ import {
   getCoreRowModel,
   getPaginationRowModel,
   getSortedRowModel,
-  RowData,
-  useReactTable,
+  SortingState,
+  useReactTable
 } from "@tanstack/react-table"
-import { classNames } from "./URfunctions"
+import axios from "axios"
 import React from "react"
 import { DataTablePagination } from "./Data-table-pagination"
-import { useRouter } from 'next/navigation';
-import axios from "axios"
+import { classNames } from "./URfunctions"
+import { useRouter } from "next/navigation"
 
 
 
@@ -33,28 +33,29 @@ export function SelectDataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
 
   const [rowSelection, setRowSelection] = React.useState({})
+  const [sorting, setSorting] = React.useState<SortingState>([])
   const router = useRouter();
 
   const table = useReactTable({
     data,
     columns,
     state: {
-      rowSelection,
+      rowSelection, sorting
     },
     enableRowSelection: true, //enable row selection for all rows
     // enableRowSelection: row => row.original.age > 18, // or enable row selection conditionally per row
     onRowSelectionChange: setRowSelection,
     getPaginationRowModel: getPaginationRowModel(),
-    getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
+    getCoreRowModel: getCoreRowModel()
   })
 
   async function onClickAction(data: any) {
     
     try {
       await axios.put(actionURL, data);
-      // router.push("/admin/tasks/"+ data[0].original.taskId +"/edit");
-      
+      router.refresh();
     } catch (error) {
 
       console.error(error);
@@ -91,7 +92,6 @@ export function SelectDataTable<TData, TValue>({
                           >
                             {flexRender(
                               header.column.columnDef.header,
-                              // classNames(breakpoints),
                               header.getContext()
                             )}
                             {{

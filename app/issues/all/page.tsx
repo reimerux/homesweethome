@@ -1,7 +1,6 @@
-import Link from "next/link";
+import { MdAdd } from "react-icons/md";
 import IssueSelector from "../../components/AllPendingSelector";
 import IssueGrid from "../IssueGrid";
-import { MdAdd } from "react-icons/md";
 
 export const dynamic = 'force-dynamic';
 const allIssues = () => {
