@@ -1,4 +1,5 @@
 "use client"
+import axios from 'axios'
 import {
     add,
     eachDayOfInterval,
@@ -12,21 +13,50 @@ import {
     parse,
     startOfToday
 } from 'date-fns'
+import { formatInTimeZone, toZonedTime } from 'date-fns-tz'
+import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import TaskCard from '../components/TaskCard'
+import toast from 'react-hot-toast'
+import TaskCardDraggable from '../components/TaskCardDraggable'
 import { classNames } from '../components/URfunctions'
-import { formatInTimeZone, fromZonedTime, toZonedTime } from 'date-fns-tz'
+import CalendarDayIndicator from '../components/CalendarDayIndicator'
 
 
 type Props = {
     tasks: any
 }
 
-const TaskCalendar =  ({tasks}: Props) => {
+const TaskCalendar = ({ tasks }: Props) => {
     let today = startOfToday();
     let [selectedDay, setSelectedDay] = useState(today)
     let [currentMonth, setCurrentMonth] = useState(format(today, 'MMM-yyyy'))
+    const [items, setItems] = useState(tasks);
+    const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+    const [dropIndex, setDropIndex] = useState<number | null>(null);
+    const router = useRouter()
+
     let firstDayCurrentMonth = parse(currentMonth, 'MMM-yyyy', new Date())
+
+    const handleDragStart = (e: any) => {
+        setDraggedIndex(e);
+    };
+
+    const handleDragOver = (event: any) => {
+        setDropIndex(event.target.id);
+        event.preventDefault();
+    };
+
+    const handleDrop = async () => {
+        // console.log("Dropped: " + draggedIndex + " to " + dropIndex)
+        const saveMonth = currentMonth;
+        setDropIndex(null);
+        try {
+            await axios.put("/api/schedules/" + draggedIndex + "/push", { calcDueDate: dropIndex, notes: "pushed via calendar" })
+            toast.success("Task has been moved");
+            router.refresh();
+        }
+        catch (error) { console.log(error) }
+    };
 
     const days = eachDayOfInterval({
         start: firstDayCurrentMonth,
@@ -48,8 +78,8 @@ const TaskCalendar =  ({tasks}: Props) => {
     }
 
     let selectedDayTasks = tasks.filter((task: any) =>
-        isSameDay(toZonedTime(task.nextDueDate,'Europe/London'), selectedDay)
-      )
+        isSameDay(toZonedTime(task.nextDueDate, 'Europe/London'), selectedDay)
+    )
 
     return (
         <>
@@ -57,7 +87,7 @@ const TaskCalendar =  ({tasks}: Props) => {
                 <div className="md:pr-14">
                     <div className="flex items-center">
                         <h2 className="flex-auto font-semibold text-gray-900">
-                            {formatInTimeZone(firstDayCurrentMonth,'Europe/London', 'MMMM yyyy')}
+                            {formatInTimeZone(firstDayCurrentMonth, 'Europe/London', 'MMMM yyyy')}
                         </h2>
                         <button
                             type="button"
@@ -92,49 +122,50 @@ const TaskCalendar =  ({tasks}: Props) => {
                     </div>
                     <div className="grid grid-cols-7 mt-2 text-sm">
                         {days.map((day, dayIdx) => {
-                        day = toZonedTime(day, "Europe/London");
-                        return (
-                            <div key={day.toString()}
-                                className={classNames(
-                                    dayIdx === 0 && colStartClasses[getDay(day)],
-                                    'py-1.5'
-                                )}>
-                                <button type="button"
-                                    onClick={() => setSelectedDay(day)}
+                            day = toZonedTime(day, "Europe/London");
+                            return (
+                                <div key={day.toString()} id={day.toString()} onDrop={handleDrop} onDragOver={(e) => handleDragOver(e)}
                                     className={classNames(
-                                        isEqual(day, selectedDay) && 'text-white',
-                                        !isEqual(day, selectedDay) &&
-                                        isToday(day) &&
-                                        'text-red-500',
-                                        !isEqual(day, selectedDay) &&
-                                        !isToday(day) &&
-                                        isSameMonth(day, firstDayCurrentMonth) &&
-                                        'text-gray-900',
-                                        !isEqual(day, selectedDay) &&
-                                        !isToday(day) &&
-                                        !isSameMonth(day, firstDayCurrentMonth) &&
-                                        'text-gray-400',
-                                        isEqual(day, selectedDay) && isToday(day) && 'bg-red-500',
-                                        isEqual(day, selectedDay) &&
-                                        !isToday(day) &&
-                                        'bg-gray-900',
-                                        !isEqual(day, selectedDay) && 'hover:bg-gray-200',
-                                        (isEqual(day, selectedDay) || isToday(day)) &&
-                                        'font-semibold',
-                                        'mx-auto flex h-8 w-8 items-center justify-center rounded-full'
-                                    )}
-                                >
-                                    <time dateTime={format(day, 'yyyy-MM-dd')}>{format(day, 'd')}</time>
-                                </button>
-                                <div className="w-1 h-1 mx-auto mt-1">
-                                    {tasks.some((task: any) =>
-                                        isSameDay(toZonedTime(task.nextDueDate, 'Europe/London'), day)
-                                    ) && (
-                                            <div className="w-1 h-1 rounded-full bg-sky-500"></div>
+                                        dayIdx === 0 && colStartClasses[getDay(day)],
+                                        'py-1.5 mt-2'
+                                    )}>
+                                    <button type="button" id={day.toString()}
+                                        onClick={() => setSelectedDay(day)}
+                                        className={classNames(
+                                            isEqual(day, selectedDay) && 'text-white',
+                                            !isEqual(day, selectedDay) &&
+                                            isToday(day) &&
+                                            'text-red-500',
+                                            !isEqual(day, selectedDay) &&
+                                            !isToday(day) &&
+                                            isSameMonth(day, firstDayCurrentMonth) &&
+                                            'text-gray-900',
+                                            !isEqual(day, selectedDay) &&
+                                            !isToday(day) &&
+                                            !isSameMonth(day, firstDayCurrentMonth) &&
+                                            'text-gray-400',
+                                            isEqual(day, selectedDay) && isToday(day) && 'bg-red-500',
+                                            isEqual(day, selectedDay) &&
+                                            !isToday(day) &&
+                                            'bg-gray-900',
+                                            !isEqual(day, selectedDay) && 'hover:bg-gray-200',
+                                            (isEqual(day, selectedDay) || isToday(day)) &&
+                                            'font-semibold',
+                                            'mx-auto flex h-8 w-8 items-center justify-center rounded-full'
                                         )}
+                                    >
+                                        <time id={day.toString()} dateTime={format(day, 'yyyy-MM-dd')}>{format(day, 'd')}</time>
+                                    </button>
+                                    <div className="w-1 h-1 mx-5 mb-1" id={day.toString()}>
+                                        {items.some((task: any) =>
+                                            isSameDay(toZonedTime(task.nextDueDate, 'Europe/London'), day)
+                                        ) && (
+                                                <CalendarDayIndicator items={items} day={day}/>
+                                            )}
+                                    </div>
                                 </div>
-                            </div>
-                        )}
+                            )
+                        }
                         )}
 
 
@@ -149,10 +180,12 @@ const TaskCalendar =  ({tasks}: Props) => {
                     </h2>
                     <ol className="mt-4 space-y-1 text-sm leading-6 text-gray-500">
                         {selectedDayTasks.length > 0 ? (
-                            selectedDayTasks.map((task: any) => (
-                                <>
-                                <TaskCard overflow={0} task={task} />
-                                </>
+                            selectedDayTasks.map((task: any, index: number) => (
+                                <TaskCardDraggable task={task} key={task.scheduleId}
+                                    color={task.color}
+                                    index={task.scheduleId}
+                                    onDragStart={handleDragStart} />
+
                             ))
                         ) : (
                             <p>No meetings for today.</p>
