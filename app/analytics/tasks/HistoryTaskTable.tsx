@@ -1,8 +1,8 @@
 import prisma from '@/prisma/client';
-import { DataTable } from '../components/Data-table';
+import { DataTable } from '@/app/components/Data-table';
 import { columns } from './columns';
 
-const HistoryTable = async () => {
+const HistoryTaskTable = async () => {
     const taskHistory = await prisma.taskHistory.findMany({
         include: { task: true },
         orderBy: { datePerformed: 'desc' }
@@ -16,4 +16,4 @@ const HistoryTable = async () => {
     )
 }
 
-export default HistoryTable
+export default HistoryTaskTable

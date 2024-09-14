@@ -11,9 +11,9 @@ const NavBar = async () => {
   const links = [
     { href: "/tasks/all", label: "Tasks" },
     { href: "/issues/pending", label: "Issues" },
-    { href: "/history", label: "History" },
     { href: "/byroom?roomSelected=1", label: "By Room" },
-    { href: "/calendar", label: "Calendar" }];
+    { href: "/calendar", label: "Calendar" },
+    { href: "/analytics", label: "Analytics" },];
 
   return (
     <div className="navbar bg-base-300">

@@ -1,6 +1,6 @@
 import prisma from '@/prisma/client';
 import { add } from 'date-fns';
-import Chart_Area from '../components/Chart_Area';
+import Chart_Area from '@/app/components/Chart_Area';
 
 
 type Props = {
