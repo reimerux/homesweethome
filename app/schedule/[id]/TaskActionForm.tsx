@@ -5,7 +5,8 @@ import DateCompletionEntry from '@/app/components/DateCompletionEntry';
 import FormButtons from '@/app/components/FormButtons';
 import { calcDueDate, dateColor, formatDateWithDiff } from '@/app/components/URfunctions';
 import axios from 'axios';
-import { formatInTimeZone, fromZonedTime } from 'date-fns-tz';
+import { isSameDay } from 'date-fns';
+import { formatInTimeZone, fromZonedTime, toZonedTime } from 'date-fns-tz';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -36,7 +37,7 @@ type Props = {
 
 const TaskActionForm = ({ operation, currentTask, id }: Props) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [complDate, setComplDate] = useState(new Date())
+  const [complDate, setComplDate] = useState(currentTask.nextDueDate)
   const [calcDate, setCalcDate] = useState(calcDueDate(currentTask.task.frequency, complDate));
   const router = useRouter();
 
@@ -46,10 +47,17 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
 
   const onDateChange = (event: any) => {
     event.preventDefault();
+    const selectedDate = toZonedTime(event.target.value, "Europe/London")
+    setComplDate(selectedDate);
+    setCalcDate(calcDueDate(currentTask.task.frequency, selectedDate));
+  }
 
-    // setComplDate(fromZonedTime(new Date(event.target.value), 'America/Los Angeles'));
-    setComplDate(event.target.value);
-    setCalcDate(calcDueDate(currentTask.task.frequency, event.target.value));
+  const onSetToday = (event: any) => {
+    event.preventDefault();
+    // const today = toZonedTime(new Date(), "Europe/London");
+    const today = new Date();
+    setComplDate(today);
+    setCalcDate(calcDueDate(currentTask.task.frequency, today));
   }
 
   return (
@@ -85,23 +93,26 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
             <span id="dueDate" className={dateColor(currentTask.nextDueDate)} >{formatDateWithDiff(currentTask.nextDueDate)}</span>
           </div>
 
-            <ul className="timeline ">
-              <DateCompletionEntry register={register('completionDate', { onChange: (e) => onDateChange(e) })} fieldName="Date of Completion" start={true} Date={complDate} />
+            <ul className="timeline">
+              <DateCompletionEntry register={register('completionDate', { onChange: (e) => onDateChange(e) })} fieldName="Date of Completion" start={true} Date={complDate} >
+                <button type="button" disabled={isSameDay(fromZonedTime(complDate, 'Europe/London'), new Date())} aria-label="COMPLETE" className="btn btn-xs btn-outline" onClick={onSetToday}>Today</button>
+              </DateCompletionEntry>
               <li><hr /><div className="timeline-start sm:w-48"></div><div className="timeline-end text-xs">{currentTask.task.frequency}</div><hr /></li>
-              <DateCompletionEntry register={register('calcDueDate')} fieldName="Next Scheduled of Date" start={false} Date={calcDate} />
+              <DateCompletionEntry register={register('calcDueDate')} fieldName="Next Scheduled of Date" start={false} Date={calcDate} >{null}</DateCompletionEntry>
             </ul>
           </>
           : <></>}
 
 
         {(operation != "Unschedule") ?
-          <div className="mb-5">
-            <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900">Notes</label >
-            <textarea id="notes" className="textarea textarea-bordered w-full" defaultValue={currentTask.notes} placeholder="Enter your Notes" {...register('notes')}></textarea>
-          </div> :
+          <>
+            <div className="mb-5 mt-2">
+              <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900">Notes</label >
+              <textarea id="notes" className="textarea textarea-bordered w-full" defaultValue={currentTask.notes} placeholder="Enter your Notes" {...register('notes')}></textarea>
+            </div></> :
           <></>}
 
-        <FormButtons isSubmitting={isSubmitting} SubmitText={operation}/>
+        <FormButtons isSubmitting={isSubmitting} SubmitText={operation} />
         {(operation === "Push") ? <p className='text-sm text-gray-400'>Pushing will mark the task as &quot;not completed&quot; and autoschedule for the next frequency.</p> : <></>}
         {(operation === "Unschedule") ? <p className='text-sm text-gray-400'>Unscheduling will remove the task from the schedule. History will remain. Task can be rescheduled at a later time.</p> : <></>}
       </form>
