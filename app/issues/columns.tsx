@@ -6,6 +6,7 @@ import Link from "next/link";
 import { MdCheck, MdEdit } from "react-icons/md";
 import ImportanceBadge from "../components/Badge_Importance";
 import RoomPills from "../components/Badge_Rooms";
+import StatusIndicator from "../components/StatusIndicator";
 
 
 interface issues {
@@ -51,7 +52,9 @@ interface issues {
     },
     {
       accessorKey: "status",
-      header: "Status"
+      header: "Status",
+      cell: ({ row }) => {
+        return (<StatusIndicator status={row.original.status} />)},
     },
     {
       accessorKey: "task.rooms",

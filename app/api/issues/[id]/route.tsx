@@ -27,6 +27,7 @@ export async function PUT(
 
         where: { issueId: parseInt(params.id) }
     })
+    
     if (!issue)
         return NextResponse.json({ error: "Room not found" }, { status: 404 })
 
@@ -34,7 +35,7 @@ export async function PUT(
     let completedAt = null;
     if (body.status === "COMPLETED" && issue.status!="COMPLETED") {completedBy=parseInt(body.userId); completedAt=new Date()}
 
-console.log(completedBy)
+// console.log(completedBy)
 
     const updatedIssue = await prisma.issue.update({
         where: { issueId: parseInt(params.id) },

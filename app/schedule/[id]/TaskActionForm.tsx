@@ -47,6 +47,7 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
   const onDateChange = (event: any) => {
     event.preventDefault();
 
+    // setComplDate(fromZonedTime(new Date(event.target.value), 'America/Los Angeles'));
     setComplDate(event.target.value);
     setCalcDate(calcDueDate(currentTask.task.frequency, event.target.value));
   }
@@ -99,6 +100,7 @@ const TaskActionForm = ({ operation, currentTask, id }: Props) => {
             <textarea id="notes" className="textarea textarea-bordered w-full" defaultValue={currentTask.notes} placeholder="Enter your Notes" {...register('notes')}></textarea>
           </div> :
           <></>}
+
         <FormButtons isSubmitting={isSubmitting} SubmitText={operation}/>
         {(operation === "Push") ? <p className='text-sm text-gray-400'>Pushing will mark the task as &quot;not completed&quot; and autoschedule for the next frequency.</p> : <></>}
         {(operation === "Unschedule") ? <p className='text-sm text-gray-400'>Unscheduling will remove the task from the schedule. History will remain. Task can be rescheduled at a later time.</p> : <></>}

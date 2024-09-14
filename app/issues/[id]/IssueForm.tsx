@@ -2,13 +2,14 @@
 import FormButtons from '@/app/components/FormButtons';
 import ImportancePicker from '@/app/components/ImportancePicker';
 import RoomMultiSelect from '@/app/components/RoomMultiSelect';
-import Toast_Award from '@/app/components/Toast_Award';
+import { classNames } from '@/app/components/URfunctions';
 import { Importance, Status } from '@prisma/client';
 import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 
 interface IssueForm {
     issueId: number; title: string; description: string | null;
@@ -26,24 +27,28 @@ type Props = {
     id: number, allRooms: any, userId: string | undefined
 }
 
+
+const StatusOption = [ "COMPLETED", "PENDING", "CANCELLED"]
+
 const IssueForm = ({ currentIssue, id, allRooms, userId }: Props) => {
+    const [issueStatus, setIssueStatus] = useState(currentIssue.status)
     const router = useRouter();
-    const { register, handleSubmit } = useForm<IssueForm>();
+    const { register, handleSubmit, setValue } = useForm<IssueForm>();
 
     return (
         <>
 
             <form className='max-w-3xl mx-auto' onSubmit={handleSubmit(async (data) => {
                 try {
+                    console.log(data)
                     await axios.put('/api/issues/' + id, data);
-                    router.push("/issues/pending?page=1&pagesize=10");
+                    router.push("/issues/pending");
                     router.refresh();
                     toast.success("Issue " + id + " updated");
 
                     if (userId) {
                         await axios.post('/api/achievements/', { "userId": userId }).then((res) => {
                             if (res.data) res.data.map((award: any) => toast((t: any) => {
-                                // console.log(award);
                                 return (
                                     <div className='w-48 h-48'>
                                         <Image
@@ -70,34 +75,31 @@ const IssueForm = ({ currentIssue, id, allRooms, userId }: Props) => {
                 }
             })
             }>
-                <h1>Edit Issue {currentIssue.issueId}</h1>
+                <h1>Edit Issue {currentIssue.issueId} <span className='text-sm font-light lowercase'>{issueStatus}</span></h1>
                 <input className='hidden' {...register('userId')} value={userId} />
-                <div className="mb-5">
+                <input className='hidden' {...register('status')} value={issueStatus} />
+                <div className="mb-2">
                     <label htmlFor="title" className="block mb-2 text-sm font-medium text-gray-900 ">Title</label>
                     <input type="text" id="title" className='input input-bordered w-full' placeholder="Task Name" defaultValue={currentIssue.title} {...register('title')} />
                 </div>
-                <div className="mb-5">
+                <div className="mb-2">
                     <label htmlFor="description" className="block mb-2 text-sm font-medium text-gray-900 ">Description</label>
                     <textarea className="textarea textarea-bordered w-full" id="description" placeholder="Description" defaultValue={currentIssue.description}{...register('description')} />
                 </div>
-                <div className="mb-5 max-w-sm">
+                <div className="mb-2 max-w-sm">
                     <ImportancePicker defaultValue={currentIssue.priority} register={register("priority", { setValueAs: v => Object.values(Importance)[2 - v], })} />
                 </div>
-                <div className="mb-5">
-                    <label htmlFor="status" className="block mb-2 text-sm font-medium text-gray-900 ">Status</label>
-                    <select id="status" className="select select-bordered w-full max-w-sm" defaultValue={currentIssue.status} {...register('status')}>
-                        {Object.keys(Status).map(item => <option key={item} value={item}>{item}</option>)}
-                    </select>
-                </div>
-                <div className="mb-5 max-w-sm">
-                    {/* {JSON.stringify(currentIssue.rooms)} */}
+                <div className="mb-2 max-w-sm">
                     <RoomMultiSelect register={register("rooms")} allRooms={allRooms} roomsSelected={currentIssue.rooms.map((room: any) => room.roomId.toString())} />
                 </div>
-                <div className="mb-5">
+                <div className="mb-2">
                     <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900 ">Notes</label>
                     <textarea className="textarea textarea-bordered w-full" id="notes" placeholder="Notes" {...register('notes')} />
                 </div>
-                <FormButtons isSubmitting={false} SubmitText="Change" />
+                <div className="mb-1">
+                    {StatusOption.map((status : any) => <button key={status} aria-label={status} className={classNames((status===issueStatus) && 'hidden',"btn btn-sm btn-outline")} type ="button" onClick={(e) => {setIssueStatus(status);setValue('status', status);}}>Set<span className='lowercase'>{status}</span></button>)}
+                </div>
+                <FormButtons isSubmitting={false} SubmitText="Save" />
             </form>
         </>
     )

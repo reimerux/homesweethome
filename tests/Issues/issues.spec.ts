@@ -7,7 +7,7 @@ test.beforeEach(async ({ page }) => {
 });
 
 
-test.describe('create Issue', () => {
+test.describe('Issue lifecycle', () => {
 
   const TestID = Math.floor(Math.random() * 100000).toString()
 
@@ -40,7 +40,7 @@ test('modify Issue', async ({ page }) => {
   await page.getByLabel('0').getByRole('link').click();
   await page.getByPlaceholder('Notes').click();
   await page.getByPlaceholder('Notes').fill('Updated via Test');
-  await page.getByRole('button', { name: 'Change' }).click();
+  await page.getByRole('button', { name: 'Save' }).click();
 
 
  //check toast message
@@ -58,8 +58,8 @@ test('complete Issue', async ({ page }) => {
 
   await page.getByLabel('Issues').click();
   await page.getByLabel('0').getByRole('link').click();
-  await page.getByLabel('Status').selectOption('COMPLETED');
-  await page.getByRole('button', { name: 'Change' }).click();
+  await page.getByLabel('COMPLETED').click();
+  await page.getByRole('button', { name: 'Save' }).click();
 
   //check toast message
  await expect(toastMsg).toBeVisible()
