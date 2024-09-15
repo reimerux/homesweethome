@@ -32,7 +32,7 @@ const Tabs = ({items}: Props) => {
       </div>
       {/* Show active tab content. */}
       <div className="py-4">
-        <p>{items[activeTabIndex].content}</p>
+        <div>{items[activeTabIndex].content}</div>
       </div>
     </div>
   );

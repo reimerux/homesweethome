@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma  from "@/prisma/client";
-import Kpis from "@/app/components/Kpis";
+import Kpis from "@/app/dashboard/Kpis";
 
 interface KPIs{
     ScheduledTasks: number,

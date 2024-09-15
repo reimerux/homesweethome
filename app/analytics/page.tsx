@@ -19,7 +19,7 @@ export default AnalyticsPage
 // Tabs confuguration
 const items = [
   {label: "Current", content: <CurrentPage/>},
-  {label: "History", content: <HistoryPage/>},
   {label: "Issues", content: <IssuePage/>},
-  {label: "Tasks", content: <TaskPage/>}
+  {label: "Tasks", content: <TaskPage/>},
+  {label: "History", content: <HistoryPage/>},
 ]

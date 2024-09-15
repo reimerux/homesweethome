@@ -24,13 +24,6 @@ interface issues {
       header: "Task",
       enableSorting: true
     },
-
-
-    {
-      accessorKey: "status",
-      header: "Status",
-      enableSorting: true
-    },
     {
       accessorKey: "priority",
       header: "Importance",
@@ -40,6 +33,7 @@ interface issues {
     {
       accessorKey: "notes",
       header: "Notes",
+      meta: "line-clamp-1"
     }
     
   ]

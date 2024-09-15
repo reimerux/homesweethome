@@ -9,10 +9,9 @@ const HistoryTaskTable = async () => {
     });
 
     return (
-        <div>
-            <p>Last 10 completed tasks</p>
+        <>
             <DataTable columns={columns} data={taskHistory.slice(0, 10)} />
-        </div>
+        </>
     )
 }
 

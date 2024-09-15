@@ -6,6 +6,7 @@ import { MdCheck, MdRedo } from "react-icons/md";
 import ImportanceBadge from "@/app/components/Badge_Importance";
 import SeasonBadge from "@/app/components/SeasonBadge";
 import { formatInTimeZone } from "date-fns-tz";
+import StatusIndicator from "@/app/components/StatusIndicator";
 
 interface taskHistory {
      task: { taskId: number, taskName: string, description: string | null, frequency: Frequency, importance: Importance, season: Season | null}
@@ -19,11 +20,6 @@ interface taskHistory {
       cell: ({ row }) => {return (<span>{formatInTimeZone(row.original.datePerformed,'Europe/London', "MM/dd/yyyy")}</span>)}
     },
     {
-      accessorKey: "monthPerformed",
-      header: "Month",
-      enableSorting: true
-    },
-    {
       accessorKey: "task.taskName",
       header: "Task",
       enableSorting: true
@@ -33,11 +29,7 @@ interface taskHistory {
       header: "Frequency",
       enableSorting: true
     },
-    {
-      accessorKey: "status",
-      header: "Status",
-      enableSorting: true
-    },
+
     {
       accessorKey: "task.importance",
       header: "Importance",
@@ -47,6 +39,7 @@ interface taskHistory {
     {
       accessorKey: "notes",
       header: "Notes",
+      meta: "line-clamp-1"
     }
     
   ]
