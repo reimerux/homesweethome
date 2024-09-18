@@ -20,7 +20,7 @@ const session = await auth();
   return (
     
       <div className='p-3'>
-        <IssueForm currentIssue={currentIssue} allRooms={allRooms} id={parseInt(id)} userId={session?.user.id}/>
+        <IssueForm currentIssue={currentIssue} allRooms={allRooms} id={parseInt(id)} userId={session?.user.id} username={session?.user.name}/>
       </div>
 
   )

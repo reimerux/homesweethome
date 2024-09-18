@@ -1,8 +1,9 @@
 'use client'
+import CommentForm from '@/app/components/CommentForm';
 import FormButtons from '@/app/components/FormButtons';
 import ImportancePicker from '@/app/components/ImportancePicker';
 import RoomMultiSelect from '@/app/components/RoomMultiSelect';
-import { classNames } from '@/app/components/URfunctions';
+import { classNames, parseComments } from '@/app/components/URfunctions';
 import { Importance, Status } from '@prisma/client';
 import axios from 'axios';
 import Image from 'next/image';
@@ -24,16 +25,18 @@ interface IssueForm {
 
 type Props = {
     currentIssue: any,
-    id: number, allRooms: any, userId: string | undefined
+    id: number, allRooms: any, userId: string | undefined, username: string | null | undefined
 }
 
 
 const StatusOption = [ "COMPLETED", "PENDING", "CANCELLED"]
 
-const IssueForm = ({ currentIssue, id, allRooms, userId }: Props) => {
+const IssueForm = ({ currentIssue, id, allRooms, userId, username }: Props) => {
     const [issueStatus, setIssueStatus] = useState(currentIssue.status)
+    const [comments, setComments] = useState(parseComments(currentIssue.notes))
     const router = useRouter();
     const { register, handleSubmit, setValue } = useForm<IssueForm>();
+
 
     return (
         <>
@@ -92,10 +95,7 @@ const IssueForm = ({ currentIssue, id, allRooms, userId }: Props) => {
                 <div className="mb-2 max-w-sm">
                     <RoomMultiSelect register={register("rooms")} allRooms={allRooms} roomsSelected={currentIssue.rooms.map((room: any) => room.roomId.toString())} />
                 </div>
-                <div className="mb-2">
-                    <label htmlFor="notes" className="block mb-2 text-sm font-medium text-gray-900 ">Notes</label>
-                    <textarea className="textarea textarea-bordered w-full" id="notes" placeholder="Notes" {...register('notes')} />
-                </div>
+                <CommentForm comments={comments} setComments={setComments} user={username} setValue={setValue}/>
                 <div className="mb-1">
                     {StatusOption.map((status : any) => <button key={status} aria-label={status} className={classNames((status===issueStatus) && 'hidden',"btn btn-sm btn-outline")} type ="button" onClick={(e) => {setIssueStatus(status);setValue('status', status);}}>Set<span className='lowercase'>{status}</span></button>)}
                 </div>

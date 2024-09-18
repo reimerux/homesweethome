@@ -91,3 +91,14 @@ export async function metricCalc(metrics: any) {
 
     return results
 }
+
+export function parseComments(data: any) {
+if (!data) return []
+try {
+  return JSON.parse(data)
+}
+catch (error) {
+  console.log(error)
+  return []
+}
+}
