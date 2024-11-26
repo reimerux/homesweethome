@@ -13,8 +13,8 @@ export function formatDateWithDiff(date: Date) {
   if (diff === 0) { response += " (today)" } else
     if (diff === 1) { response += " (tomorrow)" } else
       if (diff === -1) { response += " (yesterday)" } else
-        if (diff > 0) { response += " (" + diff + " Days left)" } else
-          if (diff < 0) { response += " (" + Math.abs(diff) + " Days ago)" };
+        if (diff < 0) { response += " (" + Math.abs(diff) + " Days left)" } else
+          if (diff > 0) { response += " (" + Math.abs(diff) + " Days ago)" };
 
   return response;
 }

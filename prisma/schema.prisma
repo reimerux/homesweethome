@@ -49,14 +49,15 @@ model House {
 }
 
 model Room {
-  roomId    Int             @id @default(autoincrement())
+  roomId    Int                @id @default(autoincrement())
   name      String
-  shortName String          @default("Short")
+  shortName String             @default("Short")
   notes     String?
-  House     House           @relation(fields: [houseId], references: [houseId])
+  House     House              @relation(fields: [houseId], references: [houseId])
   houseId   Int
   tasks     RoomsOnTasks[]
   issues    RoomsOnIssues[]
+  inventory InventoryOnRooms[]
 }
 
 model MaintenanceTask {
@@ -70,6 +71,14 @@ model MaintenanceTask {
   taskHistory  taskHistory[]
   rooms        RoomsOnTasks[]
   season       Season?
+}
+
+model Inventory {
+  invId   Int                @id @default(autoincrement())
+  name    String
+  type    String
+  content String
+  rooms   InventoryOnRooms[]
 }
 
 // Transactional
@@ -106,6 +115,17 @@ model RoomsOnTasks {
   assignedBy String
 
   @@id([taskId, roomId])
+}
+
+model InventoryOnRooms {
+  room       Room      @relation(fields: [roomId], references: [roomId])
+  roomId     Int // relation scalar field (used in the `@relation` attribute above)
+  inventory  Inventory @relation(fields: [invId], references: [invId])
+  invId      Int // relation scalar field (used in the `@relation` attribute above)
+  assignedAt DateTime  @default(now())
+  assignedBy String
+
+  @@id([roomId, invId])
 }
 
 model Issue {

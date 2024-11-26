@@ -11,6 +11,7 @@ const NavBar = async () => {
   const links = [
     { href: "/tasks/all", label: "Tasks" },
     { href: "/issues/pending", label: "Issues" },
+    { href: "/inventory", label: "Inventory" },
     { href: "/byroom?roomSelected=1", label: "By Room" },
     { href: "/calendar", label: "Calendar" },
     { href: "/analytics", label: "Analytics" },];

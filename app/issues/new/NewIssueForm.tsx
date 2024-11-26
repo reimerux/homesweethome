@@ -8,7 +8,6 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
-import { auth, signIn, signOut } from '@/auth';
 
 interface IssueForm {
     issueId: number; title: string; description: string | null;
