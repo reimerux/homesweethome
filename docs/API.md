@@ -231,10 +231,10 @@ Fetch tasks without any scheduled instances.
 
 ---
 
-### POST /tasks/autoschedule
+### PUT /tasks/autoschedule
 Create schedule instances for unscheduled tasks based on frequency.
 
-**Endpoint**: `POST /api/tasks/autoschedule`  
+**Endpoint**: `PUT /api/tasks/autoschedule`  
 **Auth Required**: Yes  
 **Role Required**: EDIT or ADMIN
 
@@ -345,32 +345,29 @@ Create a new issue.
 
 ---
 
-### PUT /issues/mass
-Bulk update issues (e.g., mark multiple as complete).
+### POST /issues/mass
+Bulk create issues.
 
-**Endpoint**: `PUT /api/issues/mass`  
+**Endpoint**: `POST /api/issues/mass`  
 **Auth Required**: Yes  
 **Role Required**: EDIT or ADMIN
 
-**Request Body**:
+**Request Body** (array of issue objects):
 ```json
-{
-  "issueIds": [1, 5, 10],
-  "updates": {
-    "status": "COMPLETED",
-    "completedBy": 1,
-    "notes": "Issue resolved"
+[
+  {
+    "title": "Water leak in basement",
+    "description": "Dripping from northwest corner",
+    "priority": "HIGH",
+    "status": "PENDING"
   }
-}
+]
 ```
 
-**Success Response** (200):
+**Success Response** (201):
 ```json
 {
-  "status": "success",
-  "data": {
-    "updated": 3
-  }
+  "count": 1
 }
 ```
 
@@ -447,63 +444,7 @@ Create a new schedule instance for a task.
 
 ---
 
-### PUT /schedules/:scheduleId
-Update a schedule instance (e.g., mark as complete or reschedule).
-
-**Endpoint**: `PUT /api/schedules/{scheduleId}`  
-**Auth Required**: Yes  
-**Role Required**: EDIT or ADMIN
-
-**Request Body**:
-```json
-{
-  "nextDueDate": "2024-06-15T00:00:00Z",
-  "status": "COMPLETED",
-  "lastCompletedDate": "2024-05-15T10:30:00Z",
-  "notes": "Completed successfully"
-}
-```
-
-**Success Response** (200):
-```json
-{
-  "status": "success",
-  "data": {
-    "scheduleId": 1,
-    "status": "COMPLETED",
-    "lastCompletedDate": "2024-05-15T10:30:00Z"
-  }
-}
-```
-
----
-
-### PUT /schedules/:scheduleId/push
-Reschedule a task (used by calendar drag-to-reschedule).
-
-**Endpoint**: `PUT /api/schedules/{scheduleId}/push`  
-**Auth Required**: Yes  
-**Role Required**: EDIT or ADMIN
-
-**Request Body**:
-```json
-{
-  "calcDueDate": "2024-06-15",
-  "notes": "pushed via calendar"
-}
-```
-
-**Success Response** (200):
-```json
-{
-  "status": "success",
-  "data": {
-    "scheduleId": 1,
-    "nextDueDate": "2024-06-15T00:00:00Z",
-    "notes": "pushed via calendar"
-  }
-}
-```
+> **Note**: Individual schedule update and reschedule endpoints (`PUT /schedules/:id`, `PUT /schedules/:id/push`) are planned but not yet implemented. Rescheduling is currently handled client-side via the calendar drag-and-drop UI calling the autoschedule flow.
 
 ---
 
@@ -566,30 +507,25 @@ Create a new room.
 
 ---
 
-### PUT /rooms/mass
-Bulk update rooms.
+### POST /rooms/mass
+Bulk create rooms.
 
-**Endpoint**: `PUT /api/rooms/mass`  
+**Endpoint**: `POST /api/rooms/mass`  
 **Auth Required**: Yes  
 **Role Required**: ADMIN
 
-**Request Body**:
+**Request Body** (array of room objects):
 ```json
-{
-  "roomIds": [1, 2, 3],
-  "updates": {
-    "notes": "Updated description"
-  }
-}
+[
+  { "name": "Master Bedroom", "shortName": "Master", "houseId": 1 },
+  { "name": "Kitchen", "shortName": "Kitchen", "houseId": 1 }
+]
 ```
 
-**Success Response** (200):
+**Success Response** (201):
 ```json
 {
-  "status": "success",
-  "data": {
-    "updated": 3
-  }
+  "count": 2
 }
 ```
 
@@ -730,103 +666,39 @@ Create a new inventory item.
 
 ---
 
-### PUT /inventory/:invId
-Update an inventory item.
-
-**Endpoint**: `PUT /api/inventory/{invId}`  
-**Auth Required**: Yes  
-**Role Required**: EDIT or ADMIN
-
-**Request Body**:
-```json
-{
-  "name": "HVAC Unit",
-  "type": "Heating",
-  "content": "2-ton unit, installed 2015, serviced 2024",
-  "roomIds": [2, 3]
-}
-```
-
-**Success Response** (200):
-```json
-{
-  "status": "success",
-  "data": {
-    "invId": 1,
-    "name": "HVAC Unit"
-  }
-}
-```
-
----
-
-### DELETE /inventory/:invId
-Delete an inventory item.
-
-**Endpoint**: `DELETE /api/inventory/{invId}`  
-**Auth Required**: Yes  
-**Role Required**: EDIT or ADMIN
-
-**Success Response** (204): No content
+> **Note**: Individual inventory update and delete endpoints (`PUT /inventory/:id`, `DELETE /inventory/:id`) are planned but not yet implemented.
 
 ---
 
 ## Achievements API
 
-### GET /achievements
-Fetch all achievements available in system.
-
-**Endpoint**: `GET /api/achievements`  
-**Auth Required**: Yes  
-**Role Required**: VIEWER or higher
-
-**Success Response** (200):
-```json
-{
-  "status": "success",
-  "data": [
-    {
-      "achievementId": 1,
-      "name": "On a Roll",
-      "category": "STREAK",
-      "description": "Complete 7 tasks in a row",
-      "target": 7,
-      "pointsValue": 100
-    }
-  ]
-}
-```
-
----
-
 ### POST /achievements
-Create a new achievement (admin function).
+Evaluate and award achievements for a user. Calculates current streaks and issue resolution counts, then unlocks any newly qualified achievements.
 
 **Endpoint**: `POST /api/achievements`  
 **Auth Required**: Yes  
-**Role Required**: ADMIN
+**Role Required**: Any authenticated user
 
 **Request Body**:
 ```json
 {
-  "name": "On a Roll",
-  "category": "STREAK",
-  "description": "Complete 7 tasks in a row",
-  "target": 7,
-  "pointsValue": 100
+  "userId": 1
 }
 ```
 
-**Success Response** (201):
+**Success Response** (201) — array of newly unlocked achievements:
 ```json
-{
-  "status": "success",
-  "data": {
-    "achievementId": 42,
+[
+  {
+    "achievementId": 3,
+    "userId": 1,
+    "unlockedAt": "2026-05-16T10:00:00Z",
     "name": "On a Roll"
   }
-}
+]
 ```
+
+Returns an empty array `[]` if no new achievements were unlocked.
 
 ---
 
@@ -968,9 +840,9 @@ Restore database from backup (admin only).
 
 ---
 
-## Rate Limiting
+## Rate Limiting [Planned]
 
-Currently not implemented. Consider adding in production:
+Rate limiting is not yet implemented. Planned additions for production:
 - Per-user rate limits (e.g., 100 requests/minute)
 - Per-IP rate limits for public endpoints
 - Exponential backoff for failed authentication

@@ -60,7 +60,7 @@ Represents application users with authentication and role information.
 | `lastName` | `String` | Required | Last name |
 | `followers` | `Int` | Default: 0 | Gamification metric |
 | `isActive` | `Boolean` | Default: true | Account status |
-| `password` | `String` | Default: "password" | Currently unused |
+| `password` | `String` | Default: "password" | Reserved for future use — authentication is currently email-only |
 | `registeredAt` | `DateTime` | Default: now() | Account creation date |
 | `role` | `Role` | Default: VIEWER | ADMIN, EDIT, or VIEWER |
 | `TaskHistory` | Relation | 1:M | Tasks performed by user |
@@ -83,7 +83,7 @@ Represents a single house being managed.
 | `Rooms` | Relation | 1:M | Rooms in house |
 
 **Primary Key**: `houseId`  
-**Note**: Currently assumes single house per application instance.
+**Note**: The application currently assumes a single house per deployment. The `houseId` is a fixed value (not auto-incremented) to reflect this. Multi-property support is a planned future enhancement.
 
 ---
 
@@ -157,8 +157,8 @@ Records completed/skipped tasks for audit trail.
 | `userPerformedId` | `Int` | `@fk` | Foreign key to User |
 | `User` | Relation | N:1 | User who performed task |
 | `datePerformed` | `DateTime` | Default: now() | When action occurred |
-| `monthPerformed` | `Int` | Default: 8 | Month of performance |
-| `yearPerformed` | `Int` | Default: 2024 | Year of performance |
+| `monthPerformed` | `Int` | Default: 8 (placeholder) | Month of performance — set by the application at completion time |
+| `yearPerformed` | `Int` | Default: 2024 (placeholder) | Year of performance — set by the application at completion time |
 | `status` | `Status` | Default: COMPLETED | COMPLETED, SKIPPED, CANCELLED |
 | `notes` | `String?` | `@db.Text` Nullable | Completion notes |
 

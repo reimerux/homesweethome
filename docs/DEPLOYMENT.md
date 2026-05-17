@@ -58,6 +58,72 @@
 
 ---
 
+## Database Backup & Recovery
+
+### Automated Backup System
+
+The application includes a comprehensive backup system located in the `scripts/` directory.
+
+#### Pre-Deployment Backup (Recommended)
+
+**Always run before any database changes:**
+
+```bash
+# Run the complete pre-deployment safety check
+./scripts/pre-deploy.sh
+```
+
+This script:
+1. Creates a timestamped database backup
+2. Verifies backup integrity
+3. Runs database migrations
+4. Aborts deployment if any step fails
+
+#### Manual Backup
+
+```bash
+# Create backup
+./scripts/backup-db.sh
+
+# Verify backup integrity
+./scripts/verify-backup.sh backups/backup_*.sql.gz
+
+# Restore if needed
+./scripts/restore-db.sh backups/backup_*.sql.gz
+```
+
+### Backup Files
+
+Backups are stored in the `backups/` directory with:
+- `backup_YYYYMMDD_HHMMSS.sql.gz` - Compressed database dump
+- `backup_YYYYMMDD_HHMMSS.sql.sha256` - Integrity checksum
+- `backup_metadata_YYYYMMDD_HHMMSS.txt` - Backup information
+
+### Environment Variables for Backups
+
+```env
+# Database connection
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=your_secure_password
+POSTGRES_HOST=your_host
+POSTGRES_PORT=5432
+POSTGRES_DB=homesweethome
+
+# Backup configuration
+BACKUP_DIR=./backups
+BACKUP_RETENTION_DAYS=30
+```
+
+### Corruption Detection
+
+The backup system includes multiple corruption detection layers:
+- SHA256 checksum verification
+- Gzip compression integrity checks
+- SQL syntax validation
+- Data consistency verification
+
+---
+
 ## Deployment to Vercel
 
 ### Recommended: Vercel Deployment
@@ -754,10 +820,11 @@ curl https://yourdomain.com
 **If Migration Causes Issues**:
 
 ```bash
-# 1. Restore from backup
-pg_restore -d homesweethome backup_*.sql
+# 1. Restore from the backup created by pre-deploy.sh
+./scripts/restore-db.sh backups/backup_*.sql.gz
+# Type 'restore' when prompted for confirmation
 
-# 2. Revert migration files
+# 2. Revert migration files (if needed)
 rm prisma/migrations/latest_migration_folder/
 
 # 3. Rollback application code
@@ -766,6 +833,16 @@ git revert HEAD
 # 4. Restart application
 npm run build
 pm2 restart homesweethome
+```
+
+**Emergency Database Restore** (if backup scripts fail):
+
+```bash
+# Direct restore using pg_restore
+pg_restore -d homesweethome --clean --if-exists backups/backup_*.sql
+
+# Or using psql for compressed backups
+gunzip -c backups/backup_*.sql.gz | PGPASSWORD=$POSTGRES_PASSWORD psql -h $POSTGRES_HOST -U $POSTGRES_USER -d $POSTGRES_DB
 ```
 
 ### Zero-Downtime Deployment

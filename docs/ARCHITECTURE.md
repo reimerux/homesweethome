@@ -73,8 +73,8 @@ Home Sweet Home follows a **client-server architecture** with a modern full-stac
 - **Data Integrity**: Foreign keys, unique constraints, enums
 
 ### Authentication Layer
-- **Strategy**: Session-based with JWT tokens (2-day max age)
-- **Provider**: Credentials (email-based, no password validation currently)
+- **Strategy**: Session-based with JWT tokens (2-day max age; expired sessions redirect to sign-in)
+- **Provider**: Credentials (email-only; password authentication is planned but not yet implemented)
 - **Authorization**: Role-based access control (ADMIN, EDIT, VIEWER)
 - **Middleware**: Route-level protection via auth middleware
 
@@ -118,9 +118,10 @@ Redirect to Dashboard
 ```
 
 **Current Implementation**:
-- Email-only authentication (no password validation)
-- All users must exist in database before login
-- Session stored as JWT in browser cookies
+- Email-only authentication — password support is on the roadmap but not yet implemented
+- All users must be created in the database (via admin panel) before they can log in
+- Session stored as JWT in browser cookies (2-day max age)
+- On session expiry the middleware redirects to `/auth/signIn`; API routes return `401 Unauthorized`
 - Server-side session validation on protected routes
 
 ### Authorization Model

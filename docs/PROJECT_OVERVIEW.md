@@ -115,7 +115,7 @@
 | **UI Components** | DaisyUI | 4.12.10 |
 | **State & Forms** | React Hook Form | 7.46.1 |
 | **Data Tables** | TanStack React Table | 8.20.1 |
-| **Authentication** | NextAuth.js | 5.0.0-beta.20 |
+| **Authentication** | NextAuth.js (beta) | 5.0.0-beta.20 |
 | **Database** | PostgreSQL | (via Prisma) |
 | **ORM** | Prisma | 5.22.0 |
 | **HTTP Client** | Axios | 1.7.3 |
@@ -271,6 +271,12 @@ homesweethome/
 - **Nice-to-Have Features**: Achievements, inventory tracking
 - **Testing**: Playwright E2E tests included
 - **Database**: PostgreSQL with connection pooling
+
+### Known Constraints
+
+- **Single house**: The application currently assumes a single house per deployment. Multi-tenancy (managing multiple properties) is not yet supported.
+- **Email-only authentication**: Login uses email address only. Password authentication is on the roadmap but not yet implemented.
+- **NextAuth beta dependency**: The project uses NextAuth.js 5.0.0-beta.20. This is a pre-release version; behaviour may change when NextAuth v5 reaches stable.
 
 ---
 

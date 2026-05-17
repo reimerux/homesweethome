@@ -44,7 +44,7 @@ Tasks represent periodic maintenance work that needs to happen on a schedule (e.
    - **HIGH** - Urgent, address immediately
    - **MEDIUM** - Normal priority
    - **LOW** - Can be deferred
-6. Optional: Select seasonal indicator (WINTER, SPRING, SUMMER, FALL)
+6. Optional: Select seasonal indicator (WINTER, SPRING, SUMMER, FALL) — used to display a season badge on task cards and filter tasks by the current season
 7. Assign to one or more rooms (required)
 8. Click "Save Task"
 
@@ -270,6 +270,17 @@ PENDING (default state)
 **By Label**:
 - Filter issues with specific tag
 - Multiple label filtering supported
+
+---
+
+### Label Management
+
+Labels are short tags that categorise issues (e.g., "plumbing", "electrical", "urgent"). Labels are created and managed via the admin API; there is no dedicated UI page for label CRUD at this time.
+
+**How labels work**:
+- Labels are shared across all issues — create a label once, apply it to many issues
+- Apply labels when creating or editing an issue (multi-select)
+- Filter the issue list by one or more labels
 
 ---
 

@@ -133,6 +133,8 @@ ALTER ROLE homeowner WITH CREATEDB;
 GRANT ALL PRIVILEGES ON DATABASE homesweethome TO homeowner;
 ```
 
+> **Note**: The `password` field in the `User` table is a schema placeholder. Application login uses email address only — password authentication is on the roadmap but not yet implemented.
+
 ### 3. Update `.env.local`
 
 Use the credentials you just created:
@@ -445,6 +447,10 @@ if (process.env.NODE_ENV === 'development') {
 
 ## Testing
 
+### E2E Test Overview
+
+Tests are located in `tests/` and run against a live development server. The test suite uses the real PostgreSQL database configured in `.env.local` — there is no separate mock or in-memory database. Ensure the dev server is running (`npm run dev`) before executing tests.
+
 ### Running Playwright Tests
 
 ```bash
@@ -459,6 +465,9 @@ npx playwright test --headed
 
 # Debug mode
 npx playwright test --debug
+
+# Run tests in CI (headless, with reporter)
+npx playwright test --reporter=html
 ```
 
 ### Writing New Tests
