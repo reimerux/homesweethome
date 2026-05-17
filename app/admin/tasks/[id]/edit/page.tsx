@@ -4,11 +4,12 @@ import prisma from '@/prisma/client';
 import TaskForm from '../TaskForm';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export const dynamic = 'force-dynamic';
-const EditUserPage = async ({ params: { id } }: Props) => {
+const EditUserPage = async ({ params }: Props) => {
+  const { id } = await params;
 
   const currentTask =  await prisma.maintenanceTask.findFirst({
     where: {taskId: parseInt(id)},

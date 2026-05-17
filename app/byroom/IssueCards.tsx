@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import prisma from '@/prisma/client';
 import { MdAdd, MdArrowOutward, MdBrokenImage } from 'react-icons/md';
 import IssueCard from '../components/IssueCard';
@@ -33,14 +34,14 @@ const IssueCards = async ({roomId}: Props) => {
                         5 most recent
                     </p>
                 </div>
-                <a href="/issues/new"
+                <Link href="/issues/new"
                     className="inline-flex items-center shrink-0 justify-center w-8 h-8 rounded-full text-white bg-gray-900 focus:outline-none"    >
                     <MdAdd />
-                </a>
-                <a href="/issues/pending"
+                </Link>
+                <Link href="/issues/pending"
                     className="inline-flex items-center shrink-0 justify-center w-8 h-8 rounded-full text-white bg-gray-900 focus:outline-none"    >
                     <MdArrowOutward />
-                </a>
+                </Link>
             </div>
             <div aria-label="content" className="mt-9 grid gap-2.5">
                 {issues.map(issue =>

@@ -3,11 +3,12 @@ import { auth } from '@/auth';
 import InventoryForm from '../InventoryForm';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export const dynamic = 'force-dynamic';
-const EditInventoryPage = async ({ params: { id } }: Props) => {
+const EditInventoryPage = async ({ params }: Props) => {
+  const { id } = await params;
 
   const currentItem =  await prisma.inventory.findFirst({
     where: {invId: parseInt(id)},

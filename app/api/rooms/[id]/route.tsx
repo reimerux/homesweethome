@@ -1,37 +1,32 @@
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/client";
 
-interface Props {
-    params: { id: number}
-}
-
 export async function GET(
     request: NextRequest,
-    {params}: {params: { id: string}}){
+    { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     const room = await prisma.room.findUnique({
-
-        where: {roomId: parseInt(params.id)}
+        where: { roomId: parseInt(id) }
     })
-        if (!room)
-        return NextResponse.json({error: "Room not found"}, {status: 404})
-        
-    
+    if (!room)
+        return NextResponse.json({ error: "Room not found" }, { status: 404 })
+
     return NextResponse.json(room);
 }
 
 export async function PUT(
     request: NextRequest,
-    {params}: {params: { id: string}}){
-        const body = await request.json();
+    { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const body = await request.json();
     const room = await prisma.room.findUnique({
-
-        where: {roomId: parseInt(params.id)}
+        where: { roomId: parseInt(id) }
     })
-        if (!room)
-        return NextResponse.json({error: "Room not found"}, {status: 404})
-        
+    if (!room)
+        return NextResponse.json({ error: "Room not found" }, { status: 404 })
+
     const updatedroom = await prisma.room.update({
-        where: { roomId: parseInt(params.id)},
+        where: { roomId: parseInt(id) },
         data: body
     })
 
@@ -40,17 +35,17 @@ export async function PUT(
 
 export async function DELETE(
     request: NextRequest,
-    {params} : {params: {id: string}}){
+    { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
     const room = await prisma.room.findUnique({
-
-        where: {roomId: parseInt(params.id)}
+        where: { roomId: parseInt(id) }
     })
-        if (!room)
-        return NextResponse.json({error: "Room not found"}, {status: 404})
-        
-    const updatedRoom = await prisma.room.delete({
-        where: { roomId: parseInt(params.id)}
-        })
+    if (!room)
+        return NextResponse.json({ error: "Room not found" }, { status: 404 })
 
-        return NextResponse.json(updatedRoom);
-    }
+    const updatedRoom = await prisma.room.delete({
+        where: { roomId: parseInt(id) }
+    })
+
+    return NextResponse.json(updatedRoom);
+}

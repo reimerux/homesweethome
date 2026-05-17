@@ -1,10 +1,11 @@
 import React from 'react'
 
 interface Props {
-    params: {id: number}
+    params: Promise<{ id: string }>
 }
 
-const TaskDetailPage = ({params: {id} } : Props) => {
+const TaskDetailPage = async ({ params }: Props) => {
+  const { id } = await params;
   return (
     <div>taskDetailPage {id}</div>
   )

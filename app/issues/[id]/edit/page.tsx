@@ -4,11 +4,12 @@ import IssueForm from '../IssueForm';
 import { auth } from '@/auth';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export const dynamic = 'force-dynamic';
-const EditUserPage = async ({ params: { id } }: Props) => {
+const EditUserPage = async ({ params }: Props) => {
+  const { id } = await params;
 
   const currentIssue =  await prisma.issue.findFirst({
     where: {issueId: parseInt(id)},

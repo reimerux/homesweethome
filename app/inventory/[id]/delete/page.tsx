@@ -3,11 +3,12 @@ import { auth } from '@/auth';
 import InventoryDeleteForm from '../InventoryDeleteForm';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 export const dynamic = 'force-dynamic';
-const DeleteInventoryPage = async ({ params: { id } }: Props) => {
+const DeleteInventoryPage = async ({ params }: Props) => {
+  const { id } = await params;
 
   const currentItem =  await prisma.inventory.findFirst({
     where: {invId: parseInt(id)},

@@ -2,10 +2,11 @@ import prisma from '@/prisma/client';
 import TaskActionForm from '../TaskActionForm';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
-const PushSchedulePage = async ({ params: { id } }: Props) => {
+const PushSchedulePage = async ({ params }: Props) => {
+  const { id } = await params;
 
   const currentTask =  await prisma.taskSchedule.findFirst({
     where: { scheduleId: parseInt(id) },

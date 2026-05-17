@@ -4,10 +4,11 @@ import prisma from '@/prisma/client';
 import IssueDeleteForm from '../IssueDeleteForm';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
-const DeleteUserPage = async ({ params: { id } }: Props) => {
+const DeleteUserPage = async ({ params }: Props) => {
+  const { id } = await params;
 
   const currentTask =  await prisma.maintenanceTask.findFirst({
     where: {taskId: parseInt(id)}

@@ -6,17 +6,17 @@ import TaskCards from "./TaskCards";
 
 
 export const dynamic = 'force-dynamic';
-const byRoomPage = async ({ searchParams}: {searchParams: {roomSelected: string}}) => {
-
+const byRoomPage = async ({ searchParams}: {searchParams: Promise<{roomSelected: string}>}) => {
+  const { roomSelected } = await searchParams;
   const allRooms = await prisma.room.findMany();
 
   return (
     <div className='p-3  bg-slate-100'>
       <div className="flex flex-col max-w-3xl mx-auto">
           <HouseInfo />
-          <RoomSelector allRooms={allRooms} roomSelected={parseInt(searchParams.roomSelected)} />
-          <TaskCards roomId={parseInt(searchParams.roomSelected)} />
-          <IssueCards roomId={parseInt(searchParams.roomSelected)} />
+          <RoomSelector allRooms={allRooms} roomSelected={parseInt(roomSelected)} />
+          <TaskCards roomId={parseInt(roomSelected)} />
+          <IssueCards roomId={parseInt(roomSelected)} />
       </div>
     </div>
   )

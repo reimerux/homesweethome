@@ -3,10 +3,11 @@ import prisma from '@/prisma/client';
 import UserForm from '../RoomForm';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
-const EditUserPage = async ({ params: { id } }: Props) => {
+const EditUserPage = async ({ params }: Props) => {
+  const { id } = await params;
 
   const currentRoom = await prisma.room.findFirst({
     where: { roomId: parseInt(id) }

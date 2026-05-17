@@ -3,11 +3,7 @@ import AdminSideNav from '@/app/admin/AdminSideNav';
 import prisma from '@/prisma/client';
 import HomeForm from './HomeForm';
 
-interface Props {
-  params: { id: string }
-}
-
-const EditHomePage = async ({ params: { id } }: Props) => {
+const EditHomePage = async () => {
 
   const home =  await prisma.house.findFirst({
     where: {houseId: 1}

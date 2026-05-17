@@ -3,10 +3,11 @@ import prisma from '@/prisma/client';
 import RoomDeleteForm from '../RoomDeleteForm';
 
 interface Props {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
-const EditRoomPage = async ({ params: { id } }: Props) => {
+const EditRoomPage = async ({ params }: Props) => {
+  const { id } = await params;
 
   const currentRoom = await prisma.room.findFirst({
     where: { roomId: parseInt(id) }
