@@ -1,5 +1,5 @@
 import Metrics from '@/app/components/chart/Metrics';
-import { metricCalc } from '@/app/components/URfunctions';
+import { metricCalc } from '@/app/components/serverFunctions';
 import { metrics } from './metrics';
 
 

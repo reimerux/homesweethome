@@ -9,7 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@prisma/client": "^5.22.0",
+    "@prisma/adapter-pg": "^7.8.0",
+    "@prisma/client": "^7.8.0",
+    "pg": "^8.13.3",
     "@tanstack/react-table": "^8.20.1",
     "@types/node": "22.0.1",
     "@types/react": "18.3.3",
@@ -40,6 +42,7 @@
     "@types/papaparse": "^5.3.14",
     "daisyui": "^4.12.10",
     "postcss-import": "^16.1.0",
-    "prisma": "^5.22.0"
+    "@types/pg": "^8.11.11",
+    "prisma": "^7.8.0"
   }
 }

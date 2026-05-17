@@ -1,5 +1,5 @@
 import Metrics from '../components/chart/Metrics';
-import { metricCalc } from '../components/URfunctions';
+import { metricCalc } from '../components/serverFunctions';
 import { metrics } from './metrics';
 
 const Kpis = async () => {
